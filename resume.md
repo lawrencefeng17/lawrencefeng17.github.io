@@ -1,3 +1,8 @@
+---
+layout: page
+title: Resume
+---
+
 ### Education
 ---
 ### Carnegie Mellon University
