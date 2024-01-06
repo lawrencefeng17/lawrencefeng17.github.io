@@ -1,9 +1,8 @@
-## Resume
-
 ### Education
 ---
 ### Carnegie Mellon University <div style="float:right;">August 2022 - May 2026</div>
 
+# <div style="text-align: left;">Left-aligned Text</div> <div style="text-align: right;">Right-aligned Text</div>
 _Bachelor of Science in Statistics and Machine Learning_ <div style="float:right;"> _Pittsburgh, Pennsylvania_ </div>
 
 * Minor in Computer Science
