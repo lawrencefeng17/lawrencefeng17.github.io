@@ -19,8 +19,10 @@ _Pittsburgh, Pennsylvania_
 * Introduction to Deep Learning (11-785, PhD)
 * Great Ideas in Theoretical Computer Science (15-251)
 * Probability (21-325)
+* Real Analysis (21-355)
 * Data Structures and Algorithms (15-210)
 * Statistical Computing (36-350)
+* Statisical Inference (36-226)
 
 ### Projects
 ---
