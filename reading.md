@@ -9,9 +9,15 @@ This is an incomplete, hopefully regularly updated, list of academic papers I ha
 
 ## Papers to Read
 
-- [ ] Add papers here with their titles and a hyperlink to access them.
+- 
 
 ## Papers Already Read
 
-- [x] [Vision Transformers](https://arxiv.org/abs/2010.11929) - An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale.
+### Safety
+- [Sleeper agents](https://arxiv.org/pdf/2401.05566.pdf) - 
+
+### Transformers
+- [The original attention paper!](https://arxiv.org/pdf/1706.03762.pdf)
+- [Listen, Attend and Spell](https://arxiv.org/pdf/1508.01211.pdf)
+- [Vision transformer](https://arxiv.org/abs/2010.11929) 
 

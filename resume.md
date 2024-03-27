@@ -18,11 +18,11 @@ _Pittsburgh, Pennsylvania_
 ---
 * Introduction to Deep Learning (11-785, PhD)
 * Great Ideas in Theoretical Computer Science (15-251)
+* Data Structures and Algorithms (15-210)
 * Probability (21-325)
 * Real Analysis (21-355)
-* Data Structures and Algorithms (15-210)
-* Statistical Computing (36-350)
 * Statisical Inference (36-226)
+* Statistical Computing (36-350)
 
 ### Projects
 ---
@@ -32,19 +32,27 @@ _August 2023 - December 2023_
 * Library implements MLPs, CNNs, RNNs, GRUs, reverse automatic differentiation, and more.
 
 #### Image Reassembly Using Reinforcement Learning
-_September 2023 -_
+_September 2023 - January 2024_
 * Inpisred by AlphaZero. CNNs underlie our architecture, with a supervised learning value network and a reinforcement learning policy netowrk.
 * Implemented vanilla policy gradient
 * Implemented Monte Carlo tree search with PUCT; value network depth reduction, policy network breadth reduction
 * Outperformed previous wors with > 90% solve rate
 
 #### Speech-to-text transformer
+_Novemeber 2024_
 * Implemented and trained encoder-decoder transformer language model
 * Inspired by the papers Attention is All You Need and Listen, Attend and Spell
 * Experimented with architectural changes, performed hyperparameter tuning, achieved top Levenshtein distance in class competition
 
 ### Experience
 ---
+### Carnegie Mellon Robotics Institute
+_February 20224 - _
+_Research Intern_
+* Robot control models struggle to solve multi-task, multi-skill problems, especially in novel environments
+* Working with vision transformers, large language models, and diffusion architectures to achieve generalization
+* Benchmarking various models using LIBERO in zero-shot, few-shot, and continual learning settings
+
 ### Boston University
 _June 2021 - August 2021_
 _Research Intern_
