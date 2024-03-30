@@ -31,5 +31,4 @@ RL stuff I would like to read in more detail!
 
 ### Transformers
 - [The original attention paper!](https://arxiv.org/pdf/1706.03762.pdf)
-- [Listen, Attend and Spell](https://arxiv.org/pdf/1508.01211.pdf)
 
