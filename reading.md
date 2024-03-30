@@ -4,13 +4,13 @@ This is an incomplete, hopefully regularly updated, list of academic papers I ha
 
 ## Papers to Read
 
-I want to know more about diffusion!
+Image stuff!
+
 - [DDPM](https://arxiv.org/pdf/2006.11239.pdf)
 - [Deep Unsupervised Learning using Nonequilibrium Thermodynamics](https://arxiv.org/pdf/1503.03585.pdf)
 - [DCGAN](https://arxiv.org/pdf/1511.06434.pdf)
 - [WGAN](https://arxiv.org/pdf/1701.07875.pdf)
 - [TryOnDiffusion](https://arxiv.org/pdf/2306.08276.pdf)
-
 - [An Image is Worth 16x16 Words](https://arxiv.org/abs/2010.11929) 
 
 RL stuff I would like to read in more detail!

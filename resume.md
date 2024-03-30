@@ -48,7 +48,7 @@ _Novemeber 2024_
 ### Experience
 ---
 ### Carnegie Mellon Robotics Institute
-_February 20224 - _
+_February 2024 -_
 _Research Intern_
 * Robot control models struggle to solve multi-task, multi-skill problems, especially in novel environments
 * Working with vision transformers, large language models, and diffusion architectures to achieve generalization
