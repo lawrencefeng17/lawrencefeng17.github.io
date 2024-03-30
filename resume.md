@@ -28,15 +28,16 @@ _Pittsburgh, Pennsylvania_
 ---
 #### MyTorch
 _August 2023 - December 2023_
+* Designing a neural network library from scratch using NumPy
 * Appling knowledge of machine learning algorithms to create an object-orientated machine learning library
 * Library implements MLPs, CNNs, RNNs, GRUs, reverse automatic differentiation, and more.
 
 #### Image Reassembly Using Reinforcement Learning
 _September 2023 - January 2024_
-* Inpisred by AlphaZero. CNNs underlie our architecture, with a supervised learning value network and a reinforcement learning policy netowrk.
-* Implemented vanilla policy gradient
-* Implemented Monte Carlo tree search with PUCT; value network depth reduction, policy network breadth reduction
-* Outperformed previous wors with > 90% solve rate
+* Lead team of four in brainstorming, designing, coding, testing, and presenting 11-785 semester project
+* Inspired by game-playing using reinforcement learning, in particular AlphaGo
+* Trained a value network using supervised learning and a policy network using policy gradient methods
+* Implemented Monte Carlo tree search to be efficient and accurate with value and policy network
 
 #### Speech-to-text transformer
 _Novemeber 2024_
