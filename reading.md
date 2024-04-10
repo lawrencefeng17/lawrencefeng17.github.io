@@ -1,8 +1,8 @@
-# Papers all the way down
+## Papers all the way down
 
 This is an incomplete, hopefully regularly updated, list of academic papers I have read or plan to read.
 
-## Papers to Read
+### Papers to Read
 
 Image stuff!
 
@@ -20,15 +20,13 @@ RL stuff I would like to read in more detail!
 - [DPO (which isn't RL...)](https://arxiv.org/pdf/2305.18290.pdf)
 - [AlphaFold](https://www.nature.com/articles/s41586-021-03819-2)
 
+### Papers I Liked!
 
-
-## Papers I Liked!
-
-### Safety, Alignment, and Other Things
+#### Safety, Alignment, and Other Things
 - [Sleeper agents](https://arxiv.org/pdf/2401.05566.pdf) 
 - [Scaling](https://arxiv.org/pdf/2001.08361.pdf)
 - [Are Emergent Abilities of Large Language Models a Mirage?](https://arxiv.org/pdf/2304.15004.pdf)
 
-### Transformers
+#### Transformers
 - [The original attention paper!](https://arxiv.org/pdf/1706.03762.pdf)
 
