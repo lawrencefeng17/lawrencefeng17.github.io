@@ -21,7 +21,7 @@ _Pittsburgh, Pennsylvania_
 * Data Structures and Algorithms (15-210)
 * Probability (21-325)
 * Real Analysis (21-355)
-* Statisical Inference (36-226)
+* Statistical Inference (36-226)
 * Statistical Computing (36-350)
 
 ### Projects
@@ -29,10 +29,10 @@ _Pittsburgh, Pennsylvania_
 #### MyTorch
 _August 2023 - December 2023_
 * Designing a neural network library from scratch using NumPy
-* Appling knowledge of machine learning algorithms to create an object-orientated machine learning library
+* Applying knowledge of machine learning algorithms to create an object-orientated machine learning library
 * Library implements MLPs, CNNs, RNNs, GRUs, reverse automatic differentiation, and more.
 
-#### Image Reassembly Using Reinforcement Learning
+#### Solving Jigsaw Puzzles using Reinforcement Learning
 _September 2023 - January 2024_
 * Lead team of four in brainstorming, designing, coding, testing, and presenting 11-785 semester project
 * Inspired by game-playing using reinforcement learning, in particular AlphaGo
@@ -40,7 +40,7 @@ _September 2023 - January 2024_
 * Implemented Monte Carlo tree search to be efficient and accurate with value and policy network
 
 #### Speech-to-text transformer
-_Novemeber 2024_
+_November 2024_
 * Implemented and trained encoder-decoder transformer language model
 * Inspired by the papers Attention is All You Need and Listen, Attend and Spell
 * Experimented with architectural changes, performed hyperparameter tuning, achieved top Levenshtein distance in class competition
