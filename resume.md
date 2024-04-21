@@ -49,6 +49,7 @@ _November 2024_
 ---
 ### Carnegie Mellon Robotics Institute
 _February 2024 -_
+
 _Research Intern_
 * Robot control models struggle to solve multi-task, multi-skill problems, especially in novel environments
 * Working with vision transformers, large language models, and diffusion architectures to achieve generalization
@@ -56,6 +57,7 @@ _Research Intern_
 
 ### Boston University
 _June 2021 - August 2021_
+
 _Research Intern_
 * Designed an LSTM cache prefetcher to speed up common computationally intensive tasks
 * Applied domain knowledge of computer system design and microarchitecture to a machine-learning task
@@ -63,6 +65,7 @@ _Research Intern_
 
 ### UC Berkeley ATDP and Monte Vista
 _August 2020 - August 2022_
+
 _Teaching Assistant_
 * Acted as the lead teaching assistant for courses in Python and Java
 * Developed the curriculum, and helped make and modify assignments to facilitate learning
