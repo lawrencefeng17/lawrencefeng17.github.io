@@ -1,6 +1,4 @@
-## Papers all the way down
-
-This is an incomplete, hopefully regularly updated, list of academic papers I have read or plan to read.
+This is an incomplete, probably not regularly updated, list of papers I have read or plan to read.
 
 ### Papers to Read
 

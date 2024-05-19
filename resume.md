@@ -11,12 +11,13 @@ _August 2022 - May 2026_
 _Bachelor of Science in Statistics and Machine Learning_
 _Pittsburgh, Pennsylvania_
 
-* Minor in Computer Science
+* Minor in Computer Science (completed)
 * Minor in Mathematics
 
 ### Relevant Coursework
 ---
-* Introduction to Deep Learning (11-785, PhD)
+#### Completed:
+* Introduction to Deep Learning (11-785)
 * Great Ideas in Theoretical Computer Science (15-251)
 * Data Structures and Algorithms (15-210)
 * Probability (21-325)
