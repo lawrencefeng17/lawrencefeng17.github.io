@@ -41,7 +41,7 @@ _September 2023 - January 2024_
 * Implemented Monte Carlo tree search to be efficient and accurate with value and policy network
 
 #### Speech-to-text transformer
-_November 2024_
+_November 2023_
 * Implemented and trained encoder-decoder transformer language model
 * Inspired by the papers Attention is All You Need and Listen, Attend and Spell
 * Experimented with architectural changes, performed hyperparameter tuning, achieved top Levenshtein distance in class competition
