@@ -3,22 +3,22 @@ This is an incomplete, probably not regularly updated, list of papers I have rea
 ### Papers to Read
 ---
 
-Transformers: 
+#### Transformers: 
 - [RingAttention](https://largeworldmodel.github.io/)
 - [DiT](https://arxiv.org/pdf/2212.09748)
 
-Image generation:
+#### Image generation:
 - [DCGAN](https://arxiv.org/pdf/1511.06434.pdf)
 - [WGAN](https://arxiv.org/pdf/1701.07875.pdf)
 - [TryOnDiffusion](https://arxiv.org/pdf/2306.08276.pdf)
 
-Reinforcement learning:
+#### Reinforcement learning:
 - [TRPO](https://arxiv.org/pdf/1502.05477.pdf)
 - [PPO](https://arxiv.org/pdf/1707.06347.pdf)
 - [DPO](https://arxiv.org/pdf/2305.18290.pdf)
 - [AlphaFold](https://www.nature.com/articles/s41586-021-03819-2)
 
-Miscellaneous:
+#### Miscellaneous:
 - [PINN](https://arxiv.org/abs/2303.14878#:~:text=Physics%2DInformed%20Neural%20Network%20)
 - [RL and PGM](https://arxiv.org/pdf/1805.00909)
 
