@@ -21,7 +21,6 @@ Reinforcement learning:
 - [AlphaFold](https://www.nature.com/articles/s41586-021-03819-2)
 
 Miscellaneous:
-
 - [PINN](https://arxiv.org/abs/2303.14878#:~:text=Physics%2DInformed%20Neural%20Network%20)
 - [RL and PGM](https://arxiv.org/pdf/1805.00909)
 
