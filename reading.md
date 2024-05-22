@@ -33,7 +33,7 @@ This is an incomplete, probably not regularly updated, list of papers I have rea
 - [PINN](https://arxiv.org/abs/2303.14878#:~:text=Physics%2DInformed%20Neural%20Network%20)
 - [RL and PGM](https://arxiv.org/pdf/1805.00909)
 
-### Papers I've read
+### Notable Papers I've read
 ---
 
 #### Safety, Alignment, and Other Things
