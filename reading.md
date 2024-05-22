@@ -1,8 +1,8 @@
 ---
 layout: page
+title: Papers All the Way Down
 ---
 
-## Papers all the way down
 This is an incomplete, probably not regularly updated, list of papers I have read or plan to read.
 
 ### Papers to Read
