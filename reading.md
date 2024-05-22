@@ -40,3 +40,4 @@ This is an incomplete, probably not regularly updated, list of papers I have rea
 - [Deep Unsupervised Learning using Nonequilibrium Thermodynamics](https://arxiv.org/pdf/1503.03585.pdf)
 - [DDPM](https://arxiv.org/pdf/2006.11239.pdf)
 - [Lilan Weng's Great Blog on Diffusion Models](https://lilianweng.github.io/posts/2021-07-11-diffusion-models/#connection-with-stochastic-gradient-langevin-dynamics)
+    - [The Annotated Diffusion Model](https://huggingface.co/blog/annotated-diffusion)
