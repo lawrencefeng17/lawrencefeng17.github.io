@@ -21,27 +21,9 @@ title: Resume
 * Statistical Inference (36-226)
 * Statistical Computing (36-350)
 
-### Projects
----
-**MyTorch** \| _August 2023 - December 2023_
-* Designing a neural network library from scratch using NumPy
-* Applying knowledge of machine learning algorithms to create an object-orientated machine learning library
-* Library implements MLPs, CNNs, RNNs, GRUs, reverse automatic differentiation, and more.
-
-**Solving Jigsaw Puzzles using Reinforcement Learning** \| _September 2023 - January 2024_
-* Lead team of four in brainstorming, designing, coding, testing, and presenting 11-785 semester project
-* Inspired by game-playing using reinforcement learning, in particular AlphaGo
-* Trained a value network using supervised learning and a policy network using policy gradient methods
-* Implemented Monte Carlo tree search to be efficient and accurate with value and policy network
-
-**Speech-to-text transformer** \| _November 2023_
-* Implemented and trained encoder-decoder transformer language model
-* Inspired by the papers Attention is All You Need and Listen, Attend and Spell
-* Experimented with architectural changes, performed hyperparameter tuning, achieved top Levenshtein distance in class competition
-
 ### Experience
 ---
-**Carnegie Mellon Robotics Institute** \| _February 2024 -_ \| _Research Intern_
+**Carnegie Mellon Robotics Institute** \| _February 2024 - Present _ \| _Research Intern_
 * Robot control models struggle to solve multi-task, multi-skill problems, especially in novel environments
 * Working with vision transformers, large language models, and diffusion architectures to achieve generalization
 * Benchmarking various models using LIBERO in zero-shot, few-shot, and continual learning settings
@@ -56,4 +38,22 @@ title: Resume
 * Developed the curriculum, and helped make and modify assignments to facilitate learning
 * Automated evaluation of programming submissions using unit testing
 * Streamlined the grading process by using APIs to integrate learning management systems
+
+### Projects
+---
+**MyTorch** \| _August 2023 - December 2023_
+* Designing a neural network library from scratch using NumPy
+* Applying knowledge of machine learning algorithms to create an object-orientated machine learning library
+* Library implements MLPs, CNNs, RNNs, GRUs, reverse automatic differentiation, and more.
+
+**Solving Jigsaw Puzzles using Reinforcement Learning** \| _Sept 2023 - January 2024_
+* Lead team of four in brainstorming, designing, coding, testing, and presenting 11-785 semester project
+* Inspired by game-playing using reinforcement learning, in particular AlphaGo
+* Trained a value network using supervised learning and a policy network using policy gradient methods
+* Implemented Monte Carlo tree search to be efficient and accurate with value and policy network
+
+**Speech-to-text transformer** \| _November 2023_
+* Implemented and trained encoder-decoder transformer language model
+* Inspired by the papers *Attention is All You Need and Listen*, *Attend and Spell*
+* Experimented with architectural changes, performed hyperparameter tuning, achieved top Levenshtein distance in class competition
 
