@@ -1,7 +1,18 @@
+---
+layout: page
+---
+
+## Papers all the way down
 This is an incomplete, probably not regularly updated, list of papers I have read or plan to read.
 
 ### Papers to Read
 ---
+
+#### Safety: 
+- [Towards Monosemanticity: Decomposing Language Models With Dictionary Learning](https://transformer-circuits.pub/2023/monosemantic-features/index.html)
+- [Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html)
+- [Circuits](https://distill.pub/2020/circuits/zoom-in/)
+- [Simple probes can catch sleeper agents](https://www.anthropic.com/research/probes-catch-sleeper-agents)
 
 #### Transformers: 
 - [RingAttention](https://largeworldmodel.github.io/)
