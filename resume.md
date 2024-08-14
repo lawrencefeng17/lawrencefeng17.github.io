@@ -12,6 +12,11 @@ title: Resume
 
 ### Relevant Coursework
 ---
+**Current:**
+* Introdution to Machine Learning (10-701)
+* Probability and Mathematical Statistics I (36-700)
+* Modern Regression (36-401)
+
 **Completed:**
 * Introduction to Deep Learning (11-785)
 * Great Ideas in Theoretical Computer Science (15-251)
@@ -24,14 +29,18 @@ title: Resume
 ### Experience
 ---
 **Carnegie Mellon Robotics Institute** \| _Feb. 2024 - Present_ \| _Research Intern_
-* Robot control models struggle to solve multi-task, multi-skill problems, especially in novel environments
-* Working with vision transformers, large language models, and diffusion architectures to achieve generalization
-* Benchmarking various models using LIBERO in zero-shot, few-shot, and continual learning settings
+* Robot control models struggle to generalilze in complex, multi-task settings
+* How can we enable real-world understanding, reasoning, and generalization?
+* We focus on trajectory-based, generative policy pipeliens, such as those that utilize point tracking
+* Creating new and utilize existing benchmarks to test the robustness of trajectory-based approaches
 
-**Boston University** \| _June 2021 - August 2021_ \| _Research Intern_
-* Designed an LSTM cache prefetcher to speed up common computationally intensive tasks
-* Applied domain knowledge of computer system design and microarchitecture to a machine-learning task
-* Results showed more than a 50% increase in performance compared to no prefetcher in some applications
+**Carnegie AI Safety Initiatve (CASI)** \| _March 2024 - Present_ \| 
+* Active member of the AI safety reading group
+* Widening my philosophical, ethical, and technical perspectives on AI safety
+* Analyzing and debating the latest research in areas such as alignment, interpretability, and explainability 
+
+**Program on AI and Reasoning (PAIR 2024)** \| _August 2024_ \|
+* Camp on artifical intelligence and rationality held by FABRIC
 
 **UC Berkeley ATDP and Monte Vista** \| _August 2020 - August 2022_ \| _Teaching Assistant_
 * Acted as the lead teaching assistant for courses in Python and Java
@@ -39,18 +48,23 @@ title: Resume
 * Automated evaluation of programming submissions using unit testing
 * Streamlined the grading process by using APIs to integrate learning management systems
 
+**Boston University** \| _June 2021 - August 2021_ \| _Research Intern_
+* Designed an LSTM cache prefetcher to speed up common computationally intensive tasks
+* Applied domain knowledge of computer system design and microarchitecture to a machine-learning task
+* Results showed more than a 50% increase in performance compared to no prefetcher in some applications
+
 ### Projects
 ---
+**Solving Jigsaw Puzzles using Reinforcement Learning, inspired by AlphaGo** \| _Sept. 2023 - Jan. 2024_
+* Lead team of four in brainstorming, designing, coding, testing, and presenting our project
+* Inspired by game-playing using reinforcement learning, in particular AlphaGo
+* Trained a value network using supervised learning and a policy network using reinforcement learning
+* Implemented a variant of Monte Carlo tree search (MCTS) as used in AlphaGo
+
 **MyTorch** \| _August 2023 - Dec.  2023_
 * Designing a neural network library from scratch using NumPy
 * Applying knowledge of machine learning algorithms to create an object-orientated machine learning library
-* Library implements MLPs, CNNs, RNNs, GRUs, reverse automatic differentiation, and more.
-
-**Solving Jigsaw Puzzles using Reinforcement Learning** \| _Sept. 2023 - Jan. 2024_
-* Lead team of four in brainstorming, designing, coding, testing, and presenting 11-785 semester project
-* Inspired by game-playing using reinforcement learning, in particular AlphaGo
-* Trained a value network using supervised learning and a policy network using policy gradient methods
-* Implemented Monte Carlo tree search to be efficient and accurate with value and policy network
+* Library implements MLPs, CNNs, RNNs, GRUs, reverse automatic differentiation, and more
 
 **Speech-to-text transformer** \| _Nov. 2023_
 * Implemented and trained encoder-decoder transformer language model
