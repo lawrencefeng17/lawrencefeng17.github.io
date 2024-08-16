@@ -31,7 +31,7 @@ title: Resume
 **Carnegie Mellon Robotics Institute** \| _Feb. 2024 - Present_ \| _Research Intern_
 * Robot control models struggle to generalilze in complex, multi-task settings
 * How can we enable real-world understanding, reasoning, and generalization?
-* We focus on trajectory-based, generative policy pipelines, such as those that utilize point tracking
+* We focus on trajectory-based, generative policy pipelines, such as those that utilize point tracking or optical flow
 * Creating new and utilizing existing benchmarks to test the robustness of trajectory-based approaches
 
 **Carnegie AI Safety Initiatve (CASI)** \| _March 2024 - Present_ \| 
@@ -48,14 +48,14 @@ title: Resume
 * Automated evaluation of programming submissions using unit testing
 * Streamlined the grading process by using APIs to integrate learning management systems
 
-**Boston University** \| _June 2021 - August 2021_ \| _Research Intern_
+**Boston University RISE** \| _June 2021 - August 2021_ \| _Research Intern_
 * Designed an LSTM cache prefetcher to speed up common computationally intensive tasks
 * Applied domain knowledge of computer system design and microarchitecture to a machine-learning task
 * Results showed more than a 50% increase in performance compared to no prefetcher in some applications
 
 ### Projects
 ---
-**Solving Jigsaw Puzzles using Reinforcement Learning, inspired by AlphaGo** \| _Sept. 2023 - Jan. 2024_
+**Solving Jigsaw Puzzles using RL, inspired by AlphaGo** \| _Sept. 2023 - Jan. 2024_
 * Lead team of four in brainstorming, designing, coding, testing, and presenting our project
 * Inspired by game-playing using reinforcement learning, in particular AlphaGo
 * Trained a value network using supervised learning and a policy network using reinforcement learning
