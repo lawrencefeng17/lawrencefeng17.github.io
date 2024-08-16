@@ -31,8 +31,8 @@ title: Resume
 **Carnegie Mellon Robotics Institute** \| _Feb. 2024 - Present_ \| _Research Intern_
 * Robot control models struggle to generalilze in complex, multi-task settings
 * How can we enable real-world understanding, reasoning, and generalization?
-* We focus on trajectory-based, generative policy pipeliens, such as those that utilize point tracking
-* Creating new and utilize existing benchmarks to test the robustness of trajectory-based approaches
+* We focus on trajectory-based, generative policy pipelines, such as those that utilize point tracking
+* Creating new and utilizing existing benchmarks to test the robustness of trajectory-based approaches
 
 **Carnegie AI Safety Initiatve (CASI)** \| _March 2024 - Present_ \| 
 * Active member of the AI safety reading group
