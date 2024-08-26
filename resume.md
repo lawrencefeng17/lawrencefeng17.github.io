@@ -7,13 +7,13 @@ title: Resume
 ---
 **Carnegie Mellon University** \| _August 2022 - May 2026_ \| _Pittsburgh, Pennsylvania_
 * Major in Statistics and Machine Learning (BS)
-* Minor in Computer Science (completed)
+* Additional major in Computer Science
 * Minor in Mathematics
 
 ### Relevant Coursework
 ---
 **Current:**
-* Introdution to Machine Learning (10-701)
+* Introduction to Machine Learning (10-701)
 * Probability and Mathematical Statistics I (36-700)
 * Modern Regression (36-401)
 
@@ -29,18 +29,18 @@ title: Resume
 ### Experience
 ---
 **Carnegie Mellon Robotics Institute** \| _Feb. 2024 - Present_ \| _Research Intern_
-* Robot control models struggle to generalilze in complex, multi-task settings
+* Robot control models struggle to generalize in complex, multi-task settings
 * How can we enable real-world understanding, reasoning, and generalization?
 * We focus on trajectory-based, generative policy pipelines, such as those that utilize point tracking or optical flow
 * Creating new and utilizing existing benchmarks to test the robustness of trajectory-based approaches
 
-**Carnegie AI Safety Initiatve (CASI)** \| _March 2024 - Present_ \| 
+**Carnegie AI Safety Initiative (CASI)** \| _March 2024 - Present_ \| 
 * Active member of the AI safety reading group
 * Widening my philosophical, ethical, and technical perspectives on AI safety
 * Analyzing and debating the latest research in areas such as alignment, interpretability, and explainability 
 
 **Program on AI and Reasoning (PAIR 2024)** \| _August 2024_ \|
-* Camp on artifical intelligence and rationality held by FABRIC
+* Camp on artificial intelligence and rationality held by FABRIC
 
 **UC Berkeley ATDP and Monte Vista** \| _August 2020 - August 2022_ \| _Teaching Assistant_
 * Acted as the lead teaching assistant for courses in Python and Java
