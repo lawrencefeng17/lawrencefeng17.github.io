@@ -3,7 +3,7 @@ layout: page
 title: About me
 ---
 
-Hi, I'm Lawrence Feng! I'm a sophomore at Carnegie Mellon University studying Statistics and Machine Learning. I have a broad interest in the field of machine learning, including reasoning, planning, reinforcement learning, and alignment, and I'm working to increase the breadth and depth of my intuition, knowledge, and fascination with this intellectually rich and deeply transformative field. 
+Hi, I'm Lawrence Feng! I'm a junior at Carnegie Mellon University studying Statistics and Machine Learning. I have a broad interest in the field of machine learning, including reasoning, planning, reinforcement learning, and alignment, and I'm working to increase the breadth and depth of my intuition, knowledge, and fascination with this intellectually rich and deeply transformative field. 
 
 Let me first motivate my motivation and provide some context.
 
