@@ -2,8 +2,11 @@
 layout: page
 title: About me
 ---
+I suppose I should begin with a standard introduction... 
 
-Let me first motivate my motivation and provide some context.
+> Hi, I'm Lawrence! I'm a junior at Carnegie Mellon University studying Statistics and Machine Learning. I have a broad interest in the field of machine learning, including reasoning, planning, reinforcement learning, and alignment, and I'm working to increase the breadth and depth of my intuition, knowledge, and fascination with this intellectually rich and deeply transformative field. 
+
+Now, let me first motivate my motivation and provide some context.
 
 In general, I'm interested in probing whatever all *this* is. 
 
@@ -11,7 +14,7 @@ Who among us has never looked up at the stars and planets in wonder? Who among u
 
 Oh, but what is the use, what is the purpose of seeking some sort of deeper understanding of ourselves and the universe? Exactly! We are purpose-seeking knowledge-seeking creatures. We crave to find direction in our lives. We craft our lives into narratives and our narratives shape our lives. We try to make sense of everything so we can try and make sense of ourselves.
 
-It is obvious then. Consider that there is no bigger, no grander perspective that can be had than the perspective that the universe affords to us. The universe is everything, literally. The cosmic perspective is *the* perspective. It is so easy to get wrapped up in our daily lives, in our earthly pleasures, in our earthly sufferings, but luckily we will always have this universal reference. Though, perhaps we are not so lucky, because reconciling these two perspectives seems like an impossible task, yet it also seems like an impossible one to avoid. Once you've acknowledged the birth and eventual heat death of our universe, how could you ever ignore that from the calculus of living? To find true meaning and true understanding, my oh-so-human innate pursuit of knowledge and desire to resolve the paradoxes of life tells me that contemplating everything and the universe is a necessary condition. 
+It is obvious then. Consider that there is no bigger, no grander perspective that can be had than the perspective that the universe affords to us. The universe is everything, literally. The cosmic perspective is *the* perspective. It is so easy to get wrapped up in our daily lives, in our earthly pleasures, in our earthly sufferings, but luckily we will always have this universal reference. Though, perhaps we are not so lucky, because reconciling these two perspectives seems like an impossible task, yet it also seems like an impossible one to avoid. Once I've acknowledged the birth and eventual heat death of our universe, how could I ever ignore that from the calculus of living? To find true meaning and true understanding, my oh-so-human innate pursuit of knowledge and desire to resolve the paradoxes of life tells me that contemplating everything and the universe is a necessary condition. 
 
 So, why artificial intelligence? 
 
