@@ -7,7 +7,7 @@ title: Resume
 ---
 **Carnegie Mellon University** \| _August 2022 - May 2026_ \| _Pittsburgh, Pennsylvania_
 * Major in Statistics and Machine Learning (BS)
-* Additional major in Computer Science
+* Additional major in Artificial Intelligence
 * Minor in Mathematics
 
 ### Relevant Coursework
@@ -15,6 +15,7 @@ title: Resume
 **Current:**
 * Introduction to Machine Learning (10-701)
 * Probability and Mathematical Statistics I (36-700)
+* Monte Carlo Methods and Applications (21-387)
 * Modern Regression (36-401)
 
 **Completed:**
@@ -28,19 +29,23 @@ title: Resume
 
 ### Experience
 ---
-**Carnegie Mellon Robotics Institute** \| _Feb. 2024 - Present_ \| _Research Intern_
-* Robot control models struggle to generalize in complex, multi-task settings
-* How can we enable real-world understanding, reasoning, and generalization?
-* We focus on trajectory-based, generative policy pipelines, such as those that utilize point tracking or optical flow
-* Creating new and utilizing existing benchmarks to test the robustness of trajectory-based approaches
+**Carnegie Mellon Robotics Institute** \| _Feb. 2024 - Present_ \| _Research Intern in the Intelligent Autonomous Manipulation lab_
+* Set goals and brainstormed ideas for multi-task, multi-skill robot control problems
+* Identified gaps in current research and pinpointed problems in existing trajectory-based approaches to intelligent control
+* Designing experiments in simulation to test robustness, generalization, spatial and semantic reasoning
+* Exploring improvements to multimodal diffusion and transformer-based robot policies
+
+**TartanAUV** \| _August 2023 - Present_ \| _Software team_
+* Building autonomous underwater vehicles, representing Carnegie Mellon in the annual RoboSub competition
+* Engineering and integrating classical and deep learning vision systems with controls and path planning
+* We placed 6th out of 41 teams in RoboSub 2024!
 
 **Carnegie AI Safety Initiative (CASI)** \| _March 2024 - Present_ \| 
-* Active member of the AI safety reading group
+* Analyzing and debating the latest research as a part of the AI Safety Fundamentals course
 * Widening my philosophical, ethical, and technical perspectives on AI safety
-* Analyzing and debating the latest research in areas such as alignment, interpretability, and explainability 
 
 **Program on AI and Reasoning (PAIR 2024)** \| _August 2024_ \|
-* Camp on artificial intelligence and rationality held by FABRIC
+* Accepted on a full scholarship to attend a 2-week immersive camp on artificial intelligence, cognition, and rationality
 
 **UC Berkeley ATDP and Monte Vista** \| _August 2020 - August 2022_ \| _Teaching Assistant_
 * Acted as the lead teaching assistant for courses in Python and Java
@@ -56,10 +61,9 @@ title: Resume
 ### Projects
 ---
 **Solving Jigsaw Puzzles using RL, inspired by AlphaGo** \| _Sept. 2023 - Jan. 2024_
-* Lead team of four in brainstorming, designing, coding, testing, and presenting our project
+* Led a team of four in brainstorming, designing, coding, testing, and presenting deep learning semester project
 * Inspired by game-playing using reinforcement learning, in particular AlphaGo
-* Trained a value network using supervised learning and a policy network using reinforcement learning
-* Implemented a variant of Monte Carlo tree search (MCTS) as used in AlphaGo
+* Contributed to data preprocessing, model architecture design, model training and tuning, tree search implementation
 
 **MyTorch** \| _August 2023 - Dec.  2023_
 * Designing a neural network library from scratch using NumPy
