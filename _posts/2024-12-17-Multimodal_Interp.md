@@ -26,7 +26,7 @@ Most works in the field of mechanistic interpretability have so far focused on l
 
 ### A brief overview of LLaVA
 
-The LLaVA architecture  consists of three main components: a vision encoder, a multimodal integration module, and a language model. In this project, we used `Intel/llava-gemma-2b` because of the existing interpretability work done on Gemma (e.g. GemmaScope).
+The LLaVA architecture  consists of three main components: a vision encoder, a multimodal integration module, and a language model. In this project, we used Gemma because of the existing interpretability work done on it (e.g. GemmaScope).
 
 Here's how LLaVA works. CLIP extracts image features, then a linear layer projects the image embeddings to match the input dimensionality of the language model.  Next, the embedded language instruction is concatenated with the projected image embedding. Finally, the output of the previous steps is processed by a fine-tuned google/gemma-2b model. The model was loaded using the Hugging Face Transformers library, then wrapped with a custom HookedTransformer from the transformer_lens library to facilitate access to intermediate activations.
 
@@ -65,7 +65,7 @@ By writing a feature as a one-hot vector in the encoding space and multiplying i
 
 One strong example of successfully influencing the model's output was from subtracting the feature *4501 references to loyal companions, specifically dogs* from the activations when running the model on the following photo.
 
-![dog](/assets/img/dog.jpg)
+![dog](/assets/img/dog.png)
 
 Original output:
 
@@ -78,7 +78,5 @@ Output after intervention:
 ## Links
 
 [Here is the code for this project](https://github.com/lawrencefeng17/llava-interpret.git)
-
-[Here is the report we wrote](https://lawrencefeng17.github.io/assets/pdf/Final_Report.pdf)
 
 
