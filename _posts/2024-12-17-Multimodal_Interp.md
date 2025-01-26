@@ -65,7 +65,7 @@ By writing a feature as a one-hot vector in the encoding space and multiplying i
 
 One strong example of successfully influencing the model's output was from subtracting the feature *4501 references to loyal companions, specifically dogs* from the activations when running the model on the following photo.
 
-![dog](/assets/img/dog.png)
+<img src="/assets/img/dog.png" alt="dog from MNIST" width="400" class="center"/>
 
 Original output:
 
