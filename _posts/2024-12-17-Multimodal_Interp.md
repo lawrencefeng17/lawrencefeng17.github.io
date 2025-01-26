@@ -69,15 +69,11 @@ One strong example of successfully influencing the model's output was from subtr
 
 Original output:
 
-```
-The image features a small black and white dog sitting in the dark, with its ears perked up. The dog is wearing a red collar, and it appears to be looking at the camera. The dog is positioned in the center of the scene, with its head tilted to the side. The background is dark, creating a dramatic and moody atmosphere.
-```
+> The image features a small black and white dog sitting in the dark, with its ears perked up. The dog is wearing a red collar, and it appears to be looking at the camera. The dog is positioned in the center of the scene, with its head tilted to the side. The background is dark, creating a dramatic and moody atmosphere.
 
 Output after intervention:
 
-```
-The image features a close-up of a person's hands holding a cell phone, with the focus on the hands and the surrounding area. The cell phone is in the middle of the hands, with the hands spread out to the sides. The image also includes a background that can be seen in the upper part of the cell phone, and the overall context suggests that the person is using the cell phone.
-```
+> The image features a close-up of a person's hands holding a cell phone, with the focus on the hands and the surrounding area. The cell phone is in the middle of the hands, with the hands spread out to the sides. The image also includes a background that can be seen in the upper part of the cell phone, and the overall context suggests that the person is using the cell phone.
 
 ## Links
 
