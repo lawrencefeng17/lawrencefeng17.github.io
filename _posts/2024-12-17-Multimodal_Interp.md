@@ -6,8 +6,6 @@ tags: [Projects]
 author: Lawrence Feng
 ---
 
-# A quick look into multimodal interpretability
-
 _**this blog post is currently in progress**_
 
 *The idea for this project was my own, but much of this work was done collaboratively for my Introduction to Machine Learning (10-701) final project.*
@@ -24,7 +22,7 @@ We also intervene on the intermediate activations of LLaVA by using the interpre
 
 Most works in the field of mechanistic interpretability have so far focused on language models. However, most state of the art transformer models, such as GPT-4o and Claude-3.5, are multimodal. Given this trend, among other (philosophical) reasons, I would guess that any sort of artificial general intelligence (AGI) will be multimodal. Therefore, it would probably be useful to explore the interpretability of these multimodal models. Not only that, but peering into how these models can process language *and* images seems qualitatively different than peering into unimodal language models.
 
-### A brief overview of LLaVA
+## A brief overview of LLaVA
 
 The LLaVA architecture  consists of three main components: a vision encoder, a multimodal integration module, and a language model. In this project, we used Gemma because of the existing interpretability work done on it (e.g. GemmaScope).
 
@@ -65,7 +63,7 @@ By writing a feature as a one-hot vector in the encoding space and multiplying i
 
 One strong example of successfully influencing the model's output was from subtracting the feature *4501 references to loyal companions, specifically dogs* from the activations when running the model on the following photo.
 
-<img src="/assets/img/dog.png" alt="dog from MNIST" width="400" class="center"/>
+<img src="/assets/img/dog.png" alt="dog from MNIST" width="300" class="center"/>
 
 Original output:
 
