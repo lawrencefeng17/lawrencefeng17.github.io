@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A quick look into multimodal interpretability
-thumbnail-img: "/assets/img/pair_stars.jpg"
+thumbnail-img: "/assets/img/multimodal_thumbnail.png"
 tags: [Projects]
 author: Lawrence Feng
 ---
