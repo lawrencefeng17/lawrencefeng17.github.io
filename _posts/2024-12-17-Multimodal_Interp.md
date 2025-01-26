@@ -79,6 +79,10 @@ Output after intervention:
 The image features a close-up of a person's hands holding a cell phone, with the focus on the hands and the surrounding area. The cell phone is in the middle of the hands, with the hands spread out to the sides. The image also includes a background that can be seen in the upper part of the cell phone, and the overall context suggests that the person is using the cell phone.
 ```
 
-## Repository
+## Links
 
 [Here is the code for this project](https://github.com/lawrencefeng17/llava-interpret.git)
+
+[Here is the report we wrote](https://lawrencefeng17.github.io/assets/pdf/Final_Report.pdf)
+
+
