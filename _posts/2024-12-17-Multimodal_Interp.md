@@ -73,6 +73,14 @@ Output after intervention:
 
 > The image features a close-up of a person's hands holding a cell phone, with the focus on the hands and the surrounding area. The cell phone is in the middle of the hands, with the hands spread out to the sides. The image also includes a background that can be seen in the upper part of the cell phone, and the overall context suggests that the person is using the cell phone.
 
+It seems like we managed to "subtract out" the dog from the image, and the model started describing something else entirely.
+
+## Conclusion
+
+The work done here was brief and exploratory, but I thought it might be interesting to share.
+
+I'd like to learn more about the latest directions in mechanistic interpretability and work being done to theoretically ground sparse dictionary learning as a method for neural network interpretability. I'm also curious to know how the field of mechanistic interpretability will evolve as timelines shorten.
+
 ## Links
 
 [Here is the code for this project](https://github.com/lawrencefeng17/llava-interpret.git)

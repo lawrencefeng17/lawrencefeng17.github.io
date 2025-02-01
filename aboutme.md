@@ -4,7 +4,7 @@ title: About me
 ---
 I suppose I should begin with a standard introduction...
 
-> Hi, I'm Lawrence! I'm a junior at Carnegie Mellon University studying Statistics and Machine Learning. I have a broad interest in the field of machine learning, including reasoning, planning, reinforcement learning, and alignment, and I'm working to increase the breadth and depth of my intuition, knowledge, and fascination with this intellectually rich and deeply transformative field.
+> Hi, I'm Lawrence! I'm a junior at Carnegie Mellon University double majoring in Statistics and Artificial Intelligence. I have a broad interest in the field of artificial intelligence, including reasoning and safety. I also spend time thinking about how our social and political institutions will need to adapt in  the presence of powerful artificial intelligence. I’m working to increase the breadth and depth of my intuition, knowledge, and fascination with this intellectually rich and deeply transformative field.
 
 Now, let me first motivate my motivation and provide some context.
 
@@ -21,4 +21,4 @@ So, why artificial intelligence?
 On the perspective line, the study of artificial intelligence seems to be in the completely opposition direction of the pursuit of a cosmic understanding of ourselves, but I don't think our line is quite straight here. There are deep ethical and philosophical questions that come from our pursuit of more intelligent artificial systems, and often they are raised by simple observation. Somehow, we have LLMs that surpass the intelligence of the average human, by some measures at least, yet somehow we don't have human-level autonomous cars, though most humans of *any* intelligence can drive a car. Somehow, LLMs can write sophisticated, factually dense prose, yet they cannot perform six-digit by six-digit multiplication. Somehow, these same language models can write deeply intricate, introspective paragraphs about intelligence and sentience, yet most of our intuitions tell us that these artificial intelligences are not self-aware and conscious. As we build the future of intelligence on this planet, we must ask ourselves, for technical, ethical, and philosophical reasons, what intelligence, understanding, learning, and sentience mean. As we dive deep into the workings of our brains, replicate them, and develop intelligent architectures that are increasingly different from ourselves, our understanding of how we *naturally* intelligent beings work is profoundly challenged. In the same way that learning more about our universe may shape why and how we live, learning more about our intelligence may shape why and how we live. And that's why I'm interested in this wonderfully curious field.
 
 ---
-*originally written March 2024*
+*originally written March 2024, updated 2025*
