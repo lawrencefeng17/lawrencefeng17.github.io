@@ -48,7 +48,7 @@ title: Alignment Reading Group
 **What is Artificial General Intelligence (and how it might go wrong)? (20 minutes)**
 * [What is AGI?](https://www.lesswrong.com/w/artificial-general-intelligence-agi)
 * [Paperclip maximizer](https://www.lesswrong.com/w/squiggle-maximizer-formerly-paperclip-maximizer)
-* [Faulty systems in the wild](https://openai.com/index/faulty-reward-functions/)
+* [Faulty systems in the wild](https://openai.com/index/faulty-reward-functions/)... watch the video!
 * [Orthogonality thesis](https://www.lesswrong.com/w/orthogonality-thesis)
 * What do you think?
 
