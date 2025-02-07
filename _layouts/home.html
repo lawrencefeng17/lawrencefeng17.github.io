@@ -6,6 +6,12 @@ layout: page
 
 {% assign posts = paginator.posts | default: site.posts %}
 
+{% if paginator == nil or paginator.page == 1 %}
+  <div class="profile-picture" style="text-align: center; margin-bottom: 2rem;">
+    <img src="/assets/img/pfp.png" alt="My Profile Picture" style="max-width: 200px; border-radius: 50%;">
+  </div>
+{% endif %}
+
 <!-- role="list" needed so that `list-style: none` in Safari doesn't remove the list semantics -->
 <ul class="posts-list list-unstyled" role="list">
   {% for post in posts %}
