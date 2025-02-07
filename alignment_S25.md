@@ -26,8 +26,9 @@ title: Alignment Reading Group
   * Week 6: Mechanistic interpretability
   * Week 7: Technical governance
   * Week 8: AI control
-* Refreshments provided at future meetings
+* Food provided at future meetings
 * Guest facilitators include PhD students like Ida and Andy Zou
+* Will be roughly based on [AISF](https://course.aisafetyfundamentals.com/alignment)
 
 #### 3. Expectations Discussion (5 minutes)
 * Group discussion of participant expectations and goals
@@ -48,8 +49,8 @@ title: Alignment Reading Group
 **What is Artificial General Intelligence (and how it might go wrong)? (20 minutes)**
 * [What is AGI?](https://www.lesswrong.com/w/artificial-general-intelligence-agi)
 * [Paperclip maximizer](https://www.lesswrong.com/w/squiggle-maximizer-formerly-paperclip-maximizer)
-* [Faulty systems in the wild](https://openai.com/index/faulty-reward-functions/)... watch the video!
 * [Orthogonality thesis](https://www.lesswrong.com/w/orthogonality-thesis)
+* [Faulty systems in the wild](https://openai.com/index/faulty-reward-functions/)... watch the video!
 * What do you think?
 
 **AI Futures (40 minutes)**
