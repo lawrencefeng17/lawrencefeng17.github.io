@@ -4,7 +4,7 @@ title: Alignment Reading Group
 ---
 ### Agenda for 02/07/2025
 
-#### Beginnings (15 minutes)
+#### Beginnings (10 minutes)
 1. Introductions from Lawrence and Ida! 
 2. Some brief guidelines:
     * We won't be doing introductions. Instead, before you speak, state your name. 
@@ -22,29 +22,30 @@ title: Alignment Reading Group
         * *Week 4*: Scalable oversight
         * *Week 5*: Robustness, unlearning
         * *Week 6*: Mechanistic interpretability
-        * *Week 7*: Technical governance
         * *Week 8*: AI control
+        * *Week 7*: Technical governance
     * There should be food in the coming meetings!
 4. Now that I've discussed my expectations, what are your expectations? 
 
 #### Form (5 minutes)
 5. To begin with, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSeTaOr4pMsmTWqIv2rIjoZ_Jw5WCMp8HmSNvEEUqqwyILkP5Q/viewform?usp=dialog).
 
-#### First readings (45 minutes)
-6. What is AI risk? 
-    * [AI and Its Impacts](https://aisafetyfundamentals.com/blog/ai-and-its-impacts/)
-    * [AI risk](https://80000hours.org/problem-profiles/artificial-intelligence/#we-can-tackle-these-risks)
-7. Discuss!
-8. How fast are things moving?
-    * [AI timelines](https://research.aimultiple.com/artificial-general-intelligence-singularity-timing/)
-9. Discuss!
-
-#### Discussion (30 minutes)
-10. Discussion topics:
-    * What is a timeline? What is your timeline?
-    * Open source of close source?
+#### Main content
+6. Beginnings
+    * [AI and its impacts](https://aisafetyfundamentals.com/blog/ai-and-its-impacts/) (5 minutes)
+    * [Why people are building AI](https://aisafetyfundamentals.com/blog/why-are-people-building-ai-systems/) (5 minutes)
+7. Discussion (10 minutes)
+8. [AI Futures](https://80000hours.org/problem-profiles/artificial-intelligence/) (20 minutes)
+9. Discuss! (20 minutes)
+    * What is a timeline? What is your timeline? (Find a partner and discuss)
+10. Catastrophic AI Risks
+    * [An Overview of Catastrophic AI Risks](https://arxiv.org/pdf/2306.12001) (15 minutes)
+        * Focus on Section 3: AI Race
+11. Discuss! (30 minutes)
     * Multipolar or unipolar?
     * Private or nationalized?
+    * Open source of close source?
+
 
 
 
