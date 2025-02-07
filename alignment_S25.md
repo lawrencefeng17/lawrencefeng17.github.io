@@ -45,7 +45,7 @@ title: Alignment Reading Group
 * Group Discussion (10 minutes)
     * What is intelligence? What is artificial intelligence?
 
-**What is Artificial General Intelligence? (20 minutes)**
+**What is Artificial General Intelligence (and how it might go wrong)? (20 minutes)**
 * [What is AGI?](https://www.lesswrong.com/w/artificial-general-intelligence-agi)
 * [Paperclip maximizer](https://www.lesswrong.com/w/squiggle-maximizer-formerly-paperclip-maximizer)
 * [Faulty systems in the wild](https://openai.com/index/faulty-reward-functions/)
