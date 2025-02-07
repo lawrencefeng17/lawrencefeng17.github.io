@@ -43,10 +43,12 @@ title: Alignment Reading Group
   * [AI and its impacts](https://aisafetyfundamentals.com/blog/ai-and-its-impacts/) (5 minutes)
   * [Why people are building AI](https://aisafetyfundamentals.com/blog/why-are-people-building-ai-systems/) (5 minutes)
 * Group Discussion (10 minutes)
+    * What is intelligence? What is artificial intelligence?
 
-**What is AGI? (20 minutes)**
+**What is Artificial General Intelligence? (20 minutes)**
 * [What is AGI?](https://www.lesswrong.com/w/artificial-general-intelligence-agi)
 * [Paperclip maximizer](https://www.lesswrong.com/w/squiggle-maximizer-formerly-paperclip-maximizer)
+* What do you think?
 
 **AI Futures (40 minutes)**
 * Reading: [80,000 Hours - AI Problem Profile](https://80000hours.org/problem-profiles/artificial-intelligence/) (20 minutes)
