@@ -4,7 +4,8 @@ title: Alignment Reading Group
 ---
 ### Agenda for 02/07/2025
 
-1. Introductions from Lawrence and Ida!
+#### Beginnings (15 minutes)
+1. Introductions from Lawrence and Ida! 
 2. Some brief guidelines:
     * We won't be doing introductions. Instead, before you speak, state your name. 
     * Please participate!
@@ -26,18 +27,25 @@ title: Alignment Reading Group
     * There should be food in the coming meetings!
 4. Now that I've discussed my expectations, what are your expectations? 
 
----
-
+#### Form (5 minutes)
 5. To begin with, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSeTaOr4pMsmTWqIv2rIjoZ_Jw5WCMp8HmSNvEEUqqwyILkP5Q/viewform?usp=dialog).
-6. [First reading]()
-5. Little discussion about timelines and accelerating progress, small reading
-6. Discussion topics:
-    1. What is your timeline?
-    2. Open source of close source?
-    3. Multipolar or unipolar?
 
+#### First readings (45 minutes)
+6. What is AI risk? 
+    * [AI and Its Impacts](https://aisafetyfundamentals.com/blog/ai-and-its-impacts/)
+    * [AI risk](https://80000hours.org/problem-profiles/artificial-intelligence/#we-can-tackle-these-risks)
+7. Discuss!
+8. How fast are things moving?
+    * [AI timelines](https://research.aimultiple.com/artificial-general-intelligence-singularity-timing/)
+9. Discuss!
 
-###
+#### Discussion (30 minutes)
+10. Discussion topics:
+    * What is a timeline? What is your timeline?
+    * Open source of close source?
+    * Multipolar or unipolar?
+    * Private or nationalized?
+
 
 
 
