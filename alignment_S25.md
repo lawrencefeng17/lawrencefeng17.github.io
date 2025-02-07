@@ -49,6 +49,7 @@ title: Alignment Reading Group
 * [What is AGI?](https://www.lesswrong.com/w/artificial-general-intelligence-agi)
 * [Paperclip maximizer](https://www.lesswrong.com/w/squiggle-maximizer-formerly-paperclip-maximizer)
 * [Faulty systems in the wild](https://openai.com/index/faulty-reward-functions/)
+* [Orthogonality thesis](https://www.lesswrong.com/w/orthogonality-thesis)
 * What do you think?
 
 **AI Futures (40 minutes)**
@@ -65,3 +66,8 @@ title: Alignment Reading Group
     * Multipolar vs. unipolar development scenarios
     * Private vs. nationalized AI development
     * Open source vs. closed source approaches
+
+---
+Future readings:
+* [Bitter Lesson](http://www.incompleteideas.net/IncIdeas/BitterLesson.html)
+* [Scaling Laws](https://arxiv.org/pdf/2001.08361)
