@@ -5,26 +5,6 @@ title: Alignment Reading Group
 ## Table of Contents
 
 1. [Agenda for February 7, 2025](#agenda-for-february-7-2025-ai-agi-and-ai-safety)
-2. [Agenda for February 14, 2025](#agenda-for-february-14-2025-the-alignment-problem)
-
-
-### Agenda for February 14, 2025: The Alignment Problem 
-
-#### 1. Preliminaries (5 minutes)
-* Let's do a quick round of introductions
-* Reminder on discussion guidelines:
-    * No need to close your laptop once you're done reading
-    * However, please do close your laptop once the discussion starts
-
-#### 2. Forecasting the Future Exercise (15 minutes)
-
-#### 3. Core Content and Discussions
-
-TBD
-
-#### 4. Exit form
-
----
 
 ### Agenda for February 7, 2025: AI, AGI, and AI Safety
 
@@ -65,23 +45,19 @@ TBD
 * Reading and Discussion (10 minutes)
   * [AI and its impacts](https://aisafetyfundamentals.com/blog/ai-and-its-impacts/) 
   * [Why people are building AI](https://aisafetyfundamentals.com/blog/why-are-people-building-ai-systems/) 
+  * [What is AGI?](https://www.lesswrong.com/w/artificial-general-intelligence-agi) (5 minutes)
 * Group Discussion (10 minutes)
     * What is intelligence? What is artificial intelligence?
 
-**5.2 What is Artificial General Intelligence (and how it might go wrong)? (40 minutes)**
-* [What is AGI?](https://www.lesswrong.com/w/artificial-general-intelligence-agi) (5 minutes)
-* [Paperclip maximizer](https://www.lesswrong.com/w/squiggle-maximizer-formerly-paperclip-maximizer) (5 minutes)
-* [Instrumental Convergence](https://www.lesswrong.com/w/instrumental-convergence) (5 minutes)
+**5.2 Intelligence and Goals (65 minutes)**
+* [The Superintelligent Will](https://nickbostrom.com/superintelligentwill.pdf) (30 minutes)
 * [Faulty systems in the wild](https://openai.com/index/faulty-reward-functions/)... watch the video! (5 minutes)
-
-**5.3 Intelligence and Goals (20 minutes)**
-* [Orthogonality thesis](https://www.lesswrong.com/w/orthogonality-thesis)
-    * [Scott Aaronson on against orthogonality thesis](https://scottaaronson.blog/?p=7064)
-* What do you think? (15 minutes)
-    * Split in half and debate the orthogonality thesis
+* What do you think?
+* Further readings:
+  * [Scott Aaronson on against orthogonality thesis](https://scottaaronson.blog/?p=7064)
 
 If time permits:
-**5.4 More on Catastrophic AI Risks**
+**5.3 More on Catastrophic AI Risks**
 * Reading: [80,000 Hours - AI Problem Profile](https://80000hours.org/problem-profiles/artificial-intelligence/) (20 minutes)
 * Partner Discussion: Timeline Perspectives (20 minutes)
   * What is a timeline?
