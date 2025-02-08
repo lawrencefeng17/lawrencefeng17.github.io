@@ -6,6 +6,7 @@ title: Alignment Reading Group
 
 1. [Agenda for February 7, 2025](#agenda-for-february-7-2025-ai-agi-and-ai-safety)
 
+
 ### Agenda for February 7, 2025: AI, AGI, and AI Safety
 
 #### 1. Welcome and Introduction (5 minutes)
@@ -40,7 +41,7 @@ title: Alignment Reading Group
 * Complete brief [introductory form](https://docs.google.com/forms/d/e/1FAIpQLSeTaOr4pMsmTWqIv2rIjoZ_Jw5WCMp8HmSNvEEUqqwyILkP5Q/viewform?usp=dialog)
 
 #### 5. Core Content and Discussions
-**5.1 Introduction to AI (25 minutes)**
+**5.1 Introduction to AI (30 minutes)**
 * What can AI do now? What can't it do? (5 minutes)
 * Reading and Discussion (10 minutes)
   * [AI and its impacts](https://aisafetyfundamentals.com/blog/ai-and-its-impacts/) 
@@ -49,14 +50,15 @@ title: Alignment Reading Group
 * Group Discussion (10 minutes)
     * What is intelligence? What is artificial intelligence?
 
-**5.2 Intelligence and Goals (65 minutes)**
+**5.2 Intelligence and Goals (70 minutes)**
 * [The Superintelligent Will](https://nickbostrom.com/superintelligentwill.pdf) (30 minutes)
 * [Faulty systems in the wild](https://openai.com/index/faulty-reward-functions/)... watch the video! (5 minutes)
-* What do you think?
+* What do you think? Debate and discuss!
 * Further readings:
   * [Scott Aaronson on against orthogonality thesis](https://scottaaronson.blog/?p=7064)
 
 If time permits:
+
 **5.3 More on Catastrophic AI Risks**
 * Reading: [80,000 Hours - AI Problem Profile](https://80000hours.org/problem-profiles/artificial-intelligence/) (20 minutes)
 * Partner Discussion: Timeline Perspectives (20 minutes)
