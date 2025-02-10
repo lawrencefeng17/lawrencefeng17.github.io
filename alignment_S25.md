@@ -5,7 +5,26 @@ title: Alignment Reading Group
 ## Table of Contents
 
 1. [Agenda for February 7, 2025](#agenda-for-february-7-2025-ai-agi-and-ai-safety)
+2. [Agenda for February 14, 2025](#agenda-for-february-14-2025-the-alignment-problem)
 
+
+### Agenda for February 14, 2025: The Alignment Problem 
+
+#### 1. Preliminaries (5 minutes)
+* Let's do a quick round of introductions
+* Reminder on discussion guidelines:
+    * No need to close your laptop once you're done reading
+    * However, please do close your laptop once the discussion starts
+
+#### 2. Forecasting the Future Exercise (15 minutes)
+
+#### 3. Core Content and Discussions
+
+TBD
+
+#### 4. Exit form
+
+---
 
 ### Agenda for February 7, 2025: AI, AGI, and AI Safety
 
