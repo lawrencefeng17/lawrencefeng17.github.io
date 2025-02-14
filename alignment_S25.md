@@ -1,5 +1,5 @@
 ---
-layout: minimal
+layout: no-nav
 title: Alignment Reading Group
 ---
 ## Table of Contents
