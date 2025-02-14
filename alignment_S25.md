@@ -30,15 +30,13 @@ title: Alignment Reading Group
 * [Constitutional AI](https://arxiv.org/pdf/2212.08073) (60 minutes)
   * This paper explains Anthropic’s constitutional AI approach, which is largely an extension on RLHF but with AIs replacing human demonstrators and human evaluators.
 
-**2.4 Deliberative Alignment by OpenAI(30 minutes)**
+**2.4 Deliberative Alignment by OpenAI (30 minutes)**
 * [Deliberative Alignment](https://arxiv.org/pdf/2412.16339) (30 minutes)
   * "We introduce Deliberative Alignment, a new paradigm that directly teaches the model safety specifications and trains it to explicitly recall and accurately reason over the specifications before answering."
 
 **2.4 Open Problems in RLHF (20 minutes)**
 * [Open Problems in RLHF](https://arxiv.org/pdf/2307.15217) (20 minutes)
   * This paper compiles a number of open problems in improving RLHF techniques.
-
-#### 3. Exit form
 
 ---
 
