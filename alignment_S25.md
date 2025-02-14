@@ -23,11 +23,15 @@ title: Alignment Reading Group
 * [What is AI alignment?](https://aisafetyfundamentals.com/blog/what-is-ai-alignment/) (15 minutes)
 
 **2.2 Introduction to RLHF (30 minutes)**
-* [RLHF](https://huggingface.co/blog/rlhf) (30 minutes)
+<ul style="margin-top: 0px; padding-left: 20px;">
+  <li><a href="https://huggingface.co/blog/rlhf">RLHF</a> (30 minutes)</li>
+</ul>
   * This more technical article explains the motivations for a system like RLHF, and adds additional concrete details as to how the RLHF approach is applied to neural networks. While reading, consider which parts of the technical implementation correspond to the 'values coach' and 'coherence coach' from the previous video.
 
 **2.3 Constitutional AI by Anthropic (60 minutes)**
-* [Constitutional AI](https://arxiv.org/pdf/2212.08073) (60 minutes)
+<ul style="margin-top: 0px; padding-left: 20px;">
+  <li><a href="https://arxiv.org/pdf/2212.08073">Constitutional AI</a> (60 minutes)</li>
+</ul>
   * This paper explains Anthropic’s constitutional AI approach, which is largely an extension on RLHF but with AIs replacing human demonstrators and human evaluators.
 
 **2.4 Deliberative Alignment by OpenAI (30 minutes)**
@@ -74,7 +78,7 @@ title: Alignment Reading Group
 * Complete brief [introductory form](https://docs.google.com/forms/d/e/1FAIpQLSeTaOr4pMsmTWqIv2rIjoZ_Jw5WCMp8HmSNvEEUqqwyILkP5Q/viewform?usp=dialog)
 
 #### 5. Core Content and Discussions
-**5.1 Introduction to AI (30 minutes)**
+##### 5.1 Introduction to AI (30 minutes)**
 * What can AI do now? What can't it do? (5 minutes)
 * Reading and Discussion (10 minutes)
   * [AI and its impacts](https://aisafetyfundamentals.com/blog/ai-and-its-impacts/) 
@@ -83,7 +87,7 @@ title: Alignment Reading Group
 * Group Discussion (10 minutes)
     * What is intelligence? What is artificial intelligence?
 
-**5.2 Intelligence and Goals (70 minutes)**
+##### 5.2 Intelligence and Goals (70 minutes)**
 * [The Superintelligent Will](https://nickbostrom.com/superintelligentwill.pdf) (30 minutes)
 * [Faulty systems in the wild](https://openai.com/index/faulty-reward-functions/)... watch the video! (5 minutes)
 * What do you think? Debate and discuss!
@@ -92,7 +96,7 @@ title: Alignment Reading Group
 
 If time permits:
 
-**5.3 More on Catastrophic AI Risks**
+##### 5.3 More on Catastrophic AI Risks**
 * Reading: [80,000 Hours - AI Problem Profile](https://80000hours.org/problem-profiles/artificial-intelligence/) (20 minutes)
 * Partner Discussion: Timeline Perspectives (20 minutes)
   * What is a timeline?
