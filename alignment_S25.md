@@ -20,22 +20,25 @@ title: Alignment Reading Group
 
 ### 2. Core Content and Discussions
 
-#### 2.1 Review and Introduction to the Alignment Problem (20 minutes)
+#### 2.1 Review and Introduction to the Alignment Problem (20 minutes)**
 * [What is AI alignment?](https://aisafetyfundamentals.com/blog/what-is-ai-alignment/) (15 minutes)
 
 #### 2.2 Introduction to RLHF (30 minutes)
 * [RLHF](https://huggingface.co/blog/rlhf) (30 minutes)
   * This more technical article explains the motivations for a system like RLHF, and adds additional concrete details as to how the RLHF approach is applied to neural networks. While reading, consider which parts of the technical implementation correspond to the 'values coach' and 'coherence coach' from the previous video.
+* Additional readings:
+  * [Deep Reinforcement Learning from Human Preferences](https://arxiv.org/pdf/1706.03741)
+  * [Training language models to follow instructions with human feedback](https://arxiv.org/pdf/2203.02155)
 
-#### 2.3 Constitutional AI by Anthropic (60 minutes)
+#### 2.3 Constitutional AI by Anthropic (60 minutes)**
 * [Constitutional AI](https://arxiv.org/pdf/2212.08073) (60 minutes)
   * This paper explains Anthropic's constitutional AI approach, which is largely an extension on RLHF but with AIs replacing human demonstrators and human evaluators.
 
-#### 2.4 Deliberative Alignment by OpenAI (30 minutes)
+#### 2.4 Deliberative Alignment by OpenAI (30 minutes)**
 * [Deliberative Alignment](https://arxiv.org/pdf/2412.16339) (30 minutes)
   * "We introduce Deliberative Alignment, a new paradigm that directly teaches the model safety specifications and trains it to explicitly recall and accurately reason over the specifications before answering."
 
-#### 2.5 Open Problems in RLHF (20 minutes)
+#### 2.5 Open Problems in RLHF (20 minutes)**
 * [Open Problems in RLHF](https://arxiv.org/pdf/2307.15217) (20 minutes)
   * This paper compiles a number of open problems in improving RLHF techniques.
 
