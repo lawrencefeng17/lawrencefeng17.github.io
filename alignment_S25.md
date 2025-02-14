@@ -7,42 +7,43 @@ title: Alignment Reading Group
 1. [Agenda for February 7, 2025](#agenda-for-february-7-2025-ai-agi-and-ai-safety)
 2. [Agenda for February 14, 2025](#agenda-for-february-14-2025-the-alignment-problem)
 
+---
 
-### Agenda for February 14, 2025: Alignment and RLHF
+## Agenda for February 14, 2025: Alignment and RLHF
 
-#### 1. Preliminaries (5 minutes)
+### 1. Preliminaries (5 minutes)
 * Let's do a quick round of introductions
 * Please fill out the [introductory form](https://docs.google.com/forms/d/e/1FAIpQLSeTaOr4pMsmTWqIv2rIjoZ_Jw5WCMp8HmSNvEEUqqwyILkP5Q/viewform?usp=dialog)
 * Reminder on discussion guidelines:
     * No need to close your laptop once you're done reading
     * However, please do close your laptop once the discussion starts
 
-#### 2. Core Content and Discussions
+### 2. Core Content and Discussions
 
-##### 2.1 Review and Introduction to the Alignment Problem (20 minutes)**
+#### 2.1 Review and Introduction to the Alignment Problem (20 minutes)**
 * [What is AI alignment?](https://aisafetyfundamentals.com/blog/what-is-ai-alignment/) (15 minutes)
 
-##### 2.2 Introduction to RLHF (30 minutes)**
+#### 2.2 Introduction to RLHF (30 minutes)**
 * [RLHF](https://huggingface.co/blog/rlhf) (30 minutes)
   * This more technical article explains the motivations for a system like RLHF, and adds additional concrete details as to how the RLHF approach is applied to neural networks. While reading, consider which parts of the technical implementation correspond to the 'values coach' and 'coherence coach' from the previous video.
 
-##### 2.3 Constitutional AI by Anthropic (60 minutes)**
+#### 2.3 Constitutional AI by Anthropic (60 minutes)**
 * [Constitutional AI](https://arxiv.org/pdf/2212.08073) (60 minutes)
   * This paper explains Anthropic’s constitutional AI approach, which is largely an extension on RLHF but with AIs replacing human demonstrators and human evaluators.
 
-##### 2.4 Deliberative Alignment by OpenAI (30 minutes)**
+#### 2.4 Deliberative Alignment by OpenAI (30 minutes)**
 * [Deliberative Alignment](https://arxiv.org/pdf/2412.16339) (30 minutes)
   * "We introduce Deliberative Alignment, a new paradigm that directly teaches the model safety specifications and trains it to explicitly recall and accurately reason over the specifications before answering."
 
-##### 2.5 Open Problems in RLHF (20 minutes)**
+#### 2.5 Open Problems in RLHF (20 minutes)**
 * [Open Problems in RLHF](https://arxiv.org/pdf/2307.15217) (20 minutes)
   * This paper compiles a number of open problems in improving RLHF techniques.
 
 ---
 
-### Agenda for February 7, 2025: AI, AGI, AI Safety
+## Agenda for February 7, 2025: AI, AGI, AI Safety
 
-#### 1. Welcome and Introduction (5 minutes)
+### 1. Welcome and Introduction (5 minutes)
 1. Introductions from Lawrence and Ida
    * Our backgrounds and motivation in AI safety
 2. Discussion Guidelines
@@ -51,7 +52,7 @@ title: Alignment Reading Group
    * Questions welcome - we're here to learn together
    * Laptops closed during discussion (exceptions for note-taking/quick searches)
 
-#### 2. Program Structure (5 minutes)
+### 2. Program Structure (5 minutes)
 * 8-week program (excluding finals week)
 * No required preparation outside the 2-hour sessions
 * Weekly Topics:
@@ -67,14 +68,14 @@ title: Alignment Reading Group
 * Guest facilitators include PhD students like Ida and Andy Zou
 * Will be roughly based on [AISF](https://course.aisafetyfundamentals.com/alignment)
 
-#### 3. Expectations Discussion (5 minutes)
+### 3. Expectations Discussion (5 minutes)
 * Group discussion of participant expectations and goals
 
-#### 4. Initial Survey (5 minutes)
+### 4. Initial Survey (5 minutes)
 * Complete brief [introductory form](https://docs.google.com/forms/d/e/1FAIpQLSeTaOr4pMsmTWqIv2rIjoZ_Jw5WCMp8HmSNvEEUqqwyILkP5Q/viewform?usp=dialog)
 
-#### 5. Core Content and Discussions
-##### 5.1 Introduction to AI (30 minutes)**
+### 5. Core Content and Discussions
+#### 5.1 Introduction to AI (30 minutes)**
 * What can AI do now? What can't it do? (5 minutes)
 * Reading and Discussion (10 minutes)
   * [AI and its impacts](https://aisafetyfundamentals.com/blog/ai-and-its-impacts/) 
@@ -83,14 +84,14 @@ title: Alignment Reading Group
 * Group Discussion (10 minutes)
     * What is intelligence? What is artificial intelligence?
 
-##### 5.2 Intelligence and Goals (70 minutes)**
+#### 5.2 Intelligence and Goals (70 minutes)**
 * [The Superintelligent Will](https://nickbostrom.com/superintelligentwill.pdf) (30 minutes)
 * [Faulty systems in the wild](https://openai.com/index/faulty-reward-functions/)... watch the video! (5 minutes)
 * What do you think? Debate and discuss!
 * Further readings:
   * [Scott Aaronson on against orthogonality thesis](https://scottaaronson.blog/?p=7064)
 
-##### If time permits: 5.3 More on Catastrophic AI Risks**
+#### If time permits: 5.3 More on Catastrophic AI Risks**
 * Reading: [80,000 Hours - AI Problem Profile](https://80000hours.org/problem-profiles/artificial-intelligence/) (20 minutes)
 * Partner Discussion: Timeline Perspectives (20 minutes)
   * What is a timeline?
