@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: minimal
 title: Alignment Reading Group
 ---
 ## Table of Contents
@@ -29,7 +29,7 @@ title: Alignment Reading Group
 
 #### 2.3 Constitutional AI by Anthropic (60 minutes)**
 * [Constitutional AI](https://arxiv.org/pdf/2212.08073) (60 minutes)
-  * This paper explains Anthropic’s constitutional AI approach, which is largely an extension on RLHF but with AIs replacing human demonstrators and human evaluators.
+  * This paper explains Anthropic's constitutional AI approach, which is largely an extension on RLHF but with AIs replacing human demonstrators and human evaluators.
 
 #### 2.4 Deliberative Alignment by OpenAI (30 minutes)**
 * [Deliberative Alignment](https://arxiv.org/pdf/2412.16339) (30 minutes)
