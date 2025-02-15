@@ -6,8 +6,23 @@ title: Alignment Reading Group
 
 ## Table of Contents
 
-1. [Agenda for February 7, 2025](#agenda-for-february-7-2025-ai-agi-and-ai-safety)
-2. [Agenda for February 14, 2025](#agenda-for-february-14-2025-the-alignment-problem)
+- [ ] [Agenda for February 21, 2025](#agenda-for-february-21-2025-constitutional-ai)
+- [x] [Agenda for February 14, 2025](#agenda-for-february-14-2025-alignment-and-rlhf)
+- [x] [Agenda for February 7, 2025](#agenda-for-february-7-2025-ai-agi-and-ai-safety)
+
+---
+
+## Agenda for February 21, 2025: Scalable Oversight
+
+### 1. Preliminaries 
+* Reminder on discussion guidelines:
+    * No need to close your laptop once you're done reading
+    * However, please do close your laptop once the discussion starts
+* If you haven't been added to the discord channel, please let me know.
+
+### 2. Core Content and Discussions
+
+TBD
 
 ---
 
@@ -23,17 +38,17 @@ title: Alignment Reading Group
 ### 2. Core Content and Discussions
 
 #### 2.1 Review and Introduction to the Alignment Problem (20 minutes)**
-* [What is AI alignment?](https://aisafetyfundamentals.com/blog/what-is-ai-alignment/) (15 minutes)
+* [What is AI alignment?](https://aisafetyfundamentals.com/blog/what-is-ai-alignment/) (10 minutes)
 
-#### 2.2 Introduction to RLHF (30 minutes)
+#### 2.2 Introduction to RLHF (50 minutes)
 * [RLHF](https://huggingface.co/blog/rlhf) (30 minutes)
   * This more technical article explains the motivations for a system like RLHF, and adds additional concrete details as to how the RLHF approach is applied to neural networks. While reading, consider which parts of the technical implementation correspond to the 'values coach' and 'coherence coach' from the previous video.
 * Additional readings:
   * [Deep Reinforcement Learning from Human Preferences](https://arxiv.org/pdf/1706.03741)
   * [Training language models to follow instructions with human feedback](https://arxiv.org/pdf/2203.02155)
 
-#### 2.3 Constitutional AI by Anthropic (40 minutes)
-* [Constitutional AI](https://arxiv.org/pdf/2212.08073) (60 minutes)
+#### 2.3 Constitutional AI by Anthropic (30 minutes)
+* [Constitutional AI](https://arxiv.org/pdf/2212.08073) (20 minutes)
   * This paper explains Anthropic's constitutional AI approach, which is largely an extension on RLHF but with AIs replacing human demonstrators and human evaluators.
   * Focus on sections 1.2, 3.1, 3.4, 4.1, 6.1, 6.2.
 
