@@ -1,5 +1,5 @@
 ---
-layout: no-nav
+layout: narrow
 title: Alignment Reading Group
 ---
 # Alignment Reading Group
@@ -61,13 +61,13 @@ title: Alignment Reading Group
 * 8-week program (excluding finals week)
 * No required preparation outside the 2-hour sessions
 * Weekly Topics:
-  * Week 1: What is AI, AI safety, and alignment?
-  * Week 2: Alignment
-  * Week 3: RLHF and other approaches to alignment
-  * Week 4: Scalable oversight
-  * Week 5: Robustness, unlearning
-  * Week 6: Mechanistic interpretability
-  * Week 7: Technical governance
+  - [ ] Week 1: What is AI, AI safety, and alignment?
+  - [ ] Week 2: Alignment
+  - [ ] Week 3: RLHF and other approaches to alignment
+  - [ ] Week 4: Scalable oversight
+  - [ ] Week 5: Robustness, unlearning
+  - [ ] Week 6: Mechanistic interpretability
+  - [ ] Week 7: Technical governance
   * Week 8: AI control
 * Food provided at future meetings
 * Guest facilitators include PhD students like Ida and Andy Zou
