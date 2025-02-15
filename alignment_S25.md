@@ -6,9 +6,9 @@ title: Alignment Reading Group
 
 ## Table of Contents
 
-- [ ] [Agenda for February 21, 2025](#agenda-for-february-21-2025-constitutional-ai)
-- [x] [Agenda for February 14, 2025](#agenda-for-february-14-2025-alignment-and-rlhf)
-- [x] [Agenda for February 7, 2025](#agenda-for-february-7-2025-ai-agi-and-ai-safety)
+- [ ]  [Agenda for February 21, 2025](#agenda-for-february-21-2025-constitutional-ai)
+- [x]  [Agenda for February 14, 2025](#agenda-for-february-14-2025-alignment-and-rlhf)
+- [x]  [Agenda for February 7, 2025](#agenda-for-february-7-2025-ai-agi-and-ai-safety)
 
 ---
 
@@ -76,13 +76,13 @@ TBD
 * 8-week program (excluding finals week)
 * No required preparation outside the 2-hour sessions
 * Weekly Topics:
-  - [ ] Week 1: What is AI, AI safety, and alignment?
-  - [ ] Week 2: Alignment
-  - [ ] Week 3: RLHF and other approaches to alignment
-  - [ ] Week 4: Scalable oversight
-  - [ ] Week 5: Robustness, unlearning
-  - [ ] Week 6: Mechanistic interpretability
-  - [ ] Week 7: Technical governance
+  * Week 1: What is AI, AI safety, and alignment?
+  * Week 2: Alignment
+  * Week 3: RLHF and other approaches to alignment
+  * Week 4: Scalable oversight
+  * Week 5: Robustness, unlearning
+  * Week 6: Mechanistic interpretability
+  * Week 7: Technical governance
   * Week 8: AI control
 * Food provided at future meetings
 * Guest facilitators include PhD students like Ida and Andy Zou
