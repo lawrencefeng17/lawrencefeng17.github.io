@@ -8,7 +8,7 @@ title: Alignment Reading Group
 
 - [ ]  [Agenda for February 21, 2025](#agenda-for-february-21-2025-constitutional-ai)
 - [x]  [Agenda for February 14, 2025](#agenda-for-february-14-2025-alignment-and-rlhf)
-- [x]  [Agenda for February 7, 2025](#agenda-for-february-7-2025-ai-agi-and-ai-safety)
+- [x]  [Agenda for February 7, 2025](#agenda-for-february-7-2025-ai-agi-ai-safety)
 
 ---
 
@@ -42,7 +42,7 @@ TBD
 
 #### 2.2 Introduction to RLHF (50 minutes)
 * [RLHF](https://huggingface.co/blog/rlhf) (30 minutes)
-  * This more technical article explains the motivations for a system like RLHF, and adds additional concrete details as to how the RLHF approach is applied to neural networks. While reading, consider which parts of the technical implementation correspond to the 'values coach' and 'coherence coach' from the previous video.
+  * This more technical article explains the motivations for a system like RLHF, and adds additional concrete details as to how the RLHF approach is applied to neural networks. 
 * Additional readings:
   * [Deep Reinforcement Learning from Human Preferences](https://arxiv.org/pdf/1706.03741)
   * [Training language models to follow instructions with human feedback](https://arxiv.org/pdf/2203.02155)
@@ -54,6 +54,7 @@ TBD
 
 #### 2.4 Deliberative Alignment by OpenAI (30 minutes, optional)
 * [Deliberative Alignment](https://arxiv.org/pdf/2412.16339) (30 minutes)
+  * This paper introduces OpenAI's approach to aligning their o-series of reasoning models.
 
 #### 2.5 Open Problems in RLHF (20 minutes)
 * [Open Problems in RLHF](https://arxiv.org/pdf/2307.15217) (20 minutes)
