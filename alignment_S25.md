@@ -14,22 +14,18 @@ title: Alignment Reading Group
 
 ## Agenda for February 28, 2025: Scalable Oversight
 
-### 1. Preliminaries 
-* Please do close your laptop once the discussion starts
-* If you haven't been added to the discord channel, please let me know.
+### 1. Core Content and Discussions
 
-### 2. Core Content and Discussions
-
-#### 2.1 An Intro to Scalable Oversight (25 minutes)
+#### 1.1 An Intro to Scalable Oversight (25 minutes)
 * [AISF Reading](https://aisafetyfundamentals.com/blog/scalable-oversight-intro/) 
 
-#### 2.2 Iterated Amplification (25 minutes)
+#### 1.2 Iterated Amplification (25 minutes)
 * [Supervising strong learners by amplifying weak experts](https://arxiv.org/pdf/1810.08575)
 
-#### 2.3 Safety Via Debate (30 minutes)
+#### 1.3 Safety Via Debate (30 minutes)
 * [AI Safety via Debate](https://arxiv.org/pdf/1805.00899) by Geoffrey Irving, Paul Christiano, and Dario Amodei
 
-#### 2.4 Weak-to-Strong Generalization (40 minutes)
+#### 1.4 Weak-to-Strong Generalization (40 minutes)
 * [Weak-to-Strong Generalization: Eliciting Strong Capabilities with Weak Supervision](https://arxiv.org/pdf/2312.09390) by OpenAI
 
 ---
