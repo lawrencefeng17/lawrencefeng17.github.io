@@ -12,7 +12,7 @@ title: Alignment Reading Group
 
 ---
 
-## Agenda for February 28, 2025: Scalable Oversight
+## Agenda for March 14, 2025: Scalable Oversight
 
 ### 1. Core Content and Discussions
 
