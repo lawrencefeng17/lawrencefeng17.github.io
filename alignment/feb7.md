@@ -2,7 +2,7 @@
 layout: narrow
 title: "Alignment Reading Group: February 7, 2025"
 ---
-# Agenda for February 7, 2025: AI, AGI, AI Safety
+# AI, AGI, AI Safety
 
 ## 1. Welcome and Introduction (5 minutes)
 1. Introductions from Lawrence and Ida
@@ -36,7 +36,7 @@ title: "Alignment Reading Group: February 7, 2025"
 * Complete brief [introductory form](https://docs.google.com/forms/d/e/1FAIpQLSeTaOr4pMsmTWqIv2rIjoZ_Jw5WCMp8HmSNvEEUqqwyILkP5Q/viewform?usp=dialog)
 
 ## 5. Core Content and Discussions
-### 5.1 [Introduction to AI](https://aisafetyfundamentals.com/blog/ai-and-its-impacts/) (30 minutes)
+### 5.1 Introduction to AI  
 * What can AI do now? What can't it do? (5 minutes)
 * Reading and Discussion (10 minutes)
   * [AI and its impacts](https://aisafetyfundamentals.com/blog/ai-and-its-impacts/) 
@@ -45,14 +45,14 @@ title: "Alignment Reading Group: February 7, 2025"
 * Group Discussion (10 minutes)
     * What is intelligence? What is artificial intelligence?
 
-### 5.2 [Intelligence and Goals](https://nickbostrom.com/superintelligentwill.pdf) (70 minutes)
+### 5.2 Intelligence and Goals
 * [The Superintelligent Will](https://nickbostrom.com/superintelligentwill.pdf) (30 minutes)
 * [Faulty systems in the wild](https://openai.com/index/faulty-reward-functions/)... watch the video! (5 minutes)
 * What do you think? Debate and discuss!
 * Further readings:
   * [Scott Aaronson on against orthogonality thesis](https://scottaaronson.blog/?p=7064)
 
-### 5.3 [More on Catastrophic AI Risks](https://80000hours.org/problem-profiles/artificial-intelligence/) (If time permits)
+### 5.3 More on Catastrophic AI Risks (If time permits)
 * Reading: [80,000 Hours - AI Problem Profile](https://80000hours.org/problem-profiles/artificial-intelligence/) (20 minutes)
 * Partner Discussion: Timeline Perspectives (20 minutes)
   * What is a timeline?

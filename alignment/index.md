@@ -2,9 +2,9 @@
 layout: narrow
 title: Alignment Reading Group
 ---
-# Alignment Reading Group
+# AI Alignment Reading Group
 
-Welcome to the Alignment Reading Group for Spring 2025. This reading group focuses on AI alignment, safety, and governance topics, covering technical approaches to ensuring AI systems behave as intended.
+Welcome to the Carnegie AI Safety Intiative (CASI) AI Alignment Reading Group for Spring 2025. This reading group focuses on topics in alignment, covering technical approaches to ensuring AI systems are safe.
 
 ## Weekly Agendas
 
