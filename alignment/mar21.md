@@ -27,3 +27,11 @@ title: "Alignment Reading Group: March 21, 2025"
 ### 1.6 [AI Control: Improving Safety Despite Intentional Subversion](https://www.lesswrong.com/posts/d9FJHawgkiMSPjagR/ai-control-improving-safety-despite-intentional-subversion) (20 minutes) 
 * AI control explores setups that reduce risks from advanced AI systems, even when models might be intentionally deceptive.
 * This forum post introduces AI control, and reports on the results of trying various protocols: both in terms of usefulness (how much performance of the model are you recovering) and safety (how often can the model get past the safeguards).
+
+## 2. Further Reading
+
+### 2.1 [The case for ensuring that powerful AIs are controlled](https://www.lesswrong.com/posts/kcKrE9mzEHrdqtDpE/the-case-for-ensuring-that-powerful-ais-are-controlled)
+
+### 2.2 [The Case Against AI Control Research](https://www.lesswrong.com/posts/8wBN8cdNAv3c7vt6p/the-case-against-ai-control-research)
+
+### 2.3 [LLM Unlearning Benchmarks are Weak Measures of Progress](https://arxiv.org/pdf/2410.02879)
