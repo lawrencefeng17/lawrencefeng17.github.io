@@ -35,3 +35,5 @@ title: "Alignment Reading Group: March 21, 2025"
 #### 2.2 [The Case Against AI Control Research](https://www.lesswrong.com/posts/8wBN8cdNAv3c7vt6p/the-case-against-ai-control-research)
 
 #### 2.3 [LLM Unlearning Benchmarks are Weak Measures of Progress](https://arxiv.org/pdf/2410.02879)
+
+#### 2.4 [Constitutional Classifiers](https://arxiv.org/pdf/2501.18837)
