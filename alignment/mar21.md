@@ -11,7 +11,7 @@ title: "Alignment Reading Group: March 21, 2025"
 ## 1. Core Content and Discussions
 
 #### 1.1 [Weak-to-Strong Generalization](https://arxiv.org/pdf/2312.09390) (20 minutes)
-* from last week
+* Reading sections 1, 3, and 6.
 
 #### 1.2 [What is AI Adversarial Robustness?](https://research.ibm.com/blog/securing-ai-workflows-with-adversarial-robustness) (10 minutes)
 * An overview of adversarial robustness
