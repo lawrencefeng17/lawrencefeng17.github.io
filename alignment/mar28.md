@@ -34,5 +34,4 @@ Read the following sections:
 #### 2.1 [GDM Depriortizing SAE Research](https://www.lesswrong.com/posts/C5KAZQib3bzzpeyrg/full-post-progress-update-1-from-the-gdm-mech-interp-team)
 
 #### 2.2 [Open Problems in Mechanistic Interpretability](https://arxiv.org/pdf/2501.16496)
-*is where I got the figure above*
 
