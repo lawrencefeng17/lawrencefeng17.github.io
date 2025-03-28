@@ -21,7 +21,6 @@ Where does it fit into the broader picture of alignment?
 * Check out [Towards Monosemanticity: Decomposing Language Models With Dictionary Learning](https://transformer-circuits.pub/2023/monosemantic-features/index.html) 
 
 #### 1.4 (Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet) (10 minutes)
-Read the following sections:
 * Scaling Laws section [here](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#scaling-scaling-laws)
 * Examples of Feature Interpretability [here](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#assessing-interp)
 
