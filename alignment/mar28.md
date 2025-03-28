@@ -23,6 +23,7 @@ Where does it fit into the broader picture of alignment?
 #### 1.4 (Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet) (10 minutes)
 * Scaling Laws section [here](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#scaling-scaling-laws)
 * Examples of Feature Interpretability [here](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#assessing-interp)
+* [Feature Visualization](https://transformer-circuits.pub/2023/monosemantic-features/vis/a1.html#feature-442)
 
 #### 1.5 [Insights on Crosscoder Model Diffing](https://transformer-circuits.pub/2025/crosscoder-diffing-update/index.html)  (if time permits)
 
