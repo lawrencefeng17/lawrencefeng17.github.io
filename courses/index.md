@@ -1,8 +1,8 @@
 ---
 layout: page
-title: CMU Course Reviews
-subtitle: as a student sitting somewhere between Stats, CS, and AI/ML
 ---
+
+# CMU Course Reviews
 
 > Incomplete
 
