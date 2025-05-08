@@ -1,7 +1,8 @@
 ---
 layout: page
-title: About me
 ---
+# About me
+
 I suppose I should begin with a standard introduction...
 
 > Hi, I'm Lawrence! I'm a junior at Carnegie Mellon University double majoring in Statistics and Artificial Intelligence. I have a broad interest in the field of artificial intelligence, including reasoning and safety. I also spend time thinking about how our social and political institutions will need to adapt in  the presence of powerful artificial intelligence. I’m working to increase the breadth and depth of my intuition, knowledge, and fascination with this intellectually rich and deeply transformative field.

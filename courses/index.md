@@ -4,7 +4,9 @@ layout: page
 
 # CMU Course Reviews
 
-> Incomplete
+*from the perspective of a double major in statistics & machine learning and artificial intelligence, with a minor in mathematics.*
+
+> Not finished at all.
 
 ## Junior Year
 

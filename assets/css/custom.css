@@ -1,7 +1,12 @@
 /* Custom CSS to hide the large title in the header */
-.intro-header .page-heading h1,
-.intro-header .post-heading h1 {
+.intro-header .page-heading h1 {
   display: none;
+}
+
+/* Adjust post titles to be more reasonably sized */
+.intro-header .post-heading h1 {
+  font-size: 2.25rem;
+  margin-top: 0;
 }
 
 /* Hide the header section entirely if it doesn't contain other elements */

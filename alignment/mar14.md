@@ -1,6 +1,5 @@
 ---
 layout: narrow
-title: "Alignment Reading Group: March 14, 2025"
 ---
 # Scalable Oversight
 

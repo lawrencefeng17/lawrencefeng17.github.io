@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Other Reviews
 ---
+# Other Reviews
 
 ## Movie Reviews
 

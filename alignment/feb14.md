@@ -1,6 +1,5 @@
 ---
 layout: narrow
-title: "Alignment Reading Group: February 14, 2025"
 ---
 # Alignment and RLHF
 

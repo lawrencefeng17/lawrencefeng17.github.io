@@ -1,6 +1,5 @@
 ---
 layout: narrow
-title: "Alignment Reading Group: March 21, 2025"
 ---
 # Robustness, Unlearning, and Control
 

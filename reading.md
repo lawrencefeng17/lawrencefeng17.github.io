@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Papers All the Way Down
 ---
+# Papers All the Way Down
 
 This is an incomplete, probably not regularly updated, list of papers I have read or plan to read.
 
