@@ -20,6 +20,8 @@ Nearing the end of the film, Lady Bird finds out she got off the waitlist to att
 
 Finally, Lady Bird arrives in New York, her dreams come true. She's far from her friends, her mother, her father, her brother, her home that is Sacramento. She's away from the house "on the wrong side of the tracks." In these moments of freedom, she finally comes to terms with the fact that her name is really Christine, and that it's a wonderful thing to be named by your parents. In these moments in a new city, Christine finally acknowledges the beauty in the ordinariness of her home of Sacramento.
 
+--- 
+
 [^1]: modulo that I watched *rush hour* last night
 
 [^2]: maybe it still does, sometimes

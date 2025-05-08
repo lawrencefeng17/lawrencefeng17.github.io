@@ -1,0 +1,20 @@
+/* Custom CSS to hide the large title in the header */
+.intro-header .page-heading h1,
+.intro-header .post-heading h1 {
+  display: none;
+}
+
+/* Hide the header section entirely if it doesn't contain other elements */
+.header-section:empty {
+  display: none;
+}
+
+/* Remove extra space at the top of the page when header is hidden */
+.header-section {
+  padding-top: 0;
+  margin-bottom: 0;
+}
+
+.intro-header {
+  margin-bottom: 0;
+} 

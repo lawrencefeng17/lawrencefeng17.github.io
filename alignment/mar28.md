@@ -1,6 +1,5 @@
 ---
 layout: narrow
-title: "Alignment Reading Group: March 28, 2025"
 ---
 # Mechanistic Interpretability
 

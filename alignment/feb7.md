@@ -1,6 +1,5 @@
 ---
 layout: narrow
-title: "Alignment Reading Group: February 7, 2025"
 ---
 # AI, AGI, AI Safety
 

@@ -8,11 +8,11 @@ Welcome to the Carnegie AI Safety Intiative (CASI) AI Alignment Reading Group fo
 
 ## Weekly Agendas
 
-- [x]  [Agenda for March 28, 2025: Mechanistic Interpretability](mar28)
-- [x]  [Agenda for March 21, 2025: Robustness, Unlearning, and Control](mar21)
-- [x]  [Agenda for March 14, 2025: Scalable Oversight](mar14)
-- [x]  [Agenda for February 14, 2025: Alignment and RLHF](feb14)
-- [x]  [Agenda for February 7, 2025: AI, AGI, AI Safety](feb7)
+- [x]  [Agenda for March 28, 2025: Mechanistic Interpretability](/alignment/mar28)
+- [x]  [Agenda for March 21, 2025: Robustness, Unlearning, and Control](/alignment/mar21)
+- [x]  [Agenda for March 14, 2025: Scalable Oversight](/alignment/mar14)
+- [x]  [Agenda for February 14, 2025: Alignment and RLHF](/alignment/feb14)
+- [x]  [Agenda for February 7, 2025: AI, AGI, AI Safety](/alignment/feb7)
 
 ## About the Reading Group
 
