@@ -1,3 +1,7 @@
+---
+layout: narrow
+---
+
 > *Lady Bird* is a poignant and awkwardly comedic bildungsroman about a rambunctious 17 year old daughter and her tempestuous relationship with her loving mother, all wrapped into a love letter to the city of Sacramento
 
 I haven't watched a movie in a while[^1]. I should really watch more movies.
