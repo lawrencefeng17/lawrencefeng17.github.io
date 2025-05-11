@@ -4,9 +4,7 @@ layout: page
 
 # CMU Course Reviews
 
-*from the perspective of a double major in statistics & machine learning and artificial intelligence, with a minor in mathematics.*
-
-> Not finished at all.
+This is a list of reviews of courses I've taken during my time at Carnegie Mellon as a double major in Statistics (Dietrich) and Artificial Intelligence (SCS), with a minor in mathematics. 
 
 ## Junior Year
 
@@ -62,8 +60,8 @@ layout: page
 
 * 15-122: Principles of Imperative Computation
 * 21-127: Concepts of Mathematics
-* 21-259: Calculus in 3-D
+* 21-259: Calculus in 3D: This is a standard Calculus III course. Unfortunately, the quality of many 21-2XX courses varies greatly. I wish CMU would make it a greater priority to make these general math courses more streamlined and more enjoyable.
 * 73-102: Principles of Microeconomics
-* 80-100: Introduction to Philosophy
+* 80-100: Introduction to Philosophy: If you want to learn about philosophy, take this course. If you don't, don't take this course. Weekly readings, weekly writings, and a few papers.
 
 
