@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A quick look into multimodal interpretability
+title: How similar are the features of a language model and a vision-language model?
 thumbnail-img: "/assets/img/multimodal_thumbnail.png"
 tags: [Projects]
 author: Lawrence Feng

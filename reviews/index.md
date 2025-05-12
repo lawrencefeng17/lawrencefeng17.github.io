@@ -2,4 +2,5 @@
 layout: page
 ---
 
-[Lady Bird](lady_bird) 
+* [Course Reviews](courses)
+* [Lady Bird](lady_bird) 
