@@ -26,12 +26,12 @@
 
 /* Reduce blog post title font size to prevent wrapping */
 .post-preview .post-title {
-  font-size: 1.5rem !important;
+  font-size: 1.6rem !important;
 }
 
 @media (min-width: 768px) {
   .post-preview .post-title {
-    font-size: 1.75rem !important;
+    font-size: 1.9rem !important;
   }
 }
 
