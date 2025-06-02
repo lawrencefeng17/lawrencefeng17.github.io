@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How similar are the features of a language model and a vision-language model?
+title: Interpreting a Multimodal Model with a Language-Only Sparse Autoencoder
 thumbnail-img: "/assets/img/multimodal_thumbnail.png"
 tags: [Projects]
 author: Lawrence Feng

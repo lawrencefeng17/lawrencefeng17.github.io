@@ -2,6 +2,7 @@
 _site
 .sass-cache
 .vagrant
+alignment/
 
 # general
 .DS_Store
