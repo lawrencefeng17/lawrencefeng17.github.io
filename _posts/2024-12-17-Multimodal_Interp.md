@@ -1,14 +1,12 @@
 ---
 layout: post
-title: Interpreting a Multimodal Model with a Language-Only Sparse Autoencoder
+title: Finding Language Concepts in a Multimodal Model
 thumbnail-img: "/assets/img/multimodal_thumbnail.png"
 tags: [Projects]
 author: Lawrence Feng
 ---
 
-_**this blog post is currently in progress**_
-
-*The idea for this project was my own, but much of this work was done collaboratively for my Introduction to Machine Learning (10-701) final project.*
+*The idea for this project was my own, but much of this work was done collaboratively for my Introduction to Machine Learning (10-701) final project. Collaborators include Shyla Bisht, James Ngai, and Parth Shastri.*
 
 ## Overview and Main Findings
 
@@ -77,9 +75,9 @@ It seems like we managed to "subtract out" the dog from the image, and the model
 
 ## Conclusion
 
-The work done here was brief and exploratory, but I thought it might be interesting to share.
+The work done here was brief and exploratory, but I thought it might be interesting to share. It's my first time playing with SAEs!
 
-I'd like to learn more about the latest directions in mechanistic interpretability and work being done to theoretically ground sparse dictionary learning as a method for neural network interpretability. I'm also curious to know how the field of mechanistic interpretability will evolve as timelines shorten.
+I'd like to learn more about the latest directions in mechanistic interpretability and work being done to theoretically ground sparse dictionary learning as a method for neural network interpretability. I'm also curious to learn more about theories of impact of Mechanistic Interpretability, especially as timelines shorten.
 
 ## Links
 
