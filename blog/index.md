@@ -2,5 +2,6 @@
 layout: page
 ---
 
-* [Course Reviews](courses)
+* [Ghost Text Plugin](ghost_plugin)
+* [Course Reviews](courses) 
 * [Lady Bird](lady_bird) 

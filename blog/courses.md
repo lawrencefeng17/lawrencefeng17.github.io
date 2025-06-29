@@ -2,7 +2,7 @@
 layout: page
 ---
 
-# CMU Course Reviews
+# CMU Course Reviews (which I haven't written yet)
 
 This is a list of reviews of courses I've taken during my time at Carnegie Mellon as a double major in Statistics (Dietrich) and Artificial Intelligence (SCS), with a minor in mathematics. 
 
