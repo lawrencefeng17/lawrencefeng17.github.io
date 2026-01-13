@@ -50,4 +50,43 @@
     max-width: 88%;
     margin-left: 6%;
   }
+}
+
+/* Margin note styling - grey text on RHS, outside content boundaries */
+.blog-post {
+  overflow: visible; /* Allow margin notes to extend beyond */
+}
+
+.blog-post .margin-note-wrapper {
+  position: relative;
+  margin: 1.875rem 0; /* Match paragraph spacing */
+}
+
+@media (min-width: 992px) {
+  .blog-post .margin-note {
+    position: absolute;
+    right: -280px; /* Position outside the content area */
+    width: 260px;
+    font-size: 0.85em;
+    color: #888;
+    line-height: 1.5;
+    font-style: italic;
+    white-space: normal;
+    margin-top: 0;
+    /* Align with baseline of surrounding text */
+    top: 0.2em;
+  }
+  
+  /* Ensure parent containers allow overflow */
+  .blog-post,
+  .col-xl-8,
+  .col-lg-10 {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 991px) {
+  .blog-post .margin-note {
+    display: none; /* Hide on smaller screens */
+  }
 } 
