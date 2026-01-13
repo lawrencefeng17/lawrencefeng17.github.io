@@ -22,8 +22,6 @@ author: Lawrence Feng
 navbar-links:
   About Me: "aboutme"
   Resume: "/assets/pdf/resume.pdf"
-  Reading Group: "/alignment"
-  Blog: "blog"
   # Currently Reading: "reading"
 
 ################
@@ -85,9 +83,9 @@ rss-description: This website is a virtual proof that I'm awesome
 
 # Select which social network share links to show in posts
 share-links-active:
-  twitter: true
+  twitter: false
   facebook: false
-  linkedin: true
+  linkedin: false
   vk: false
 
 # How to display the link to your website in the footer
@@ -283,6 +281,11 @@ exclude:
   - README.md
   - screenshot.png
   - docs/
+  - vendor
+  - vendor/bundle
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
 
 plugins:
   - jekyll-paginate

@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Finding Language Concepts in a Multimodal Model
-thumbnail-img: "/assets/img/multimodal_thumbnail.png"
 tags: [Projects]
 author: Lawrence Feng
 ---
