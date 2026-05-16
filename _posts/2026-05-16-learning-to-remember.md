@@ -1,15 +1,19 @@
 ---
 layout: null
+title: "Learning to Remember"
+subtitle: "Downstream forgetting is an upstream problem."
+author: Lawrence Feng, Gaurav R. Ghosal, Jacob Mitchell Springer, Ziqian Zhong, Aditi Raghunathan
+date: 2026-05-16
+tags: [Projects]
 sitemap: false
-hidden: true
-permalink: /2026-04-26-prc-watermark/
-redirect_to: https://github.com/lawrencefeng17/PRC-Watermark?tab=readme-ov-file#a-new-embedding-algorithm-tree-based-xor-watermarking-for-language-models
+permalink: /2026-05-16-learning-to-remember/
+redirect_to: https://ar-forum.github.io/earlyexposure-website/
 ---
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Tree-based XOR Watermarking for LMs</title>
+    <title>{{ page.title }}</title>
     <link rel="canonical" href="{{ page.redirect_to }}">
     <meta http-equiv="refresh" content="0; url={{ page.redirect_to }}">
     <meta name="robots" content="noindex">
