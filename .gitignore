@@ -3,6 +3,15 @@ _site
 .sass-cache
 .vagrant
 
+# resume LaTeX build artifacts (source is resume.tex; published PDF lives in assets/pdf/)
+resume/resume.pdf
+resume/*.aux
+resume/*.log
+resume/*.out
+resume/*.fls
+resume/*.fdb_latexmk
+resume/*.synctex.gz
+
 # general
 .DS_Store
 Thumbs.db

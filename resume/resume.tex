@@ -1,0 +1,239 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\usepackage{url}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \scshape Lawrence feng} \\ \vspace{1pt}
+    \small \raisebox{-0.1\height}\faPhone\ 925-819-8690 ~ \href{mailto:lawrence.feng2017@gmail.com}{\raisebox{-0.2\height}\faEnvelope\  \underline{lawrence.feng2017@gmail.com}} ~ 
+    \href{https://lawrencefeng17.github.io/}{\textcolor{MidnightBlue}{\underline{lawrencefeng17.github.io}}}
+    \vspace{-8pt}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+        {Carnegie Mellon University}{Fall 2022 -- Spring 2026}
+        {Bachelor of Science in Statistics and Machine Learning}{Pittsburgh, Pennsylvania}
+        \resumeItemListStart
+            \resumeItem{Minor in Computer Science, minor in Mathematics. Admitted into 5th-year Masters in Machine Learning.}
+            \resumeItem{GPA: 3.90}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%------RELEVANT COURSEWORK-------
+\vspace{-15pt}
+\section{Relevant Coursework}
+    \begin{multicols}{2}
+        \small
+        \begin{itemize}[itemsep=-3pt, parsep=4pt]
+            \item {Introduction to Deep Learning (PhD)}
+            \item {Deep Reinforcement Learning (PhD)}
+            \item{Probabilistic Graphical Models (PhD)}
+            \item {Probability and Mathematical Statistics (PhD)}
+            \item {Algorithm Design and Analysis}
+            \item {Parallel and Sequential Data Structures} 
+            \item {Advanced Methods for Data Analysis}
+            \item {Monte Carlo Methods and Applications}
+        \end{itemize}
+    \end{multicols}
+\vspace{-5pt}
+
+%-----------RESEARCH EXPERIENCE-----------
+\section{Research Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+    {Honors Undergraduate Research Thesis}{Fall 2025 -- Present}
+    {Advised by Professor Aditi Raghunathan}{}
+    \resumeItemListStart
+        \resumeItem{Led \href{https://ar-forum.github.io/earlyexposure-website/}{\textcolor{MidnightBlue}{Early Data Exposure Improves Robustness to Subsequent Fine-Tuning"}} — earlier versions of this work accepted to ICLR 2026 [SPOT, GRaM, DATA-FM]; under submission at COLM 2026}
+        \resumeItem{Our work reframes catastrophic forgetting as a property of upstream training rather than a downstream mitigation problem; \textit{how} a model acquires a capability matters for how it is retained, revealing false equivalances in prior work}
+        \resumeItem{We study what we call early exposure, that is mixing target data into pretraining, revealing performance gains on that target domain \textit{after} a downstream fine-tuning stage is introduced; early exposure also improves Pareto frontiers}
+        \resumeItem{Developed theory showing that specialized features are protected from downstream interference using early exposure}
+    \resumeItemListEnd
+
+    \resumeSubheading
+        {Carnegie Mellon Computer Science Department}{Fall 2024 -- Summer 2025}
+        {Advised by Professor Wenting Zheng}{}
+        \resumeItemListStart
+            \resumeItem{\href{https://lawrencefeng17.github.io/2026-04-26-prc-watermark/}{\textcolor{MidnightBlue}{Developed novel watermark embedding algorithm which makes cryptographic watermarking (more) practical}}}
+            \resumeItem{Sole programmer managing all aspects: experimental design, implementation, analysis, and progress reporting}
+            \resumeItem{Synthesizing complex experimental results into clear visualizations and accessible summaries for research collaboration}
+        \resumeItemListEnd
+        
+    \resumeSubheading
+      {Robotics Institute at Carnegie Mellon}{Spring 2024 -- Fall 2024}
+      {Summer Research Apprenticeship}{}
+      \resumeItemListStart
+        \resumeItem{Explored adapting CoTracker's retrospective dense point tracking into predictive models that output future robot states}
+        \resumeItem{Uncovered significant robustness failures in state-of-the-art models through systematic environmental variations}
+      \resumeItemListEnd
+    
+  \resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%-----------WORK AND LEADERSHIP EXPERIENCE-----------
+\section{Work and Leadership Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+        {Inflection AI}{Summer 2025}
+        {Member of Technical Staff Intern}{}
+        \resumeItemListStart
+            \resumeItem{Developed post-training tools for the open-source torchtune library, including support for distributed \href{https://github.com/pytorch/torchtune/pull/2868}{\textcolor{MidnightBlue}{{Qwen2.5-VL fine-tuning} (PR \#2868)}}; required deep understanding of multimodal RoPE and fusion architectures}
+            \resumeItem{Proposed and built benchmark refinement tool leveraging Item Response Theory to transform statistically insignificant LLM-as-a-judge evaluations into reliable discriminative assessments, now part of the company's core evaluation suite}
+            \resumeItem{Core contributor to a company-wide effort on EQ evaluation; surveyed prior work and collaborated on designing a suite of benchmarks, prototyped persona-based LLM simulators, and built synthetic data generation pipelines}
+        \resumeItemListEnd
+
+    \resumeSubheading
+      {\href{https://cmuaisafety.com/}{\textcolor{MidnightBlue}{Carnegie AI Safety Initiative}}}{Fall 2023 -- Present}
+      {President (Fall 2025 - Spring 2026), Member}{}
+      \resumeItemListStart
+            \resumeItem{Spearheaded outreach growing mailing list $4\times$ to $\sim900$, expanded leadership team $4 \times$ to $\sim16$, developed and taught \href{https://docs.google.com/document/d/11hSVDwhiRjqONF5kGo661CZMaCo-zZzmYqql3JbJllg/edit?usp=sharing}{\textcolor{MidnightBlue}{technical AI safety fundamentals course}} to $\sim 40$ ppl/sem, piloted and grew jailbreaking hackathon to $\sim 200$ participants}
+      \resumeItemListEnd
+    
+  \resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \vspace{-5pt}
+    \resumeSubHeadingListStart
+        \resumeProjectHeading
+            {\textbf{\href{https://lawrencefeng17.github.io/2024-12-17-Multimodal_Interp/}{\textcolor{MidnightBlue}{Interpreting Vision Language Models}}} $|$ \emph{Python, Hugging Face, TransformerLens}}{Fall 2024}
+            \resumeItemListStart
+                \resumeItem{Found that a language-only sparse autoencoder can provide insights into a multimodal model's black-box behavior}
+                \resumeItem{Demonstrated the ability to manipulate how a model interprets images using natural language concepts}
+            \resumeItemListEnd
+    \resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming Languages}: Python, R, C, C++, Java, SQL, SML, \LaTeX, Bash \\
+     \textbf{Developer Tools}: GCP, AWS EC2, Git, WandB, Slurm, Conda, uv \\
+     \textbf{Frameworks and Libraries}: PyTorch, TensorFlow, Hugging Face, vLLM, OpenCV, NumPy, Pandas, Matplotlib, ROS
+    }}
+ \end{itemize}
+ \vspace{-16pt}
+
+\end{document}
