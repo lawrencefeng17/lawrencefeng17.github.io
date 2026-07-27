@@ -1,13 +1,13 @@
 ---
 layout: null
-title: "Learning to Remember"
-subtitle: "Early data exposure improves robustness to subsequent fine-tuning (COLM 2026)"
-author: Lawrence Feng, Gaurav R. Ghosal, Jacob Mitchell Springer, Ziqian Zhong, Aditi Raghunathan
-date: 2026-05-16
+title: "Subliminal Learning Happens at Every Rank"
+subtitle: "Given the Right Learning Rate and Enough Data"
+author: Lawrence Feng
+date: 2026-07-27
 tags: [Projects]
 sitemap: false
-permalink: /2026-05-16-learning-to-remember/
-redirect_to: https://ar-forum.github.io/earlyexposure-website/
+permalink: /2026-07-27-subliminal-learning-every-rank/
+redirect_to: https://www.lesswrong.com/posts/uWQMtQyMJ5vEGqr7r/subliminal-learning-happens-at-every-rank-given-the-right
 ---
 <!DOCTYPE html>
 <html lang="en">
