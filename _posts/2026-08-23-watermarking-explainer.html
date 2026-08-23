@@ -1,0 +1,1127 @@
+---
+layout: standalone
+title: "How can LLM text be watermarked?"
+subtitle: "An interactive explainer"
+author: Lawrence Feng
+date: 2026-08-23
+tags: [Projects]
+excerpt: "An interactive explainer on how a watermark can be hidden in an LLM's sampling, and how you detect it later."
+---
+{% raw %}<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How can LLM text be watermarked?</title>
+<meta name="description" content="An interactive explainer on how a watermark can be hidden in the way a language model samples its next word, and how you detect it later.">
+<meta name="author" content="Lawrence Feng">
+<link rel="canonical" href="https://lawrencefeng17.github.io/2026-08-23-watermarking-explainer/">
+<meta property="og:site_name" content="Lawrence Feng">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How can LLM text be watermarked?">
+<meta property="og:description" content="An interactive explainer on how a watermark can be hidden in the way a language model samples its next word, and how you detect it later.">
+<meta property="og:url" content="https://lawrencefeng17.github.io/2026-08-23-watermarking-explainer/">
+<meta property="og:image" content="https://lawrencefeng17.github.io/assets/img/watermarking-explainer.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How can LLM text be watermarked?">
+<meta name="twitter:description" content="An interactive explainer on how a watermark can be hidden in the way a language model samples its next word, and how you detect it later.">
+<meta name="twitter:image" content="https://lawrencefeng17.github.io/assets/img/watermarking-explainer.png">
+<script src="/assets/js/dc-runtime.js"></script>
+</head>
+<body>
+<a href="/" style="position:fixed;top:20px;left:32px;z-index:50;font-family:'Roboto',system-ui,sans-serif;font-size:14px;font-weight:400;color:#8A857C;text-decoration:none;letter-spacing:0.01em">&#8592; Lawrence Feng</a>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300&amp;family=IBM+Plex+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#FFFFFF;color:#1B1B1B;overflow-x:hidden;}
+body{font-family:'Roboto',system-ui,sans-serif;font-size:18px;line-height:1.75;font-weight:300;}
+a{color:#6559C5;text-decoration-thickness:1px;text-underline-offset:3px;}
+a:hover{color:#4A3FA0;}
+::selection{background:#E8E4F8;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes spinCoin{from{transform:rotateX(0)}to{transform:rotateX(360deg)}}
+@media (max-width: 720px) { #mobile-guard { display: flex !important; } }
+@keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+</style>
+</helmet>
+<div id="mobile-guard" style="display:none;position:fixed;inset:0;z-index:99;background:#FFFFFF;align-items:center;justify-content:center;padding:32px;text-align:center;font-family:'Roboto',sans-serif;font-size:17px;line-height:1.6;color:#1B1B1B">Please view this on desktop. Sorry!</div>
+
+<div data-screen-label="Hero" style="max-width:1060px;margin:0 auto;padding:96px 32px 0">
+  <h1 style="font-family: 'Roboto',sans-serif; font-weight: 400; font-size: 50px; line-height: 1.1; letter-spacing: -0.01em; margin: 26px 0 18px; max-width: 800px">How can LLM text be watermarked?</h1>
+  <p style="font-size:22px;line-height:1.55;color:#55504A;max-width:640px;margin:0 0 56px">an interactive explainer (~15 minutes)</p>
+</div>
+
+<div data-screen-label="Intro" style="max-width:1060px;margin:0 auto;padding:0 32px 8px">
+  <div style="position:relative;display:grid;grid-template-columns:minmax(0,880px) 170px;gap:24px;align-items:start">
+  <div style="grid-column:2;grid-row:1;margin-top:104px;font-size:13px;line-height:1.6;color:#8A857C"><sup>1</sup> Not this method, but some other watermarking methods, like red-list/green-list logit biasing, do nudge the model's word choices in a more distortionary way.</div>
+  <p style="grid-column:1;grid-row:1;margin:0 0 24px;max-width:880px">In August 2026 Anthropic announced that <a href="https://www.anthropic.com/news/claude-text-watermark">future Claude models will carry a watermark</a> in their text.&nbsp;<br><br>This sort of watermark is unlike the image watermarks which you might be familiar with. LLM watermarks involve no shift in style or planting of hidden characters<sup style="font-size:12px;color:#8A857C">1</sup>. So then, how is it possible? This method relies on the particular way in which LLMs work, and it's surprisingly intuitive!<br><br><b><b><span style="font-weight: normal;">This explainer requires no prior knowledge about language models!</span></b></b><br><br>In this explainer, I'll explain Google's <a href="https://deepmind.google/science/synthid/">SynthID</a> watermarking method. Google has been quietly running it in <a href="https://www.nature.com/articles/s41586-024-08025-4">Gemini since 2024</a>, serving millions of users. Anthropic has <a href="https://www.anthropic.com/news/claude-text-watermark#how-does-watermarking-affect-Claude's-outputs">stated</a> that their watermarking algorithm is based on this same technique.<br><br>Let's get started!</p>
+  </div>
+
+  <div style="display:flex;justify-content:center;margin:72px 0 24px">
+    <div style="width:min(600px,100%);display:flex;flex-direction:column;gap:16px">
+      <div style="align-self:flex-end;max-width:78%;background:#F2F0EC;border-radius:16px 16px 4px 16px;padding:12px 18px;font-size:16px">Hey Claude, how was the weather today?</div>
+      <div style="align-self:flex-start;max-width:86%;background:#F7F5FB;border-radius:16px 16px 16px 4px;padding:12px 18px;font-size:16px">The weather today was cold and<span style="display:inline-block;width:8px;height:17px;background:#6559C5;vertical-align:-3px;margin-left:3px;animation:blink 1s step-end infinite"></span></div>
+    </div>
+  </div>
+  <p style="margin:0;max-width:880px">First, we'll want to understand how LLMs generate normal, unwatermarked text.</p>
+  <div style="display:flex;justify-content:center;margin:56px 0 0;animation:bounceDown 1.6s ease-in-out infinite">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 8l7 7 7-7" stroke="#8A857C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+  </div>
+</div>
+
+<div data-screen-label="Scene 1 distribution" id="distribution" style="max-width:1060px;margin:0 auto;padding:120px 32px 0">
+  <h2 style="font-family:'Roboto',sans-serif;font-size:28px;font-weight:400;margin:0 0 0;max-width:640px">How do LLMs generate text?</h2>
+  <div style="display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:72px;align-items:start">
+    <div>
+      <div data-step="a-0" data-lit="0.85" style="min-height:60vh;display:flex;align-items:flex-start;padding-top:28px"><p style="margin:0;opacity:{{ ops.a0 }};transition:opacity .4s">A typical language model generates one word<sup style="font-size:12px;color:#8A857C">2</sup> at a time. To generate the next word, the model reads all words written down already, then provides guesses for the next potential word.&nbsp;</p>
+</div>
+      <div data-step="a-1" style="min-height:75vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.a1 }};transition:opacity .4s">Those guesses come in the form of probabilities. Often there are many reasonable continuations. Here the model considers&nbsp;<span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 14px; background: rgb(245, 243, 239); border-radius: 6px; padding: 1px 7px; color: rgb(85, 80, 74); white-space: nowrap; vertical-align: 1px; line-height: 1.4;">overcast</span>&nbsp;to be the best continuation, though the model considers&nbsp;<span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 14px; background: rgb(245, 243, 239); border-radius: 6px; padding: 1px 7px; color: rgb(85, 80, 74); white-space: nowrap; vertical-align: 1px; line-height: 1.4;">grey</span>&nbsp;and&nbsp;<span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 14px; background: rgb(245, 243, 239); border-radius: 6px; padding: 1px 7px; color: rgb(85, 80, 74); white-space: nowrap; vertical-align: 1px; line-height: 1.4;">wet</span>&nbsp;to be reasonable too.</p></div>
+      <div data-step="a-2" style="min-height:75vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.a2 }};transition:opacity .4s">Every word in the model's vocabulary gets a probability. Most words will get assigned a probability near zero because they don't make any sense.<br><br>In all, the job of LLMs is to generate&nbsp;<i>probability distributions</i>&nbsp;over all possible words in its vocabulary!</p></div>
+      <div data-step="a-3" data-lit="0.4" style="min-height:90vh;display:flex;align-items:flex-start;padding-top:8vh;box-sizing:border-box"><p style="margin:0;opacity:{{ ops.a3 }};transition:opacity .4s">What next? Does the model finalize its guess for us? Actually no.&nbsp;<br><br>The model is finished doing any work. It's now up to whoever is running the model (e.g. Anthropic) to pick a word.<br><br>Then they'll write that choice down, the model will read all words written down, generate guesses for the next word, and repeat.<br><br>Picking the word is referred to as sampling from the model's probability distribution.&nbsp;<br><br>Let's see how that works...<span style="display:flex;justify-content:center;margin-top:40px"><span style="display:inline-flex;animation:bounceDown 1.6s ease-in-out infinite"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 8l7 7 7-7" stroke="#8A857C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></span></p></div>
+      <h2 id="picking" style="font-family:'Roboto',sans-serif;font-size:28px;font-weight:400;margin:200px 0 0">Picking from the distribution&nbsp;<br>via a tournament of words</h2>
+      <div data-step="b-0" data-lit="0.6" style="min-height:60vh;display:flex;align-items:flex-start;padding-top:28px"><p style="margin:0;opacity:{{ ops.b0 }};transition:opacity .4s">Sometimes the choice is made for us. If the model puts 99% on the word <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4;">the</span>, then we'll write&nbsp;<span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4;">the</span>. Easy!</p></div>
+      <div data-step="b-1" style="min-height:75vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.b1 }};transition:opacity .4s">Sometimes the choice is ambiguous. Here, the model puts 50% on <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4;">happy</span> and 50% on <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4;">sad</span>. Well then, let's decide by flipping a coin!</p></div>
+      <div data-step="b-2" style="min-height:60vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.b2 }};transition:opacity .4s">But what if there are more than two options? Say the model splits its guess evenly across four words…</p></div>
+      <div data-step="b-3" data-lit="0.45" style="min-height:60vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.b3 }};transition:opacity .4s">We can pair the words off and flip a coin for each pair…</p></div>
+      <div data-step="b-4" data-lit="0.45" style="min-height:60vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.b4 }};transition:opacity .4s">…and flip once more between the winners. Like a tournament! Every word still has an equal chance of coming out on top.</p></div>
+      <div data-step="b-5" style="min-height:60vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.b5 }};transition:opacity .4s">This method can be used to sample from any general distribution, not just uniform ones where every word has equal chance.</p></div>
+      <div data-step="b-6" style="min-height:75vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.b6 }};transition:opacity .4s">Let's convert the guesses into lottery tickets. If the model assigns <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4;">overcast</span> a 40% probability, then we'll give <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4;">overcast</span> 4 out of 10 available tickets.</p></div>
+      <div data-step="b-7" style="min-height:75vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.b7 }};transition:opacity .4s">Now forget the axes and line the tickets up. Pair them off at random and flip a coin for each pair. The winner move up to the next level of the bracket. Keep going until a single ticket reaches the top.</p></div>
+      <div data-step="b-8" data-lit="0.3" style="min-height:100vh;padding-top:20vh;box-sizing:border-box"><p style="margin:0;opacity:{{ ops.b8 }};transition:opacity .4s">Each word wins the tournament with exactly its probability. We've simply devised a way of making a choice from the model's guesses via a sequence of coin flips.<span style="display:flex;justify-content:center;margin-top:40px"><span style="display:inline-flex;animation:bounceDown 1.6s ease-in-out infinite"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 8l7 7 7-7" stroke="#8A857C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></span></p></div>
+    </div>
+    <div style="position:sticky;top:4vh;height:80vh;display:flex;align-items:flex-start;padding-top:28px">
+      <div style="position:absolute;left:calc(min(560px, 100%) + 20px);top:28px;width:140px;font-size:13px;line-height:1.6;color:#8A857C;opacity:{{ tokNoteOp }};transition:opacity .4s"><sup>2</sup> Models actually work with <i>tokens</i>, small chunks of text like <span style="font-family:'IBM Plex Mono',monospace;font-size:12px">watermark</span> = <span style="font-family:'IBM Plex Mono',monospace;font-size:12px">water</span> + <span style="font-family:'IBM Plex Mono',monospace;font-size:12px">mark</span>. We'll say "word" for simplicity.</div>
+      <div style="position:relative;width:100%;max-width:560px;height:460px">
+        <div style="position:absolute;inset:0;pointer-events:none;opacity:{{ mLayerOp }};transition:opacity .5s">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:17px;margin-bottom:28px">{{ mPrefix }} <span style="display:inline-block;min-width:100px;border-bottom:2px solid #1B1B1B;text-align:center;color:#6559C5;font-weight:500">{{ mBlank }}</span>{{ mSuffix }}</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ mBars }}" as="bar" hint-placeholder-count="7">
+              <div style="display:grid;grid-template-columns:84px 1fr 60px;gap:14px;align-items:center;opacity:{{ bar.op }};transition:opacity .6s">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:right;color:{{ bar.nameColor }};font-weight:{{ bar.wt }};transition:color .4s">{{ bar.name }}</div>
+                <div style="height:20px;border-radius:10px;overflow:hidden;background:#F5F3EF"><div style="height:100%;width:{{ bar.tW }}%;background:{{ bar.fill }};border-radius:10px;transition:background .4s,width .9s ease"></div></div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#8A857C">{{ bar.pct }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A857C;margin-top:24px;opacity:{{ aDoneOp }};transition:opacity .5s">the model's job ends here</div>
+        </div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:44px;opacity:{{ bP1Op }};transition:opacity .5s;pointer-events:{{ bP1Ev }}">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:17px">After the exam I felt <span style="display:inline-block;min-width:84px;border-bottom:2px solid #1B1B1B;text-align:center;color:#6559C5;font-weight:500">{{ b1Blank }}</span></div>
+          <div style="display:flex;gap:64px">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;padding:10px 20px;border-radius:10px;background:{{ b1HappyBg }};color:{{ b1HappyFg }};transition:background .4s,color .4s">happy <span style="font-size:13px;color:#8A857C">50%</span></div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;padding:10px 20px;border-radius:10px;background:{{ b1SadBg }};color:{{ b1SadFg }};transition:background .4s,color .4s">sad <span style="font-size:13px;color:#8A857C">50%</span></div>
+          </div>
+          <div style="width:72px;height:72px;border-radius:50%;border:3px solid #1B1B1B;display:grid;place-items:center;font-family:'Roboto',sans-serif;font-weight:400;font-size:28px;user-select:none;animation:{{ b1Anim }}">{{ b1Face }}</div>
+        </div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;opacity:{{ bP2Op }};transition:opacity .5s;pointer-events:none">
+          <div style="position:relative;font-family:'IBM Plex Mono',monospace;font-size:16px;margin-bottom:64px">
+            <div style="opacity:{{ b2PrefixAOp }};transition:opacity .8s">I opened the door and walked <span style="display:inline-block;min-width:84px;border-bottom:2px solid #1B1B1B;text-align:center;color:#6559C5;font-weight:500">{{ b2Blank }}</span></div>
+            <div style="position:absolute;inset:0;opacity:{{ b2PrefixBOp }};transition:opacity .8s">The weather today was cold and <span style="display:inline-block;min-width:84px;border-bottom:2px solid #1B1B1B;text-align:center;color:#6559C5;font-weight:500">?</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:34px">
+            <sc-for list="{{ b2Cands }}" as="w" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:92px {{ b2TrackW }}px 46px;gap:12px;align-items:center">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:right">{{ w.name }}</div>
+                <div style="height:17px;border-radius:7px;background:transparent"><div style="height:100%;width:{{ w.tW }}%;background:{{ w.bar }};border-radius:7px;transition:width .9s ease,background .9s"></div></div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#8A857C">{{ w.pct }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="opacity:{{ b2BracketOp }};transition:opacity .6s">
+          <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:20px;align-items:center">
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <sc-for list="{{ b2Cands }}" as="w" hint-placeholder-count="4">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;padding:9px 0;border-radius:10px;text-align:center;background:{{ w.bg }};color:{{ w.fg }};transition:background .4s,color .4s">{{ w.name }} <span style="font-size:12px;color:#A8A399">25%</span></div>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:74px;opacity:{{ b2SemiCoinOp }};transition:opacity .5s">
+              <div style="width:44px;height:44px;border-radius:50%;border:2px solid #1B1B1B;display:grid;place-items:center;font-family:'Roboto',sans-serif;font-weight:400;font-size:18px;animation:{{ b2SemiAnim }}">{{ b2c1 }}</div>
+              <div style="width:44px;height:44px;border-radius:50%;border:2px solid #1B1B1B;display:grid;place-items:center;font-family:'Roboto',sans-serif;font-weight:400;font-size:18px;animation:{{ b2SemiAnim }}">{{ b2c2 }}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:56px">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;padding:9px 0;border-radius:10px;text-align:center;background:#F5F3EF;opacity:{{ b2SemiOp }};transition:opacity .4s">{{ b2w1 }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;padding:9px 0;border-radius:10px;text-align:center;background:#F5F3EF;opacity:{{ b2SemiOp }};transition:opacity .4s">{{ b2w2 }}</div>
+            </div>
+            <div style="width:44px;height:44px;border-radius:50%;border:2px solid #1B1B1B;display:grid;place-items:center;font-family:'Roboto',sans-serif;font-weight:400;font-size:18px;opacity:{{ b2FinalCoinOp }};transition:opacity .4s;animation:{{ b2FinalAnim }}">{{ b2cf }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;padding:12px 0;border-radius:10px;text-align:center;background:#6559C5;color:#FFFFFF;opacity:{{ b2FinalOp }};transition:opacity .4s">{{ b2winner }}</div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A857C;text-align:center;margin-top:28px;opacity:{{ b2FinalOp }};transition:opacity .4s">each word wins the bracket exactly 25% of the time</div>
+          </div>
+        </div>
+        <div style="position:absolute;inset:0;opacity:{{ bP3Op }};transition:opacity .5s;pointer-events:none">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;margin-bottom:4px">The weather today was cold and <span style="display:inline-block;min-width:90px;border-bottom:2px solid #1B1B1B;text-align:center;color:#6559C5;font-weight:500">{{ elimBlank }}</span></div>
+          <div data-chart="sq" style="position:relative;width:100%;height:368px">
+            <sc-for list="{{ sqLabels }}" as="l" hint-placeholder-count="4">
+              <div style="position:absolute;left:0;top:{{ l.top }}px;width:92px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:14px;opacity:{{ sqAxisOp }};transition:opacity .8s,top .9s ease">{{ l.name }}</div>
+              <div style="position:absolute;left:{{ pctX }}px;top:{{ l.top }}px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#8A857C;opacity:{{ sqAxisOp }};transition:opacity .8s,left .5s,top .9s ease">{{ l.pct }}</div>
+            </sc-for>
+            <sc-for list="{{ conns }}" as="cn" hint-placeholder-count="0">
+              <div style="position:absolute;left:{{ cn.left }}px;top:{{ cn.top }}px;width:{{ cn.w }}px;height:{{ cn.h }}px;border-left:2px solid #B5B0A6;border-right:2px solid #B5B0A6;border-top:2px solid #B5B0A6;border-radius:6px 6px 0 0;opacity:{{ cn.op }};transition:opacity .5s"></div>
+            </sc-for>
+            <sc-for list="{{ pyrNodes }}" as="pn" hint-placeholder-count="0">
+              <div style="position:absolute;left:{{ pn.x }}px;top:{{ pn.y }}px;width:26px;height:17px;background:{{ pn.bg }};opacity:{{ pn.op }};transition:opacity .5s;transform:{{ pn.tf }};-webkit-mask:radial-gradient(circle 4px at 0 50%,transparent 96%,#000 100%) left/51% 100% no-repeat,radial-gradient(circle 4px at 100% 50%,transparent 96%,#000 100%) right/51% 100% no-repeat"></div>
+            </sc-for>
+            <sc-for list="{{ sqs }}" as="sq" hint-placeholder-count="20">
+              <div style="position:absolute;left:{{ sq.x }}px;top:{{ sq.y }}px;width:{{ sq.w }}px;height:17px;border-radius:{{ sq.rad }};background:{{ sq.bg }};opacity:{{ sq.op }};transition:left .9s ease,top .9s ease,width .9s ease,opacity .7s,transform .5s,border-radius .6s;transform:{{ sq.tf }};-webkit-mask:{{ sq.mask }}"></div>
+            </sc-for>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div data-screen-label="Scene 3 pseudorandomness" id="pseudorandomness" style="max-width:1060px;margin:0 auto;padding:48px 32px 0">
+  <h2 style="font-family:'Roboto',sans-serif;font-size:28px;font-weight:400;letter-spacing:0;margin:0;max-width:640px">Exploiting pseudorandomness</h2>
+  <div style="display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:72px;align-items:start">
+    <div>
+      <div data-step="c-0" data-lit="0.6" style="min-height:60vh;display:flex;align-items:flex-start;padding-top:28px"><p style="margin:0;opacity:{{ ops.c0 }};transition:opacity .4s">How does a computer flip a coin? You might've heard of random number generators. Random number generators are not truly random; they are pseudorandom! They appear to generate random numbers, but are actually deterministic.&nbsp;<br><br>If you've ever played Minecraft, you'll recall that creating a world starts with a random seed. These random seeds can be used to produce infinite worlds, but if you gave me the same seed, I could produce the same exact infinite world.&nbsp;<br><br>Perhaps you can see where we're going with this...</p></div>
+      <div data-step="c-1" style="min-height:75vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.c1 }};transition:opacity .4s">In practice, every coin we flipped in the section above is done using pseudorandomness. This is how normal LLM generation works; we haven't yet gotten to watermarking!<br><br>Given the seed, we can reproduce the same&nbsp; coin flip.</p></div>
+      <div data-step="c-2" style="min-height:75vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.c2 }};transition:opacity .4s">Watermarking makes a small change. To implement watermarking, the model developer will seed the flips deliberately, with a secret key and a few other parameters. With the secret key, only they can reproduce the coin flips.&nbsp;</p></div>
+      <div data-step="c-3" data-lit="0.25" style="min-height:90vh;display:flex;align-items:flex-start;padding-top:12vh;box-sizing:border-box"><p style="margin:0;opacity:{{ ops.c3 }};transition:opacity .4s">And to everyone else? Without the key, the outputs are provably indistinguishable from fair coin flips.&nbsp;<br><br>Pseudorandomness underlies LLM watermarking. When watermarking is used, every token is chosen from the model's guesses in a way indistinguishable from unwatermarked generation<sup style="font-size:12px;color:#8A857C">3</sup>.<span style="display:flex;justify-content:center;margin-top:40px"><span style="display:inline-flex;animation:bounceDown 1.6s ease-in-out infinite"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 8l7 7 7-7" stroke="#8A857C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></span></p></div>
+    </div>
+    <div style="position:sticky;top:4vh;height:80vh;display:flex;align-items:flex-start;padding-top:28px">
+      <div style="width:100%;max-width:560px;display:flex;flex-direction:column;gap:40px">
+        <div style="opacity:{{ cFreshLayerOp }};transition:opacity .6s">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:#8A857C;margin-bottom:14px">AN UNWATERMARKED COIN</div>
+          <div style="display:flex;flex-direction:column;gap:26px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <div style="display:flex;align-items:center;gap:14px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#F5F3EF;border-radius:8px;padding:5px 12px;white-space:nowrap;vertical-align:1px;line-height:1.4">seed = 120391823</span>
+                  <div style="display:flex;align-items:center">
+                    <div style="width:26px;border-top:1.5px solid #8A857C"></div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#55504A;border:1.5px solid #8A857C;border-radius:10px;padding:10px 14px;white-space:nowrap;vertical-align:1px;line-height:1.4">flip( )</div>
+                    <div style="width:26px;border-top:1.5px solid #8A857C"></div>
+                  </div>
+                  <span style="width:36px;height:36px;background:#55504A;border-radius:50%;display:inline-grid;place-items:center;color:#FFFFFF;font-family:'Roboto',sans-serif;font-weight:500;flex:none">T</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:14px;opacity:{{ cFresh2Op }};transition:opacity .7s">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#F5F3EF;border-radius:8px;padding:5px 12px;white-space:nowrap;vertical-align:1px;line-height:1.4">seed = 120391823</span>
+                  <div style="display:flex;align-items:center">
+                    <div style="width:26px;border-top:1.5px solid #8A857C"></div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#55504A;border:1.5px solid #8A857C;border-radius:10px;padding:10px 14px;white-space:nowrap;vertical-align:1px;line-height:1.4">flip( )</div>
+                    <div style="width:26px;border-top:1.5px solid #8A857C"></div>
+                  </div>
+                  <span style="width:36px;height:36px;background:#55504A;border-radius:50%;display:inline-grid;place-items:center;color:#FFFFFF;font-family:'Roboto',sans-serif;font-weight:500;flex:none">T</span>
+                </div>
+              </div>
+              <span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:74px;color:#C9C4BA;line-height:1;opacity:{{ cFresh2Op }};transition:opacity .7s">}</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A857C;white-space:nowrap;vertical-align:1px;line-height:1.4;opacity:{{ cFresh2Op }};transition:opacity .7s">same seed,<br>same flip</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;opacity:{{ cFresh3Op }};transition:opacity .7s">
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <div style="display:flex;align-items:center;gap:14px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#F5F3EF;border-radius:8px;padding:5px 12px;white-space:nowrap;vertical-align:1px;line-height:1.4">seed = 771402359</span>
+                  <div style="display:flex;align-items:center">
+                    <div style="width:26px;border-top:1.5px solid #8A857C"></div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#55504A;border:1.5px solid #8A857C;border-radius:10px;padding:10px 14px;white-space:nowrap;vertical-align:1px;line-height:1.4">flip( )</div>
+                    <div style="width:26px;border-top:1.5px solid #8A857C"></div>
+                  </div>
+                  <span style="width:36px;height:36px;background:#FFFFFF;color:#55504A;border:1.5px solid #8A857C;box-sizing:border-box;border-radius:50%;display:inline-grid;place-items:center;font-family:'Roboto',sans-serif;font-weight:500;flex:none">H</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:14px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#F5F3EF;border-radius:8px;padding:5px 12px;white-space:nowrap;vertical-align:1px;line-height:1.4">seed = 771402359</span>
+                  <div style="display:flex;align-items:center">
+                    <div style="width:26px;border-top:1.5px solid #8A857C"></div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#55504A;border:1.5px solid #8A857C;border-radius:10px;padding:10px 14px;white-space:nowrap;vertical-align:1px;line-height:1.4">flip( )</div>
+                    <div style="width:26px;border-top:1.5px solid #8A857C"></div>
+                  </div>
+                  <span style="width:36px;height:36px;background:#FFFFFF;color:#55504A;border:1.5px solid #8A857C;box-sizing:border-box;border-radius:50%;display:inline-grid;place-items:center;font-family:'Roboto',sans-serif;font-weight:500;flex:none">H</span>
+                </div>
+              </div>
+              <span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:74px;color:#C9C4BA;line-height:1">}</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A857C;white-space:nowrap;vertical-align:1px;line-height:1.4">same seed,<br>same flip</span>
+            </div>
+          </div>
+        </div>
+        <div style="position:relative">
+          <div style="border-top:1px solid #EDEAE4;max-width:400px"></div>
+          <div style="position:absolute;right:0;top:10px;width:140px;font-size:13px;line-height:1.6;color:#8A857C;opacity:{{ seqNoteOp }};transition:opacity .4s"><sup>3</sup> Precisely, each single token carries no distortion. Across a whole sequence, the joint distribution can shift slightly.</div>
+        </div>
+        <div style="opacity:{{ cKeyOp }};transition:opacity .6s">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:#6559C5;margin-bottom:14px">A WATERMARKED COIN</div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#F7F5FB;color:#4A3FA0;border-radius:8px;padding:5px 12px">secret key</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#F5F3EF;border-radius:8px;padding:5px 12px">other parameters</span>
+            </div>
+            <div style="display:flex;align-items:center">
+              <div style="width:26px;border-top:1.5px solid #8A857C"></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#55504A;border:1.5px solid #8A857C;border-radius:10px;padding:10px 14px;white-space:nowrap;vertical-align:1px;line-height:1.4">flip( )</div>
+              <div style="width:26px;border-top:1.5px solid #8A857C"></div>
+            </div>
+            <span style="width:36px;height:36px;background:#6559C5;border-radius:50%;display:inline-grid;place-items:center;color:#FFFFFF;font-family:'Roboto',sans-serif;font-weight:500;flex:none">H</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div data-screen-label="Scene 4 tournament" id="tournament" style="max-width:1060px;margin:0 auto;padding:80px 32px 0">
+  <h2 style="font-family:'Roboto',sans-serif;font-size:28px;font-weight:400;letter-spacing:0;margin:0;max-width:640px">A watermarked tournament</h2>
+  <div style="display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:72px;align-items:start">
+    <div>
+      <div data-step="d-0" data-lit="0.6" style="min-height:60vh;display:flex;align-items:flex-start;padding-top:28px"><p style="margin:0;opacity:{{ ops.d0 }};transition:opacity .4s">We finally have all the ingredients we need.&nbsp;<br><br>The watermarking procedure begins, like before, by drawing a few words from the model's distribution. Again, a likely word will have more tickets and will be drawn more often.</p></div>
+      <div data-step="d-1" data-lit="0.55" style="min-height:34vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.d1 }};transition:opacity .4s">Now, let's run the tournament.<br><br>Let's flip!</p></div>
+      <div data-step="d-2" style="min-height:90vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.d2 }};transition:opacity .4s">We'll provide the appropriate inputs to our pseudorandom flip function. Other than the secret key, those other parameters include the word under consideration, and the round of the tournament.&nbsp;<br><br>Here, the candidate word is <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4;">grey</span>, and we're on round 1. The <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4;">flip</span> function returns heads! Again, the <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4;">flip</span> function is deterministic yet gives us 50/50 odds!</p></div>
+      <div data-step="d-3" style="min-height:75vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.d3 }};transition:opacity .4s">…and now we flip a coin for each of the rest of the candidate words.&nbsp;<br><br>But wait... why are we flipping a coin for every word now?&nbsp;<br><br>Let me explain.</p></div>
+      <div data-step="d-4" style="min-height:75vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.d4 }};transition:opacity .4s">To enable watermarking, we'll have to make a slight change to our tournament procedure.&nbsp;<br><br>Instead of flipping one coin to decide between two words, we'll flip a coin for every word. Then, the winner between the two words is the one that lands heads. If both land tails or both heads, we'll break the tie arbitrarily.&nbsp;<br><br>The chance that either tokens wins is still 50/50! But the chance that the winner is heads is 75%. .<br><br>It's important that each word at every round of the tournament gets a heads or tails. We'll see why.</p></div>
+      <div data-step="d-5" style="min-height:110vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.d5 }};transition:opacity .4s">The champion has been chosen!<br><br>Here it is <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4;">grey</span>. Notice what it took to get there. The winning word had to beat out every other word.<br><br>That means that the watermarked word is the one is the one that repeatedly flipped heads (except for ties between tail flips).&nbsp;<br><br>Under the secret key, the champion word carries better than a 1 in 2 chance of heads across all rounds of the tournament.&nbsp;</p></div>
+      <div data-step="d-6" data-lit="0.45" style="min-height:90vh;display:flex;align-items:flex-start;padding-top:16vh;box-sizing:border-box"><p style="margin:0;opacity:{{ ops.d6 }};transition:opacity .4s">In fact, as we increase the number of tournament rounds, which we can do by drawing more tickets from the model's token distribution, then the champion word would have to had survived more coin flip battles. This packs more watermark evidence per token.<span style="display:flex;justify-content:center;margin-top:40px"><span style="display:inline-flex;animation:bounceDown 1.6s ease-in-out infinite"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 8l7 7 7-7" stroke="#8A857C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></span></p></div>
+    </div>
+    <div style="position:sticky;top:4vh;height:80vh;display:flex;align-items:flex-start;padding-top:28px">
+      <div data-arrow-root="1" style="position:relative;width:100%;max-width:560px">
+        <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;opacity:{{ dArrowOp }};transition:opacity .6s" viewBox="{{ dArrowVB }}" preserveAspectRatio="none">
+          <path d="{{ dArrowPath }}" fill="none" stroke="#6559C5" stroke-width="1.5" stroke-dasharray="4 4"></path>
+          <path d="{{ dArrowHead }}" fill="#6559C5"></path>
+          <path d="{{ dArrow2Path }}" fill="none" stroke="#3E7C4F" stroke-width="1.5" stroke-dasharray="4 4"></path>
+          <path d="{{ dArrow2Head }}" fill="#3E7C4F"></path>
+          <path d="{{ dArrow3Path }}" fill="none" stroke="#6559C5" stroke-width="1.5" stroke-dasharray="4 4"></path>
+          <path d="{{ dArrow3Head }}" fill="#6559C5"></path>
+        </svg>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#8A857C;margin-bottom:24px">The weather today was cold and <span style="display:inline-block;min-width:70px;border-bottom:2px solid #1B1B1B;text-align:center;color:#6559C5;font-weight:500">?</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;align-items:center">
+          <div style="position:relative;display:flex;flex-direction:column;gap:16px">
+            <sc-for list="{{ dCands }}" as="c" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:8px;opacity:{{ dCandsOp }};transition:opacity .5s">
+                <div data-arrow-from="{{ c.isFirst }}" style="flex:1;font-family:'IBM Plex Mono',monospace;font-size:14px;color:#FFFFFF;background:{{ c.tkc }};padding:9px 0;text-align:center;font-weight:{{ c.wt }};transform:{{ c.tf }};transition:transform .5s,font-weight .3s;-webkit-mask:radial-gradient(circle 6px at 0 50%,transparent 96%,#000 100%) left/51% 100% no-repeat,radial-gradient(circle 6px at 100% 50%,transparent 96%,#000 100%) right/51% 100% no-repeat">{{ c.name }}</div>
+                <div data-arrow-tob="{{ c.isFirst }}" style="width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-family:'Roboto',sans-serif;font-size:13px;font-weight:700;flex:none;background:{{ c.badgeBg }};color:{{ c.badgeFg }};border:{{ c.badgeBorder }};opacity:{{ c.badgeOp }};transition:opacity .5s">{{ c.call }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:48px;opacity:{{ dSemiOp }};transition:opacity .5s">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="flex:1;font-family:'IBM Plex Mono',monospace;font-size:14px;color:#FFFFFF;background:#6559C5;padding:9px 0;text-align:center;-webkit-mask:radial-gradient(circle 6px at 0 50%,transparent 96%,#000 100%) left/51% 100% no-repeat,radial-gradient(circle 6px at 100% 50%,transparent 96%,#000 100%) right/51% 100% no-repeat">grey</div>
+              <div style="width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-family:'Roboto',sans-serif;font-size:13px;font-weight:700;flex:none;background:#6559C5;color:#FFFFFF">H</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="flex:1;font-family:'IBM Plex Mono',monospace;font-size:14px;color:#FFFFFF;background:#B4543F;padding:9px 0;text-align:center;-webkit-mask:radial-gradient(circle 6px at 0 50%,transparent 96%,#000 100%) left/51% 100% no-repeat,radial-gradient(circle 6px at 100% 50%,transparent 96%,#000 100%) right/51% 100% no-repeat">damp</div>
+              <div style="width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-family:'Roboto',sans-serif;font-size:13px;font-weight:700;flex:none;background:#FFFFFF;color:#8A857C;border:1.5px solid #C9C4BA;box-sizing:border-box">T</div>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A857C;text-align:center;margin-top:-24px">ties are broken arbitrarily</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:-28px;opacity:{{ dFinalOp }};transition:opacity .5s">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;background:#6559C5;color:#FFFFFF;padding:12px 0;text-align:center;font-weight:500;-webkit-mask:radial-gradient(circle 7px at 0 50%,transparent 96%,#000 100%) left/51% 100% no-repeat,radial-gradient(circle 7px at 100% 50%,transparent 96%,#000 100%) right/51% 100% no-repeat">grey</div>
+
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-top:14px;opacity:{{ dLayerMarkOp }};transition:opacity .6s">
+          <div data-arrow-from2="1" style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#3E7C4F;text-align:center">round 1</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#3E7C4F;text-align:center;opacity:{{ dSemiOp }};transition:opacity .5s">round 2</div>
+          <div></div>
+        </div>
+        <div style="position:relative;margin-top:30px;opacity:{{ dFlipDiagOp }};transition:opacity .6s">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:#6559C5;margin-bottom:14px">A WATERMARKED COIN</div>
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#F7F5FB;color:#4A3FA0;border-radius:8px;padding:6px 12px;white-space:nowrap;vertical-align:1px;line-height:1.4">secret key</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#F5F3EF;color:#55504A;border-radius:8px;padding:{{ dOtherPad }};max-height:{{ dOtherMaxH }};opacity:{{ dOtherOp }};overflow:hidden;white-space:nowrap;vertical-align:1px;line-height:1.4;transition:max-height .5s,opacity .5s,padding .5s">other parameters</span>
+              <span data-arrow-to="1" style="font-family:'IBM Plex Mono',monospace;font-size:13px;border-radius:8px;padding:{{ dExpPad }};max-height:{{ dExpMaxH }};opacity:{{ dExpOp }};overflow:hidden;white-space:nowrap;vertical-align:1px;line-height:1.4;background:{{ dInCandBg }};color:{{ dInCandFg }};font-weight:{{ dInCandWt }};transform:{{ dInCandTf }};transition:max-height .5s,opacity .5s,padding .5s,background .5s,color .5s,transform .5s">candidate: {{ dInCand }}</span>
+              <span data-arrow-to2="1" style="font-family:'IBM Plex Mono',monospace;font-size:13px;border-radius:8px;padding:{{ dExpPad }};max-height:{{ dExpMaxH }};opacity:{{ dExpOp }};overflow:hidden;white-space:nowrap;vertical-align:1px;line-height:1.4;background:{{ dInLayerBg }};color:{{ dInLayerFg }};font-weight:{{ dInLayerWt }};transform:{{ dInLayerTf }};transition:max-height .5s,opacity .5s,padding .5s,background .5s,color .5s,transform .5s">round {{ dInLayer }}</span>
+            </div>
+            <div style="display:flex;align-items:center">
+              <div style="width:26px;border-top:1.5px solid #8A857C"></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#55504A;border:1.5px solid #8A857C;border-radius:10px;padding:10px 14px;white-space:nowrap;vertical-align:1px;line-height:1.4">flip( )</div>
+              <div style="width:26px;border-top:1.5px solid #8A857C"></div>
+            </div>
+            <span data-arrow-out="1" style="width:36px;height:36px;background:{{ dFlipOutBg }};border-radius:50%;display:inline-grid;place-items:center;color:#FFFFFF;font-family:'Roboto',sans-serif;font-weight:500;flex:none;transition:background .5s">{{ dFlipOut }}</span>
+          </div>
+        </div>
+        <div style="margin-top:24px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#55504A;opacity:{{ dFinalOp }};transition:opacity .5s">The weather today was cold and <span style="background:#F7F5FB;color:#4A3FA0;padding:1px 6px;border-radius:4px">grey</span>, and the wind…</div>
+        <div data-chart="big" style="position:absolute;inset:0;background:#FFFFFF;opacity:{{ dBigOp }};pointer-events:none;transition:opacity .6s">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:#8A857C;margin:56px 0 14px">MORE TICKETS, MORE ROUNDS</div>
+          <div style="position:relative;height:400px">
+            <sc-for list="{{ dBigConns }}" as="bn" hint-placeholder-count="0">
+              <div style="position:absolute;left:{{ bn.left }}px;top:{{ bn.top }}px;width:{{ bn.w }}px;height:{{ bn.h }}px;border-left:1.5px solid #C9C4BA;border-right:1.5px solid #C9C4BA;border-top:1.5px solid #C9C4BA;border-radius:5px 5px 0 0"></div>
+            </sc-for>
+            <sc-for list="{{ dBigCells }}" as="bc" hint-placeholder-count="0">
+              <div style="position:absolute;left:{{ bc.x }}px;top:{{ bc.y }}px;width:20px;height:13px;background:{{ bc.bg }};-webkit-mask:radial-gradient(circle 3px at 0 50%,transparent 96%,#000 100%) left/51% 100% no-repeat,radial-gradient(circle 3px at 100% 50%,transparent 96%,#000 100%) right/51% 100% no-repeat"></div>
+            </sc-for>
+            <sc-for list="{{ dBigLabels }}" as="bl" hint-placeholder-count="0">
+              <div style="position:absolute;left:0;top:{{ bl.y }}px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3E7C4F">{{ bl.t }}</div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div data-screen-label="Scene 5 detection" id="detection" style="max-width:1060px;margin:0 auto;padding:24px 32px 0">
+  <h2 style="font-family:'Roboto',sans-serif;font-size:28px;font-weight:400;letter-spacing:0;margin:0;max-width:640px">The detection algorithm</h2>
+  <div style="display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:72px;align-items:start">
+    <div>
+      <div data-step="e-0" data-lit="0.6" style="min-height:60vh;display:flex;align-items:flex-start;padding-top:28px"><p style="margin:0;opacity:{{ ops.e0 }};transition:opacity .4s">Someone hands the model developer a piece of text. They want to know whether or not one of their models generated it.<br><br>How can we detect watermarked text? Well, we said that the tokens chosen by the watermarking algorithm are the ones that tend to flip heads according to our secretly seeded pseudorandom coin flipper.<br><br>So, what if we just flipped the same seeded pseudorandom coin for every word in our piece of text?</p></div>
+      <div data-step="e-1" style="min-height:75vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.e1 }};transition:opacity .4s">And remember, the <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 14px; background: rgb(245, 243, 239); border-radius: 6px; padding: 1px 7px; color: rgb(85, 80, 74); white-space: nowrap; vertical-align: 1px; line-height: 1.4;">flip</span> function required us to provide a candidate word, a round number, and the secret key. Let's start with the first word, <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 14px; background: rgb(245, 243, 239); border-radius: 6px; padding: 1px 7px; color: rgb(85, 80, 74); white-space: nowrap; vertical-align: 1px; line-height: 1.4;">The</span>, and flip its coin for rounds 1, 2, and 3.</p></div>
+      <div data-step="e-2" style="min-height:100vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.e2 }};transition:opacity .4s">We're basically simulating what would have been <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4;">The</span>'s journey through the tournament.<br><br>Our detection algorithm doesn't actually need to know how the tournament played out during the watermarking process. But if <span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4;">The</span> was written down, it must have survived every round, all the way from the bottom to the top.</p></div>
+      <div data-step="e-3" style="min-height:100vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.e3 }};transition:opacity .4s">Now, let's flip coins for all our words and all rounds.&nbsp;<br><br>If the text is watermarked, then these coins should flip heads a suspicious number of times.</p></div>
+      <div data-step="e-4" style="min-height:100vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.e4 }};transition:opacity .4s">Now, gather every coin into two piles, heads and tails. Our score is simply the fraction of all flips that landed heads.</p></div>
+      <div data-step="e-5" data-lit="0.5" style="min-height:75vh;display:flex;align-items:flex-start;padding-top:28px"><div style="opacity:{{ ops.e5 }};transition:opacity .4s"><p style="margin:0">As you might infer, the more text we have, the more coins we can flip, and the more evidence we can gather for and against the text having been LLM generated.<br><br>Mathematically, the score function looks like this, where T is the number of tokens and m is the number of rounds in the tournament of words. We count the number of heads that show up, and divide by the total number of flips<sup style="font-size:12px;color:#8A857C">4</sup>.</p>
+      </div></div>
+      <div data-step="e-6" style="min-height:75vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.e6 }};transition:opacity .4s">If we process unwatermarked text, the score falls around 50%. Each dot here corresponds to the score of an ordinary, unwatermarked document. That document could be human or machine-generated, from a different developer or from a locally-hosted model. They pile up around one half.</p></div>
+      <div data-step="e-7" style="min-height:75vh;display:flex;align-items:center"><p style="margin:0;opacity:{{ ops.e7 }};transition:opacity .4s">But when we score watermarked text, the fraction of heads indeed shows up significantly more than 50% of the time.<br><br>We can compute the scores across tons of text, and determine what a reasonable boundary is so as to not falsely label unwatermarked text.</p></div>
+      <div data-step="e-8" data-lit="0.3" style="min-height:80vh;display:flex;align-items:flex-start;padding-top:8vh;box-sizing:border-box"><p style="margin:0;opacity:{{ ops.e8 }};transition:opacity .4s">And that's it! Now we know how to generate watermarked text and how to detect it!</p></div>
+      <div style="height:8vh"></div>
+    </div>
+    <div style="position:sticky;top:4vh;height:80vh;display:flex;align-items:flex-start;padding-top:28px">
+      <div style="position:relative;width:100%;max-width:560px">
+        <div style="position:absolute;inset:0;background:#FFFFFF;z-index:4;opacity:{{ eEqOp }};pointer-events:none;transition:opacity .6s;display:flex;align-items:flex-start">
+          <div style="width:100%">
+            <div data-katex="\text{score}=\frac{1}{mT}\sum_{t,\,\ell}\texttt{flip}(\text{key},\,\text{word}_t,\,\ell)" style="background:#F5F3EF;border-radius:10px;padding:20px 24px;text-align:center;font-size:16px"></div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.6;color:#8A857C;margin-top:16px"><sup>4</sup> Real detectors can do better than simply counting heads. SynthID's main experiments use a learned statistical detector that takes into account which tournament rounds the favorable flips occurred in.</div>
+          </div>
+        </div>
+        <div style="position:absolute;inset:0;background:#FFFFFF;z-index:2;opacity:{{ eIntroOp }};pointer-events:none;transition:opacity .6s">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:#8A857C;margin:0 0 22px;opacity:{{ eIntroHeadOp }};transition:opacity .5s">REPLAYING EVERY COIN</div>
+          <div style="position:relative;padding-left:74px;opacity:{{ eWordsStripOp }};transition:opacity .5s">
+            <div style="position:absolute;left:0;top:37px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3E7C4F;opacity:{{ eIntroScoreLegendOp }};transition:opacity .4s">round 1</div>
+            <div style="position:absolute;left:0;top:65px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3E7C4F;opacity:{{ eIntroScoreLegendOp }};transition:opacity .4s">round 2</div>
+            <div style="position:absolute;left:0;top:93px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3E7C4F;opacity:{{ eIntroScoreLegendOp }};transition:opacity .4s">round 3</div>
+            <div style="display:flex;gap:14px 10px;flex-wrap:wrap;align-content:flex-start">
+            <sc-for list="{{ eIntroWords }}" as="w" hint-placeholder-count="14">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;opacity:{{ w.op }};transition:opacity .5s">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#F5F3EF;border-radius:7px;padding:4px 9px;border:{{ w.bd }};opacity:{{ w.chipOp }};transition:opacity .5s">{{ w.t }}</div>
+                <div data-fly="{{ w.id1 }}" style="width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-family:'Roboto',sans-serif;font-size:11px;font-weight:700;background:{{ w.bg1 }};color:{{ w.fg1 }};border:{{ w.bd1 }};box-sizing:border-box;opacity:{{ w.op1 }};transition:opacity .4s,transform .9s ease;transform:{{ w.tf1 }}">{{ w.f1 }}</div>
+                <div data-fly="{{ w.id2 }}" style="width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-family:'Roboto',sans-serif;font-size:11px;font-weight:700;background:{{ w.bg2 }};color:{{ w.fg2 }};border:{{ w.bd2 }};box-sizing:border-box;opacity:{{ w.op2 }};transition:opacity .4s,transform .9s ease;transform:{{ w.tf2 }}">{{ w.f2 }}</div>
+                <div data-fly="{{ w.id3 }}" style="width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-family:'Roboto',sans-serif;font-size:11px;font-weight:700;background:{{ w.bg3 }};color:{{ w.fg3 }};border:{{ w.bd3 }};box-sizing:border-box;opacity:{{ w.op3 }};transition:opacity .4s,transform .9s ease;transform:{{ w.tf3 }}">{{ w.f3 }}</div>
+              </div>
+            </sc-for>
+            </div>
+          </div>
+          <div style="margin-top:26px;opacity:{{ eFlipFnOp }};transition:opacity .5s">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+              <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#F7F5FB;color:#4A3FA0;border-radius:8px;padding:5px 11px">secret key</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#F5F3EF;border-radius:8px;padding:5px 11px">word: The</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#F5F3EF;border-radius:8px;padding:5px 11px">round 1, 2, 3</span>
+              </div>
+              <div style="display:flex;align-items:center">
+                <div style="width:22px;border-top:1.5px solid #8A857C"></div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#55504A;border:1.5px solid #8A857C;border-radius:10px;padding:9px 12px;white-space:nowrap;vertical-align:1px;line-height:1.4">flip( )</div>
+                <div style="width:22px;border-top:1.5px solid #8A857C"></div>
+              </div>
+              <span style="width:32px;height:32px;background:#6559C5;border-radius:50%;display:inline-grid;place-items:center;color:#FFFFFF;font-family:'Roboto',sans-serif;font-size:14px;font-weight:500;flex:none">H</span>
+              <span style="width:32px;height:32px;background:#6559C5;border-radius:50%;display:inline-grid;place-items:center;color:#FFFFFF;font-family:'Roboto',sans-serif;font-size:14px;font-weight:500;flex:none">H</span>
+              <span style="width:32px;height:32px;background:#FFFFFF;border:1.5px solid #C9C4BA;box-sizing:border-box;border-radius:50%;display:inline-grid;place-items:center;color:#8A857C;font-family:'Roboto',sans-serif;font-size:14px;font-weight:500;flex:none">T</span>
+            </div>
+          </div>
+          <div style="position:absolute;left:0;right:0;top:{{ eJourneyTop }}px;transform:scale({{ eJourneyScale }});transform-origin:top left;opacity:{{ eJourneyOp }};transition:opacity .5s">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:#8A857C;margin-bottom:20px">THE'S JOURNEY, RECONSTRUCTED</div>
+            <div style="position:relative;width:100%;height:270px">
+              <sc-for list="{{ eJourneyCells }}" as="jc" hint-placeholder-count="0">
+                <div style="position:absolute;left:{{ jc.x }}px;top:{{ jc.y }}px;transform:translateX(-50%);display:flex;align-items:center;gap:6px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;background:{{ jc.bg }};color:{{ jc.fg }};border-radius:6px;padding:3px 8px;border:{{ jc.bd }};white-space:nowrap;vertical-align:1px;line-height:1.4">{{ jc.t }}</span>
+                  <sc-if value="{{ jc.coin }}" hint-placeholder-val="{{ false }}"><span style="width:18px;height:18px;border-radius:50%;background:{{ jc.cbg }};color:{{ jc.cfg }};border:{{ jc.cbd }};box-sizing:border-box;display:inline-grid;place-items:center;font-family:'Roboto',sans-serif;font-size:9px;font-weight:700;flex:none">{{ jc.coin }}</span></sc-if>
+                </div>
+              </sc-for>
+              <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none">
+                <sc-for list="{{ eJourneyEdges }}" as="je" hint-placeholder-count="0">
+                  <path d="{{ je.d }}" stroke="{{ je.c }}" stroke-width="{{ je.w }}" fill="none" opacity="{{ je.o }}"></path>
+                </sc-for>
+              </svg>
+              <sc-for list="{{ eJourneySide }}" as="js" hint-placeholder-count="0">
+                <div style="position:absolute;left:{{ js.x }}px;top:{{ js.y }}px;transform:translateY(-2px);display:flex;align-items:center;gap:8px">
+                  <span style="width:24px;height:24px;border-radius:50%;background:{{ js.bg }};color:{{ js.fg }};border:{{ js.bd }};box-sizing:border-box;display:inline-grid;place-items:center;font-family:'Roboto',sans-serif;font-size:11px;font-weight:700">{{ js.f }}</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A857C;white-space:nowrap">{{ js.r }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+          </div>
+        </div>
+        <div style="position:absolute;inset:0;z-index:3;opacity:{{ eStackOp }};pointer-events:none;transition:opacity .6s">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:#8A857C;margin:40px 0 30px;opacity:{{ eStackPctOp }};transition:opacity .6s">COUNTING THE COINS</div>
+          <div style="display:flex;align-items:flex-start;gap:18px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+              <div style="display:grid;grid-template-columns:repeat(14,22px);gap:5px;min-height:22px;align-content:end">
+                <sc-for list="{{ eNumDots }}" as="nd" hint-placeholder-count="0">
+                  <div data-slotn="{{ nd.k }}" style="width:18px;height:18px;border-radius:50%;background:#6559C5;opacity:0"></div>
+                </sc-for>
+              </div>
+              <div style="width:100%;border-top:2px solid #1B1B1B;opacity:{{ eStackPctOp }};transition:opacity .6s"></div>
+              <div style="display:grid;grid-template-columns:repeat(14,22px);gap:5px;align-content:start">
+                <sc-for list="{{ eDenDots }}" as="dd" hint-placeholder-count="0">
+                  <div data-slotd="{{ dd.k }}" style="width:18px;height:18px;border-radius:50%;background:{{ dd.bg }};border:{{ dd.bd }};box-sizing:border-box;opacity:{{ dd.op }};transition:opacity .6s"></div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:28px;color:#1B1B1B;margin-top:{{ eEqTop }}px;line-height:1;opacity:{{ eStackPctOp }};transition:opacity .6s">= <span style="color:#4A3FA0;font-weight:500">{{ eStackPct }}</span></div>
+          </div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;color:#8A857C;margin-bottom:16px">AVERAGE SHARE OF HEADS PER DOCUMENT</div>
+        <div data-chart="hist" style="position:relative;height:260px;border-bottom:2px solid #1B1B1B">
+          <sc-for list="{{ eDots }}" as="d" hint-placeholder-count="0">
+            <div style="position:absolute;width:8px;height:8px;border-radius:50%;background:{{ d.c }};left:{{ d.x }}px;bottom:{{ d.y }}px"></div>
+          </sc-for>
+          <div style="position:absolute;left:{{ eThreshX }}px;top:0;bottom:0;border-left:2px dashed #B4543F;opacity:{{ eThreshOp }};transition:opacity .6s">
+            <div style="position:absolute;top:0;left:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#B4543F;white-space:nowrap;vertical-align:1px;line-height:1.4">decision line</div>
+          </div>
+        </div>
+        <div style="position:relative;height:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A857C;margin-top:8px"><span style="position:absolute;left:0">30%</span><span style="position:absolute;left:33.3%;transform:translateX(-50%)">50%</span><span style="position:absolute;right:0">90%</span></div>
+        <div style="display:flex;gap:22px;margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:12px">
+          <span style="display:flex;align-items:center;gap:7px;color:#55504A"><span style="width:9px;height:9px;border-radius:50%;background:#C9C4BA;display:inline-block"></span>ordinary text</span>
+          <span style="display:flex;align-items:center;gap:7px;color:#4A3FA0;opacity:{{ eWmLegendOp }};transition:opacity .5s"><span style="width:9px;height:9px;border-radius:50%;background:#6559C5;display:inline-block"></span>watermarked text</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div data-screen-label="Limits" id="limits" style="max-width:1060px;margin:0 auto;padding:0 32px 0">
+  <div style="display:flex;justify-content:center;margin:-48px 0 104px;animation:bounceDown 1.6s ease-in-out infinite">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 8l7 7 7-7" stroke="#8A857C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+  </div>
+  <h2 style="font-family:'Roboto',sans-serif;font-size:28px;font-weight:400;margin:0 0 40px">LLM Watermarking FAQ</h2>
+  <h3 style="font-family:'Roboto',sans-serif;font-size:20px;font-weight:500;margin:0 0 14px;max-width:880px">So, Anthropic's watermark doesn't bias the model's probability distribution?</h3>
+  <p style="margin:0 0 24px;max-width:880px">Nope! Indeed, there are other watermarking schemes that secretly boost some words and suppress others.</p>
+  <p style="margin:0 0 40px;max-width:880px">But remember what happened above. SynthID never changes the probability distribution produced by the language model.&nbsp;</p>
+  <h3 style="font-family:'Roboto',sans-serif;font-size:20px;font-weight:500;margin:0 0 14px;max-width:880px">Does this really mean the watermark doesn't change the model's writing at all?</h3>
+  <p style="margin:0 0 24px;max-width:880px">Actually, no.</p>
+  <p style="margin:0 0 24px;max-width:880px">There is one subtlety. Even though the watermark doesn't systematically push the model toward particular words, it can still make different responses slightly more alike.</p>
+  <p style="margin:0 0 24px;max-width:880px">Remember that the secret coin flips are reproducible. If the same context appears in two different responses, the watermark will make the same secret coin-flip assignments again. As a result, watermarked responses can be slightly more similar to one another than they otherwise would be.</p>
+  <p style="margin:0 0 40px;max-width:880px">The original SynthID work discusses ways of removing these correlations and obtaining stronger forms of <i>non-distortion.</i> The version we've explained here focuses on the simpler guarantee.</p>
+  <h3 style="font-family:'Roboto',sans-serif;font-size:20px;font-weight:500;margin:0 0 14px;max-width:880px">Does LLM watermarking hide secret or invisible characters in the text?</h3>
+  <p style="margin:0 0 40px;max-width:880px">No. As we've seen, there is nothing hidden between the words, no invisible Unicode, and no added metadata.</p>
+  <h3 style="font-family:'Roboto',sans-serif;font-size:20px;font-weight:500;margin:0 0 14px;max-width:880px">What about really short text? Surely a few words could line up with the key by accident.</h3>
+  <p style="margin:0 0 24px;max-width:880px">Exactly!</p>
+  <p style="margin:0 0 24px;max-width:880px">Flipping a fair coin four times and getting three heads is completely unremarkable. On the other hand, flipping it 1,000 times and getting heads 75% of the time is very suspicious.</p>
+  <p style="margin:0 0 40px;max-width:880px">This is why, in practice, the detection threshold depends on how much text you have. The detector accounts for how much evidence it has when deciding what counts as suspicious.&nbsp;</p>
+  <h3 style="font-family:'Roboto',sans-serif;font-size:20px;font-weight:500;margin:0 0 14px;max-width:880px">If I give Claude something I wrote myself, will Claude's watermark suddenly appear on it?</h3>
+  <p style="margin:0 0 24px;max-width:880px">Not necessarily. Remember our pile of lottery tickets. If you ask Claude to reproduce text you wrote, word for word, nearly every ticket in the tournament will correspond with the same word, because the model, being competent at the task, will put 100% of its guess on the word you've given and requested it to say back to you.</p>
+  <div style="border-top:1px solid #EDEAE4;border-bottom:1px solid #EDEAE4;padding:28px 0;margin:0 0 28px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#8A857C;margin-bottom:12px">Repeat this back to me verbatim: "I love to watch sunsets in the city of Pittsburgh"</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;margin-bottom:26px">I love to watch sunsets in the city of <span style="border-bottom:2px solid #1B1B1B;color:#3E7C4F;font-weight:500">?</span></div>
+    <div style="display:grid;grid-template-columns:repeat(4,140px);row-gap:30px;justify-content:start">
+      <div style="grid-column:1 / 5;display:flex;justify-content:center"><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#3E7C4F;color:#FFFFFF;border-radius:7px;padding:4px 10px">Pittsburgh</span></div>
+      <div style="grid-column:1 / 3;display:flex;justify-content:center;align-items:center;gap:8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#3E7C4F;color:#FFFFFF;border-radius:7px;padding:4px 10px">Pittsburgh</span><span style="width:20px;height:20px;border-radius:50%;background:#6559C5;color:#FFFFFF;display:inline-grid;place-items:center;font-family:'Roboto',sans-serif;font-size:10px;font-weight:700">H</span></div>
+      <div style="grid-column:3 / 5;display:flex;justify-content:center;align-items:center;gap:8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#3E7C4F;color:#FFFFFF;border-radius:7px;padding:4px 10px">Pittsburgh</span><span style="width:20px;height:20px;border-radius:50%;background:#6559C5;color:#FFFFFF;display:inline-grid;place-items:center;font-family:'Roboto',sans-serif;font-size:10px;font-weight:700">H</span></div>
+      <div style="grid-column:1;display:flex;justify-content:center;align-items:center;gap:8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#3E7C4F;color:#FFFFFF;border-radius:7px;padding:4px 10px">Pittsburgh</span><span style="width:20px;height:20px;border-radius:50%;background:#FFFFFF;color:#8A857C;border:1.5px solid #C9C4BA;box-sizing:border-box;display:inline-grid;place-items:center;font-family:'Roboto',sans-serif;font-size:10px;font-weight:700">T</span></div>
+      <div style="grid-column:2;display:flex;justify-content:center;align-items:center;gap:8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#3E7C4F;color:#FFFFFF;border-radius:7px;padding:4px 10px">Pittsburgh</span><span style="width:20px;height:20px;border-radius:50%;background:#FFFFFF;color:#8A857C;border:1.5px solid #C9C4BA;box-sizing:border-box;display:inline-grid;place-items:center;font-family:'Roboto',sans-serif;font-size:10px;font-weight:700">T</span></div>
+      <div style="grid-column:3;display:flex;justify-content:center;align-items:center;gap:8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#3E7C4F;color:#FFFFFF;border-radius:7px;padding:4px 10px">Pittsburgh</span><span style="width:20px;height:20px;border-radius:50%;background:#FFFFFF;color:#8A857C;border:1.5px solid #C9C4BA;box-sizing:border-box;display:inline-grid;place-items:center;font-family:'Roboto',sans-serif;font-size:10px;font-weight:700">T</span></div>
+      <div style="grid-column:4;display:flex;justify-content:center;align-items:center;gap:8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:#3E7C4F;color:#FFFFFF;border-radius:7px;padding:4px 10px">Pittsburgh</span><span style="width:20px;height:20px;border-radius:50%;background:#FFFFFF;color:#8A857C;border:1.5px solid #C9C4BA;box-sizing:border-box;display:inline-grid;place-items:center;font-family:'Roboto',sans-serif;font-size:10px;font-weight:700">T</span></div>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A857C;margin-top:20px">the model was instructed to repeat your words, so it puts nearly 100% on Pittsburgh</div>
+  </div>
+  <p style="margin:0 0 24px;max-width:880px">The tournament then has no real choice to make. Every battle is a tie. Remember, <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;background:#F5F3EF;border-radius:6px;padding:1px 7px;color:#55504A;white-space:nowrap;vertical-align:1px;line-height:1.4">flip</span> returns heads or tails based on three inputs: the secret key, the round, and the candidate word. Within a round, identical tickets all flip the same way, so every faceoff is a draw.</p>
+  <p style="margin:0 0 40px;max-width:880px">So the winning words aren't being selected because they got heads. Their flips stay roughly 50/50, just like unwatermarked text.<br><br>If Claude substantially rewrites the text, however, the tournament begins to 'make' choices, and evidence of the watermark will begin to accumulate. Intuitively, the less the writing is yours, the more the detector will flag it.</p>
+</div>
+
+<sc-if value="{{ showCoda }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Coda" id="coda" style="max-width:1060px;margin:0 auto;padding:24px 32px 0">
+  <h2 style="font-family: 'Roboto',sans-serif; font-size: 28px; font-weight: 400; margin: 0 0 24px; max-width: 880px">Isn't human-AI collaboration the entire point of all this? Why&nbsp; watermark LLM text when the ideas were human?&nbsp;</h2>
+  <p style="margin:0 0 24px;max-width:880px">There are a lot of opinions on this, so I'll provide mine briefly :). I might share more at a later time.</p>
+  <div style="position:relative;display:grid;grid-template-columns:minmax(0,880px) 170px;gap:24px;align-items:start">
+  <div style="grid-column:2;grid-row:1;font-size:13px;line-height:1.6;color:#8A857C"><sup>5</sup> I say translated, to broadly mean synthesizing human ideas and ramblings into coherent text.</div>
+  <p style="grid-column:1;grid-row:1;margin: 0 0 24px; max-width: 880px">First, the internet is becoming filled with AI writing. It would be great to know if text came from (a particular) AI. If the writing was autonomously generated, we should give attribution to the AI that wrote it. If human ideas were 'translated'<sup>5</sup> by AI, then AI should be credited as a translator, just like how we credit human translators.<br><br>Second, just because something was generated by AI, doesn't mean it is not worth our time. Suppose someone uses Gemini or Claude for translation. It is likely that this will result in watermarked text; however, readers should not automatically dismiss the intent and meaning of the text. Further, AIs may one day be capable of substantial original and compelling thought, if they aren't starting to already (in the form of novel proofs).<br><br>So, then. What is the point of knowing if something is AI if you have to read it to find out if it is slop?<br><br>Simply because it is a form of verifying authorship or coauthorship. In any case, LLM use should be disclosed openly. Watermarking prevents stolen authorship. It prevents students from claiming ownership over work that was co-authored at best. If an AI was used for language translation, there should be no shame in acknowledging that an AI was used; this criticism of shame and shaming applies to writers and readers, respectively. Translation of any sort, language translation or synthesis of dictated ramblings, involve interpretation and misinterpretation. The structure, voice, style, and diction of a text are intertwined with the ideas themselves. We should acknowledge that.<br><br>It's true that public opinion about AI is quite negative, and thus AI-use disclosure is often met with backlash or dismissal. This is something that we should all work to overcome, though I acknowledge that AI content often ranges from uninteresting to wrong to malicious.&nbsp;</p>
+  </div>
+</div>
+</sc-if>
+
+<div data-screen-label="Further reading" style="max-width:1060px;margin:0 auto;padding:8px 32px 120px">
+  <div style="border-top:1px solid #EDEAE4;padding-top:32px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#8A857C;margin-bottom:16px">FURTHER READING</div>
+    <div style="display:flex;flex-direction:column;gap:10px;font-size:16px">
+      <div><a href="https://www.nature.com/articles/s41586-024-08025-4">Scalable watermarking for identifying LLM outputs</a> · the SynthID-Text paper (Nature, 2024)</div>
+      <div><a href="https://www.anthropic.com/news/claude-text-watermark">How Claude's text watermark works</a> · Anthropic's FAQ (2026)</div>
+      <div><a href="https://scottaaronson.blog/?p=6823">Scott Aaronson's 2022 lecture</a> · the original watermarking proposal</div>
+      <div><a href="https://arxiv.org/abs/2301.10226">A Watermark for Large Language Models</a> · Kirchenbauer et al., the green and red list scheme</div>
+    </div>
+    <p style="font-size:14px;color:#8A857C;margin:28px 0 0">Numbers in the demonstrations above are illustrative. Real vocabularies have around 100,000 entries and real tournaments run more layers. The mechanism is shown faithfully.</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;wmMean&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 0.68, &quot;min&quot;: 0.55, &quot;max&quot;: 0.8, &quot;step&quot;: 0.01, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Simulation&quot;}, &quot;showCoda&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Content&quot;}}">
+class Component extends DCLogic {
+  state = { a: -1, b: -1, c: -1, d: -1, e: -1,
+    prog: {}, sqW: 520, histW: 520,
+    dotsN: 0, wmN: 0 };
+  TOKENS = [
+    { t: 'overcast', p: 0.34, c: '#3E7C4F' }, { t: 'grey', p: 0.27, c: '#6559C5' },
+    { t: 'wet', p: 0.14, c: '#4E8FB0' }, { t: 'windy', p: 0.11, c: '#C08A3E' },
+    { t: 'damp', p: 0.08, c: '#B4543F' }, { t: 'drizzly', p: 0.06, c: '#9A958B' },
+    { t: 'sugary', p: 0.0001, c: '#C9C4BA' }
+  ];
+  B2WORDS = ['north', 'south', 'east', 'west'];
+  componentDidMount() {
+    this._katexPoll = setInterval(() => {
+      if (!window.katex) return;
+      document.querySelectorAll('[data-katex]').forEach((el) => {
+        if (!el.dataset.katexDone) { el.dataset.katexDone = '1'; window.katex.render(el.dataset.katex, el, { throwOnError: false, displayMode: true }); }
+      });
+      if (!document.querySelector('[data-katex]:not([data-katex-done])')) clearInterval(this._katexPoll);
+    }, 300);
+    this._poll = setInterval(() => {
+      const steps = document.querySelectorAll('[data-step]');
+      if (!steps.length) return;
+      const upd0 = {};
+      const line = window.innerHeight * 0.5;
+      const litLine = window.innerHeight * 0.1;
+      const active = { a: -1, b: -1, c: -1, d: -1, e: -1 };
+      const lit = { a: -1, b: -1, c: -1, d: -1, e: -1 };
+      const prog = {};
+      steps.forEach((el) => {
+        const parts = el.dataset.step.split('-');
+        const g = parts[0], idx = +parts[1];
+        const r = el.getBoundingClientRect();
+        if (r.top <= line) active[g] = Math.max(active[g], idx);
+        const ll = el.dataset.lit ? window.innerHeight * parseFloat(el.dataset.lit) : litLine;
+        if (r.top <= ll) lit[g] = Math.max(lit[g], idx);
+        prog[g + idx] = Math.max(0, Math.min(1, (line - r.top) / r.height));
+      });
+      const litKey = 'abcde'.split('').map((g) => lit[g]).join(',');
+      if (litKey !== this._litKey) { this._litKey = litKey; upd0.lit = lit; }
+      const upd = upd0;
+      Object.keys(active).forEach((g) => { if (this.state[g] !== active[g]) upd[g] = active[g]; });
+      const pk = ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'c1', 'c2', 'd2', 'e3', 'e4'].map((k) => Math.round((prog[k] || 0) * 40)).join(',');
+      if (pk !== this._pk) { this._pk = pk; upd.prog = prog; }
+      const aRoot = document.querySelector('[data-arrow-root]');
+      const aFrom = document.querySelector('[data-arrow-from="true"]');
+      const aTo = document.querySelector('[data-arrow-to]');
+      const aFrom2 = document.querySelector('[data-arrow-from2]');
+      const aTo2 = document.querySelector('[data-arrow-to2]');
+      if (aRoot && aFrom && aTo && aFrom2 && aTo2 && aTo.getBoundingClientRect().height > 26) {
+        const rr = aRoot.getBoundingClientRect(), rf = aFrom.getBoundingClientRect(), rt = aTo.getBoundingClientRect();
+        const rf2 = aFrom2.getBoundingClientRect(), rt2 = aTo2.getBoundingClientRect();
+        const aOut = document.querySelector('[data-arrow-out]');
+        const aToB = document.querySelector('[data-arrow-tob="true"]');
+        const ro = aOut ? aOut.getBoundingClientRect() : { right: 0, top: 0, height: 0 };
+        const rb = aToB ? aToB.getBoundingClientRect() : { right: 0, top: 0, height: 0 };
+        const geom = [rf.left - rr.left, rf.top + rf.height / 2 - rr.top, rt.left - rr.left, rt.top + rt.height / 2 - rr.top,
+          rf2.left - rr.left, rf2.top + rf2.height / 2 - rr.top, rt2.left - rr.left, rt2.top + rt2.height / 2 - rr.top,
+          rr.width, rr.height,
+          ro.right - rr.left, ro.top + ro.height / 2 - rr.top, rb.right - rr.left, rb.top + rb.height / 2 - rr.top].map(Math.round).join(',');
+        if (geom !== this._aGeom) { this._aGeom = geom; upd0.arrowGeom = geom; }
+      }
+      const sqEl = document.querySelector('[data-chart="sq"]');
+      const hEl = document.querySelector('[data-chart="hist"]');
+      const eSizeKey = window.innerWidth + 'x' + window.innerHeight;
+      if (this._eMeasSize !== eSizeKey) this._eFlyDone = false;
+      if (this.state.e >= 0 && !this._eFlyDone) {
+        const coins = document.querySelectorAll('[data-fly]');
+        if (coins.length && document.querySelector('[data-slotn="0"]')) {
+          const map = {};
+          let ok = true;
+          coins.forEach((el) => {
+            const id = el.dataset.fly;
+            const tgt = this._eTarget && this._eTarget[id];
+            if (!tgt) { ok = false; return; }
+            const tEl = document.querySelector(tgt[0] === 'n' ? '[data-slotn="' + tgt[1] + '"]' : '[data-slotd="' + tgt[1] + '"]');
+            if (!tEl) { ok = false; return; }
+            // current style-transform offset (0 when at rest in the word rows)
+            const sm = /translate\((-?[\d.]+)px[ ,]+(-?[\d.]+)px\)/.exec(el.style.transform || '');
+            const sx = sm ? parseFloat(sm[1]) : 0, sy = sm ? parseFloat(sm[2]) : 0;
+            // skip while mid-transition (visual position differs from style target)
+            const ct = getComputedStyle(el).transform;
+            let cx = 0, cy = 0;
+            if (ct && ct !== 'none') {
+              const mm = /matrix\([^)]*, *(-?[\d.]+), *(-?[\d.]+)\)/.exec(ct);
+              if (mm) { cx = parseFloat(mm[1]); cy = parseFloat(mm[2]); }
+            }
+            if (Math.abs(cx - sx) > 1 || Math.abs(cy - sy) > 1) { ok = false; return; }
+            const a = el.getBoundingClientRect(), b = tEl.getBoundingClientRect();
+            map[id] = [Math.round(b.left - (a.left - cx) + (b.width - a.width) / 2), Math.round(b.top - (a.top - cy) + (b.height - a.height) / 2)];
+          });
+          if (ok && Object.keys(map).length) { this._eFlyDone = true; this._eMeasSize = eSizeKey; upd0.eFly = map; }
+        }
+      }
+      const bigEl = document.querySelector('[data-chart="big"]');
+      if (bigEl && Math.abs(bigEl.offsetWidth - (this.state.bigW || 0)) > 2) upd.bigW = bigEl.offsetWidth;
+      if (sqEl && Math.abs(sqEl.offsetWidth - this.state.sqW) > 2) upd.sqW = sqEl.offsetWidth;
+      if (hEl && Math.abs(hEl.offsetWidth - this.state.histW) > 2) upd.histW = hEl.offsetWidth;
+      if (Object.keys(upd).length) {
+        this.setState(upd);
+
+        if ('e' in upd) {
+          if (upd.e >= 6) this.startDots();
+          if (upd.e >= 7) this.startWm();
+          if (upd.e < 6) { clearInterval(this._dotTimer); this._dotTimer = null; this.setState({ dotsN: 0 }); }
+          if (upd.e < 7) { clearInterval(this._wmTimer); this._wmTimer = null; this.setState({ wmN: 0 }); }
+        }
+      }
+    }, 120);
+  }
+  componentWillUnmount() {
+    clearInterval(this._poll); clearInterval(this._katexPoll);
+    clearInterval(this._dotTimer); clearInterval(this._wmTimer);
+  }
+
+
+  TICK = [
+    { t: 'overcast', n: 4, c: '#3E7C4F', pct: '40%' },
+    { t: 'grey', n: 3, c: '#6559C5', pct: '30%' },
+    { t: 'wet', n: 2, c: '#4E8FB0', pct: '20%' },
+    { t: 'damp', n: 1, c: '#B4543F', pct: '10%' }
+  ];
+  buildElim() {
+    if (this._sqTok) return;
+    this._sqTok = [];
+    this.TICK.forEach((o, ti) => { for (let k = 0; k < o.n; k++) this._sqTok.push(ti); });
+    const r = this.rng(1234);
+    const order = this._sqTok.map((_, i) => i);
+    for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); const t = order[i]; order[i] = order[j]; order[j] = t; }
+    this._lineOrder = order;
+    this._dropped = order.slice(-2);
+    let surv = order.slice(0, -2);
+    const rounds = [];
+    while (surv.length > 1) {
+      const pairs = [], losers = [], winners = [];
+      for (let i = 0; i + 1 < surv.length; i += 2) {
+        pairs.push([surv[i], surv[i + 1]]);
+        if (r() < 0.5) { winners.push(surv[i]); losers.push(surv[i + 1]); }
+        else { winners.push(surv[i + 1]); losers.push(surv[i]); }
+      }
+      if (surv.length % 2) winners.push(surv[surv.length - 1]);
+      rounds.push({ pairs, losers, remain: winners.length });
+      surv = winners;
+    }
+    this._rounds = rounds;
+    this._winnerIdx = surv[0];
+  }
+
+  rng(seed) { let s = seed; return () => { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296; }; }
+  makeDots(n, mean, sd, seed, color) {
+    const r = this.rng(seed), cols = {}, out = [];
+    for (let k = 0; k < n; k++) {
+      const g = mean + (r() + r() + r() - 1.5) * sd * 2;
+      let col = Math.round((g - 0.30) / 0.60 * 51);
+      col = Math.max(0, Math.min(51, col));
+      const stack = cols[col] = (cols[col] || 0) + 1;
+      out.push({ col, stack, c: color });
+    }
+    return out;
+  }
+  startDots() {
+    if (this._dotTimer) return;
+    this._dotTimer = setTimeout(() => {
+      this._dotTimer = setInterval(() => {
+        if (this.state.dotsN >= 220) { clearInterval(this._dotTimer); this._dotTimer = null; return; }
+        this.setState({ dotsN: Math.min(220, this.state.dotsN + 5) });
+      }, 50);
+    }, 900);
+  }
+  startWm() {
+    if (this._wmTimer) return;
+    this._wmTimer = setTimeout(() => {
+      this._wmTimer = setInterval(() => {
+        if (this.state.wmN >= 30) { clearInterval(this._wmTimer); this._wmTimer = null; return; }
+        this.setState({ wmN: this.state.wmN + 1 });
+      }, 90);
+    }, 900);
+  }
+  renderVals() {
+    const st = this.state;
+    const wmMean = this.props.wmMean ?? 0.68;
+    const ops = {};
+    const groups = { a: 4, b: 9, c: 4, d: 7, e: 9 };
+    const lit = st.lit || {};
+    Object.keys(groups).forEach((g) => { for (let i = 0; i < groups[g]; i++) ops[g + i] = (lit[g] !== undefined ? lit[g] : -1) === i ? 1 : 0.22; });
+    const maxP = 0.34;
+    const litA = (st.lit || {}).a !== undefined ? st.lit.a : -1;
+    const hl = litA === 1 ? 0 : (litA === 2 ? 6 : -1);
+    const tokNoteOp = litA === 0 ? 1 : 0;
+    const easy = st.b >= 0;
+    const EASY = [{ t: 'the', p: 0.99 }, { t: 'my', p: 0.006 }, { t: 'some', p: 0.004 }];
+    const mBars = this.TOKENS.map((o, i) => {
+      if (easy) {
+        const e = EASY[i];
+        return e ? {
+          name: e.t, nameColor: i === 0 ? '#1B1B1B' : '#8A857C', wt: 400,
+          fill: i === 0 ? '#3E7C4F' : '#C9C4BA',
+          tW: Math.max(0.5, e.p * 100),
+          pct: i === 0 ? '99%' : (e.p * 100) + '%', op: 1
+        } : { name: '', nameColor: '#8A857C', wt: 400, fill: '#C9C4BA', tW: 0, pct: '', op: 0 };
+      }
+      return {
+        name: o.t,
+        nameColor: hl === i ? '#6559C5' : (i === 6 ? '#A8A399' : '#1B1B1B'),
+        wt: hl === i ? 600 : 400,
+        fill: hl === i ? '#6559C5' : (litA >= 3 ? '#C9C4BA' : '#8FAE97'),
+        tW: Math.max(0.5, o.p / maxP * 100),
+        pct: i === 6 ? '0.01%' : Math.round(o.p * 100) + '%',
+        op: st.a >= 0 ? 1 : 0
+      };
+    });
+    const litB = (st.lit || {}).b !== undefined ? st.lit.b : -1;
+    const bp = st.b <= 0 ? 0 : (st.b === 1 ? 1 : (st.b >= 7 || litB >= 6 ? 3 : (st.b === 2 && (st.prog.b2 || 0) < 0.45 ? 1 : 2)));
+    const b1Done = st.b >= 2 || (st.b === 1 && (st.prog.b1 || 0) > 0.72);
+    const b1Spin = st.b === 1 && !b1Done && (st.prog.b1 || 0) > 0.45;
+    const semiVis = st.b >= 4 || (st.b === 3 && (st.prog.b3 || 0) > 0.45);
+    const semiDone = st.b >= 4 || (st.b === 3 && (st.prog.b3 || 0) > 0.8);
+    const finalVis = st.b >= 5 || (st.b === 4 && (st.prog.b4 || 0) > 0.45);
+    const finalDone = st.b >= 5 || (st.b === 4 && (st.prog.b4 || 0) > 0.8);
+    const win1 = semiDone ? 'north' : '';
+    const win2 = semiDone ? 'west' : '';
+    const b2winner = finalDone ? 'north' : '';
+    const morphed = st.b >= 6 || ((st.lit || {}).b !== undefined && st.lit.b >= 5);
+    const b2Cands = this.B2WORDS.map((w, i) => {
+      if (morphed) {
+        const tk = this.TICK[i];
+        return { name: tk.t, bg: '#F5F3EF', fg: '#1B1B1B', tW: tk.n * 26 / (4 * 30 - 4) * 100, bar: tk.c, pct: tk.pct };
+      }
+      const on = w === win1 || w === win2;
+      return { name: w, bg: on ? '#F7F5FB' : '#F5F3EF', fg: on ? '#4A3FA0' : '#1B1B1B', tW: 62.5, bar: '#8FAE97', pct: '25%' };
+    });
+    this.buildElim();
+    const lined = st.b >= 8 || litB >= 7;
+    const b6p = st.b >= 7 ? 1 : (st.b === 6 ? (st.prog.b6 || 0) : 0);
+    const phase = lined ? 3 : (b6p > 0.78 ? 2 : (b6p > 0.6 ? 1 : 0));
+    const TMASK = 'radial-gradient(circle 4px at 0 50%,transparent 96%,#000 100%) left/51% 100% no-repeat,radial-gradient(circle 4px at 100% 50%,transparent 96%,#000 100%) right/51% 100% no-repeat';
+    const SQ = 26, GAP = 4;
+    const R = this._rounds.length;
+    const t = Math.max(0, Math.min(1, Math.max(0, (st.prog.b7 || 0) - 0.5) * 2 * 0.5 + Math.min(1, (st.prog.b8 || 0) * 1.6) * 0.5));
+    const visStage = lined ? Math.floor(t * (2 * R + 0.999)) : 0;
+    const baseY = 330, LVL = 50;
+    const sp = Math.min(48, Math.max(30, (st.sqW - 34) / 9));
+    const linedW = Math.min(26, sp - 5);
+    const conns = [], pyrNodes = [];
+    const basePos = {};
+    let elimMsg = '';
+    if (lined) {
+      this._lineOrder.forEach((idx, pos) => { basePos[idx] = Math.round(4 + pos * sp); });
+      const pos = Object.assign({}, basePos);
+      for (let ri = 0; ri < R; ri++) {
+        const round = this._rounds[ri];
+        const connVis = visStage >= 2 * ri + 1, winVis = visStage >= 2 * ri + 2;
+        const yLow = baseY - ri * LVL, yHigh = baseY - (ri + 1) * LVL;
+        const next = {};
+        round.pairs.forEach((p) => {
+          const xA = Math.min(pos[p[0]], pos[p[1]]), xB = Math.max(pos[p[0]], pos[p[1]]);
+          const winner = round.losers.includes(p[0]) ? p[1] : p[0];
+          const mid = Math.round((xA + xB) / 2);
+          next[winner] = mid;
+          conns.push({ left: xA + Math.round(linedW / 2) + 1, w: Math.max(4, xB - xA), top: yHigh + 21, h: yLow - yHigh - 23, op: connVis ? 1 : 0 });
+          pyrNodes.push({ x: mid, y: yHigh, bg: this.TICK[this._sqTok[winner]].c, op: winVis ? 1 : 0, tf: ri === R - 1 && winVis ? 'scale(1.3)' : 'scale(1)' });
+        });
+        Object.keys(pos).forEach((k) => {
+          if (!(k in next) && this._dropped.indexOf(+k) === -1 && !round.losers.includes(+k) && !round.pairs.some((p) => p[0] === +k || p[1] === +k)) {
+            next[k] = pos[k];
+            pyrNodes.push({ x: pos[k], y: yHigh, bg: this.TICK[this._sqTok[k]].c, op: winVis ? 1 : 0, tf: 'scale(1)' });
+          }
+        });
+        Object.keys(pos).forEach((k) => { delete pos[k]; });
+        Object.assign(pos, next);
+      }
+      elimMsg = visStage >= 2 * R ? 'one ticket reaches the top, so we write ' + this.TICK[this._sqTok[this._winnerIdx]].t : (visStage >= 1 ? 'each pair flips a fair coin, the winner rises' : 'line the tickets up');
+    }
+    const winnerNow = lined && visStage >= 2 * R;
+    const stacks = [0, 0, 0, 0];
+    const sqs = this._sqTok.map((ti, i) => {
+      const k = stacks[ti]++;
+      return {
+        bg: this.TICK[ti].c,
+        x: lined ? basePos[i] : 104 + k * (phase >= 1 ? 30 : 26),
+        y: lined ? baseY : 60 + ti * (phase >= 1 ? 56 : 24),
+        w: lined ? linedW : 26,
+        dropped: lined && this._dropped.indexOf(i) !== -1,
+        rad: phase >= 2 ? '0px' : (phase >= 1 ? '4px' : (k === 0 ? '7px 0 0 7px' : (k === this.TICK[ti].n - 1 ? '0 7px 7px 0' : '0px'))),
+        mask: phase >= 2 ? TMASK : 'none',
+        op: lined && this._dropped.indexOf(i) !== -1 ? 0 : 1,
+        mark: '',
+        tf: 'scale(1)'
+      };
+    });
+    const sqLabels = this.TICK.map((o, ti) => ({ name: o.t, pct: o.pct, top: 61 + ti * (phase >= 1 ? 56 : 24) }));
+    const E_TXT = 'The weather today was cold and grey , and the wind howled outside . I pulled my coat tighter and hurried home .'.split(' ');
+    if (!this._eF) {
+      const r = this.rng(11);
+      this._eF = E_TXT.map(() => [r() < 0.78 ? 'H' : 'T', r() < 0.78 ? 'H' : 'T', r() < 0.78 ? 'H' : 'T']);
+      this._eF[0] = ['H', 'H', 'T'];
+      const want = Math.round(E_TXT.length * 3 * 0.72);
+      let have = this._eF.reduce((a, f) => a + f.filter((v) => v === 'H').length, 0);
+      const order = [];
+      for (let ri = 0; ri < 3; ri++) for (let i = 1 + ri; i < this._eF.length; i += 3) order.push([i, ri]);
+      for (let k = 0; k < order.length && have !== want; k++) {
+        const [i, ri] = order[k];
+        if (have > want && this._eF[i][ri] === 'H') { this._eF[i][ri] = 'T'; have--; }
+        else if (have < want && this._eF[i][ri] === 'T') { this._eF[i][ri] = 'H'; have++; }
+      }
+      let hk = 0, tk = 0;
+      this._eTarget = {};
+      this._eF.forEach((f, i) => f.forEach((v, ri) => { this._eTarget[i * 3 + ri] = v === 'H' ? ['n', hk++] : ['d', tk++]; }));
+      this._eHeadsN = hk; this._eTailsN = tk;
+    }
+    const eFlipOn = st.e >= 2 || (st.e === 1 && ((st.lit || {}).e !== undefined ? st.lit.e : -1) >= 1);
+    const eP2 = st.e >= 4 ? 1 : (st.e === 3 ? (st.prog.e3 || 0) : 0);
+    const eReveal = Math.floor(Math.max(0, eP2 - 0.55) * (E_TXT.length - 1) * 3.4);
+    const eGather = st.e >= 4;
+    const fly = st.eFly || {};
+    const eIntroWords = E_TXT.map((t, i) => {
+      const on = eGather || (i === 0 ? eFlipOn : eReveal > i - 1);
+      const tail = !eGather && i > E_TXT.length - 5 ? Math.max(0.3, (E_TXT.length - i) / 5) : 1;
+      const mk = (f) => ({
+        bg: on ? (f === 'H' ? '#6559C5' : '#FFFFFF') : '#FFFFFF',
+        fg: on ? (f === 'H' ? '#FFFFFF' : '#8A857C') : '#8A857C',
+        bd: on && f === 'H' ? 'none' : '1.5px solid #C9C4BA',
+        op: on ? 1 : 0
+      });
+      const a = mk(this._eF[i][0]), b = mk(this._eF[i][1]), c = mk(this._eF[i][2]);
+      const tf = (id) => eGather && fly[id] ? 'translate(' + fly[id][0] + 'px,' + fly[id][1] + 'px)' : 'translate(0,0)';
+      return {
+        t, op: tail,
+        chipOp: eGather ? 0 : 1,
+        id1: String(i * 3), id2: String(i * 3 + 1), id3: String(i * 3 + 2),
+        tf1: tf(i * 3), tf2: tf(i * 3 + 1), tf3: tf(i * 3 + 2),
+        bd: i === 0 && eFlipOn && !eGather ? '1.5px solid #6559C5' : '1.5px solid transparent',
+        f1: this._eF[i][0], f2: this._eF[i][1], f3: this._eF[i][2],
+        bg1: a.bg, fg1: a.fg, bd1: a.bd, op1: a.op,
+        bg2: b.bg, fg2: b.fg, bd2: b.bd, op2: b.op,
+        bg3: c.bg, fg3: c.fg, bd3: c.bd, op3: c.op
+      };
+    });
+    const jW = st.histW || 520;
+    const jRows = [8, 4, 2, 1];
+    const jPath = [5, 2, 1, 0];
+    const jCoins = ['H', 'H', 'T'];
+    const eJourneyCells = [];
+    const eJourneyEdges = [];
+    const jPos = [];
+    const jSideX = jW - 6;
+    const eJourneySide = jCoins.map((f, ri) => ({
+      x: jSideX, y: 234 - ri * 72, f, r: 'round ' + (ri + 1),
+      bg: f === 'H' ? '#6559C5' : '#FFFFFF', fg: f === 'H' ? '#FFFFFF' : '#8A857C',
+      bd: f === 'H' ? 'none' : '1.5px solid #C9C4BA'
+    }));
+    jRows.forEach((n, ri) => {
+      const y = 234 - ri * 72;
+      const row = [];
+      for (let k = 0; k < n; k++) {
+        const x = jW * (k + 0.5) / n;
+        const onPath = jPath[ri] === k;
+        row.push([x, y]);
+        if (onPath && ri < 3) {
+          eJourneyEdges.push({
+            d: 'M' + Math.round(x + 26) + ' ' + (y + 10) + ' C ' + Math.round(x + (jSideX - x) * 0.5) + ' ' + (y + 10) + ', ' + Math.round(jSideX - 46) + ' ' + (y + 10) + ', ' + Math.round(jSideX - 16) + ' ' + (y + 10),
+            c: '#C9C4BA', w: 1.5, o: 1
+          });
+        }
+        eJourneyCells.push({
+          x: Math.round(x), y,
+          t: onPath ? 'The' : '?',
+          bg: onPath ? '#6559C5' : '#F5F3EF',
+          fg: onPath ? '#FFFFFF' : '#8A857C',
+          bd: onPath ? '1.5px solid transparent' : '1.5px dashed #C9C4BA',
+          coin: false,
+          cbg: jCoins[ri] === 'H' ? '#6559C5' : '#FFFFFF',
+          cfg: jCoins[ri] === 'H' ? '#FFFFFF' : '#8A857C',
+          cbd: jCoins[ri] === 'H' ? 'none' : '1.5px solid #C9C4BA'
+        });
+      }
+      jPos.push(row);
+    });
+    for (let ri = 0; ri < 3; ri++) {
+      jPos[ri].forEach((p, k) => {
+        const q = jPos[ri + 1][Math.floor(k / 2)];
+        const onPath = jPath[ri] === k;
+        eJourneyEdges.push({
+          d: 'M' + Math.round(p[0]) + ' ' + (p[1] - 4) + ' C ' + Math.round(p[0]) + ' ' + (p[1] - 34) + ', ' + Math.round(q[0]) + ' ' + (q[1] + 52) + ', ' + Math.round(q[0]) + ' ' + (q[1] + 26),
+          c: onPath ? '#6559C5' : '#C9C4BA',
+          w: onPath ? 2.5 : 1,
+          o: onPath ? 1 : 0.6
+        });
+      });
+    }
+    const eHeads = this._eHeadsN;
+    const eNumRows = Math.ceil(eHeads / 14);
+    const eEqTop = eNumRows * 22 + (eNumRows - 1) * 5 + 14 - 13 - 8;
+    const eTotal = E_TXT.length * 3;
+    const eP3 = st.e >= 5 ? 1 : (st.e === 4 ? (st.prog.e4 || 0) : 0);
+    const eStackDone = eGather && eP3 > 0.4;
+    const eNumDots = [];
+    for (let k = 0; k < eHeads; k++) eNumDots.push({ k: String(k) });
+    const eDenDots = [];
+    for (let k = 0; k < eHeads + this._eTailsN; k++) {
+      const isH = k >= this._eTailsN;
+      eDenDots.push({ k: String(k), bg: isH ? '#6559C5' : '#FFFFFF', bd: isH ? 'none' : '1.5px solid #C9C4BA', op: isH ? (eStackDone ? 1 : 0) : 0 });
+    }
+    if (!this._base) this._base = this.makeDots(220, 0.5, 0.055, 42, '#C9C4BA');
+    if (this._wmKey !== wmMean) { this._wmKey = wmMean; this._wm = this.makeDots(30, wmMean, 0.05, 7, '#6559C5'); }
+    const dExpanded = st.d > 2 || (st.d === 2 && (st.prog.d2 || 0) > 0.18);
+    const dIdx = 0;
+    const dActive = st.d === 2 && ((st.lit || {}).d !== undefined ? st.lit.d : -1) >= 2;
+    const dFlip = [
+      { name: 'grey', call: 'H' }, { name: 'overcast', call: 'T' },
+      { name: 'grey', call: 'H' }, { name: 'damp', call: 'H' }
+    ][dIdx];
+    // duplicate candidates share the same flip within a round
+    const dCands = [
+      { name: 'grey', call: 'H', tkc: '#6559C5', badgeBg: '#6559C5', badgeFg: '#FFFFFF', badgeBorder: 'none' },
+      { name: 'overcast', call: 'T', tkc: '#3E7C4F', badgeBg: '#FFFFFF', badgeFg: '#8A857C', badgeBorder: '1.5px solid #C9C4BA' },
+      { name: 'grey', call: 'H', tkc: '#6559C5', badgeBg: '#6559C5', badgeFg: '#FFFFFF', badgeBorder: 'none' },
+      { name: 'damp', call: 'H', tkc: '#B4543F', badgeBg: '#6559C5', badgeFg: '#FFFFFF', badgeBorder: 'none' }
+    ].map((c, i) => Object.assign(c, {
+      isFirst: i === 0 ? 'true' : 'false',
+      badgeOp: (i === 0 ? dActive || st.d >= 4 || (st.d === 3 && ((st.lit || {}).d !== undefined ? st.lit.d : -1) >= 3) : st.d >= 4 || (st.d === 3 && ((st.lit || {}).d !== undefined ? st.lit.d : -1) >= 3)) ? 1 : 0,
+      tf: dActive && i === dIdx ? 'scale(1.14)' : 'scale(1)',
+      wt: dActive && i === dIdx ? 700 : 400
+    }));
+    return {
+      showCoda: this.props.showCoda ?? true,
+      ops, mBars, tokNoteOp,
+      seqNoteOp: (lit.c !== undefined ? lit.c : -1) === 3 ? 1 : 0,
+      mLayerOp: st.b <= 0 ? 1 : 0,
+      mPrefix: easy ? 'She handed me' : 'The weather today was cold and',
+      mBlank: easy ? 'the' : '?',
+      mSuffix: easy ? ' keys' : '',
+      aDoneOp: litA >= 3 && !easy ? 1 : 0,
+      bP1Op: bp === 1 ? 1 : 0, bP1Ev: bp === 1 ? 'auto' : 'none',
+      bP2Op: bp === 2 ? 1 : 0,
+      bP3Op: bp === 3 ? 1 : 0,
+      b1Face: b1Done ? 'H' : '?',
+      b1Anim: b1Spin ? 'spinCoin .35s linear infinite' : 'none',
+      b1Blank: b1Done ? 'happy' : '?',
+      b1HappyBg: b1Done ? '#6559C5' : '#F5F3EF',
+      b1HappyFg: b1Done ? '#FFFFFF' : '#1B1B1B',
+      b1SadBg: '#F5F3EF',
+      b1SadFg: '#1B1B1B',
+      b2Cands,
+      b2c1: semiDone ? 'H' : '?', b2c2: semiDone ? 'T' : '?',
+      b2cf: finalDone ? 'H' : '?',
+      b2SemiCoinOp: semiVis ? 1 : 0,
+      b2FinalCoinOp: finalVis ? 1 : 0,
+      b2SemiAnim: semiVis && !semiDone ? 'spinCoin .35s linear infinite' : 'none',
+      b2FinalAnim: finalVis && !finalDone ? 'spinCoin .35s linear infinite' : 'none',
+      b2w1: win1, b2w2: win2, b2winner,
+      b2PrefixAOp: morphed ? 0 : 1,
+      b2PrefixBOp: morphed ? 1 : 0,
+      b2Blank: b2winner || '?',
+      b2BracketOp: morphed ? 0 : 1,
+      b2SemiOp: win1 ? 1 : 0,
+      b2FinalOp: b2winner ? 1 : 0,
+      sqs, sqLabels, conns, pyrNodes,
+      pctX: 104 + 4 * 30 + 16,
+      b2TrackW: 4 * 30 - 4,
+      sqAxisOp: lined ? 0 : 1,
+      elimMsg,
+      elimBlank: winnerNow ? this.TICK[this._sqTok[this._winnerIdx]].t : '?',
+      cFreshRow: 'T H H T H T T',
+      cFreshLayerOp: 1,
+      cFresh2Op: (lit.c !== undefined ? lit.c : -1) >= 1 && (st.prog.c1 || 0) > 0.55 || (lit.c !== undefined ? lit.c : -1) >= 2 ? 1 : 0,
+      cFresh3Op: (lit.c !== undefined ? lit.c : -1) >= 1 && (st.prog.c1 || 0) > 0.78 || (lit.c !== undefined ? lit.c : -1) >= 2 ? 1 : 0,
+      cKeyOp: (lit.c !== undefined ? lit.c : -1) >= 2 ? 1 : 0,
+      cReplayOp: st.c >= 2 ? 1 : 0,
+      cRep2Op: st.c === 2 && (st.prog.c2 || 0) > 0.4 || st.c >= 3 ? 1 : 0,
+      cRep3Op: st.c === 2 && (st.prog.c2 || 0) > 0.6 || st.c >= 3 ? 1 : 0,
+      dCands,
+      dCandsOp: st.d >= 0 ? 1 : 0,
+      dFlipDiagOp: st.d >= 1 ? 1 : 0,
+      dOtherPad: dExpanded ? '0 12px' : '6px 12px',
+      dOtherMaxH: dExpanded ? '0px' : '40px',
+      dOtherOp: dExpanded ? 0 : 1,
+      dExpPad: dExpanded ? '6px 12px' : '0 12px',
+      dExpMaxH: dExpanded ? '40px' : '0px',
+      dExpOp: dExpanded ? 1 : 0,
+      dArrowOp: dActive && st.arrowGeom ? 1 : 0,
+      dBigOp: st.d === 6 && (st.lit || {}).d >= 6 ? 1 : 0,
+      dBigCells: (() => {
+        const w = st.bigW || 445;
+        if (!this._bigCells || this._bigW !== w) {
+          this._bigW = w;
+          const cells = [], labels = [], conns = [];
+          const cols = ['#3E7C4F', '#6559C5', '#4E8FB0', '#C08A3E', '#B4543F', '#9A958B'];
+          const r = this.rng(77);
+          const counts = [16, 8, 4, 2, 1];
+          const off = 74, span = Math.max(200, w - off - 8);
+          let rowCols = [];
+          counts.forEach((n, ri) => {
+            const y = 360 - ri * 84;
+            const step = span / n;
+            if (ri === 0) { for (let k = 0; k < n; k++) rowCols.push(cols[Math.floor(r() * 6)]); }
+            else { const next = []; for (let j = 0; j < n; j++) next.push(rowCols[2 * j + (r() < 0.5 ? 0 : 1)]); rowCols = next; }
+            for (let k = 0; k < n; k++) {
+              cells.push({ x: Math.round(off + step * k + step / 2 - 10), y, bg: rowCols[k] });
+            }
+            labels.push({ y, t: ri === 4 ? 'champion' : 'round ' + (ri + 1) });
+            if (ri < 4) {
+              const yUp = 360 - (ri + 1) * 84;
+              for (let j = 0; j < n / 2; j++) {
+                const cL = off + step * (2 * j) + step / 2, cR = off + step * (2 * j + 1) + step / 2;
+                conns.push({ left: Math.round(cL), w: Math.round(cR - cL), top: yUp + 17, h: y - yUp - 21 });
+              }
+            }
+          });
+          this._bigCells = cells; this._bigLabels = labels; this._bigConns = conns;
+        }
+        return this._bigCells;
+      })(),
+      dBigLabels: this._bigLabels || [],
+      dBigConns: this._bigConns || [],
+      dArrowVB: (() => { const g = (st.arrowGeom || '').split(',').map(Number); return g.length >= 10 ? '0 0 ' + g[8] + ' ' + g[9] : '0 0 560 600'; })(),
+      dArrowPath: (() => {
+        const g = (st.arrowGeom || '').split(',').map(Number);
+        if (g.length < 10) return '';
+        const x1 = g[0] - 8, y1 = g[1], x2 = g[2] - 12, y2 = g[3], xL = Math.min(x1, x2) - 14;
+        return 'M ' + x1 + ' ' + y1 + ' H ' + xL + ' V ' + y2 + ' H ' + (x2 - 4);
+      })(),
+      dArrowHead: (() => {
+        const g = (st.arrowGeom || '').split(',').map(Number);
+        if (g.length < 10) return '';
+        return 'M ' + (g[2] - 4) + ' ' + g[3] + ' l -7 -4.5 v 9 Z';
+      })(),
+      dArrow2Path: (() => {
+        const g = (st.arrowGeom || '').split(',').map(Number);
+        if (g.length < 10) return '';
+        const x1 = g[4] - 8, y1 = g[5], x2 = g[6] - 12, y2 = g[7], xL = Math.min(x1, x2) - 34;
+        return 'M ' + x1 + ' ' + y1 + ' H ' + xL + ' V ' + y2 + ' H ' + (x2 - 4);
+      })(),
+      dArrow2Head: (() => {
+        const g = (st.arrowGeom || '').split(',').map(Number);
+        if (g.length < 10) return '';
+        return 'M ' + (g[6] - 4) + ' ' + g[7] + ' l -7 -4.5 v 9 Z';
+      })(),
+      dArrow3Path: (() => {
+        const g = (st.arrowGeom || '').split(',').map(Number);
+        if (g.length < 14) return '';
+        const x1 = g[10] + 8, y1 = g[11], x2 = g[12] + 12, y2 = g[13], xR = Math.max(x1, x2) + 18;
+        return 'M ' + x1 + ' ' + y1 + ' H ' + xR + ' V ' + y2 + ' H ' + (x2 + 4);
+      })(),
+      dArrow3Head: (() => {
+        const g = (st.arrowGeom || '').split(',').map(Number);
+        if (g.length < 14) return '';
+        return 'M ' + (g[12] + 4) + ' ' + g[13] + ' l 7 -4.5 v 9 Z';
+      })(),
+      dLayerMarkOp: dExpanded ? 1 : 0,
+      dInCand: dFlip.name, dFlipOut: dActive ? dFlip.call : '?',
+      dFlipOutBg: dActive && dFlip.call === 'H' ? '#6559C5' : '#55504A',
+      dInCandBg: '#F5F3EF', dInCandFg: '#55504A',
+      dInCandWt: dActive ? 500 : 400, dInCandTf: dActive ? 'scale(1.08)' : 'scale(1)',
+      dInLayer: '1',
+      dInLayerBg: '#F5F3EF', dInLayerFg: dActive ? '#3E7C4F' : '#55504A', dInLayerWt: dActive ? 700 : 400, dInLayerTf: dActive ? 'scale(1.08)' : 'scale(1)',
+      dCallsOp: st.d >= 4 || (st.d === 3 && ((st.lit || {}).d !== undefined ? st.lit.d : -1) >= 3) ? 1 : 0,
+      dSemiOp: st.d >= 5 || (st.d === 4 && ((st.lit || {}).d !== undefined ? st.lit.d : -1) >= 4) ? 1 : 0,
+      dFinalOp: st.d >= 6 || (st.d === 5 && ((st.lit || {}).d !== undefined ? st.lit.d : -1) >= 5) ? 1 : 0,
+      eDots: this._base.slice(0, st.dotsN).concat(this._wm.slice(0, st.wmN)).map((d) => ({ x: Math.round(d.col * (st.histW / 52)), y: (d.stack - 1) * 9 + 2, c: d.c })),
+      eThreshX: Math.round((0.65 - 0.30) / 0.60 * 51 * (st.histW / 52)),
+      eThreshOp: st.e >= 7 && st.wmN >= 30 ? 1 : 0,
+      eEqOp: st.e === 5 ? 1 : 0,
+      eWmLegendOp: st.e >= 7 ? 1 : 0,
+      eIntroOp: st.e <= 4 ? 1 : 0,
+      eStackOp: st.e === 4 ? 1 : 0,
+      eJourneyOp: (st.lit || {}).e === 2 && st.e === 2 ? 1 : 0,
+      eJourneyScale: Math.max(0.6, Math.min(1, (window.innerHeight * 0.8 - 120) / 320)),
+      eJourneyTop: 60,
+      eFlipFnOp: eFlipOn && st.e < 2 && !eGather ? 1 : 0,
+      eWordsStripOp: (st.lit || {}).e === 2 && st.e === 2 ? 0 : 1,
+      eJourneyCells, eJourneyEdges, eJourneySide,
+      eNumDots,
+      eDenDots,
+      eStackPct: Math.round(eHeads / eTotal * 100) + '%', eEqTop,
+      eStackPctOp: eStackDone ? 1 : 0,
+      eIntroFlipDiagOp: eFlipOn && !eGather ? 1 : 0,
+      eIntroWords,
+      eIntroScoreLegendOp: eFlipOn && !eGather ? 1 : 0,
+      eIntroHeadOp: eGather ? 0 : 1
+    };
+  }
+}
+</script>
+</body>
+</html>
+{% endraw %}
