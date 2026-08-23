@@ -15,6 +15,25 @@ The copy into `../assets/pdf/resume.pdf` happens automatically after a
 successful compile (see `.latexmkrc`). Commit that PDF along with any source
 changes to update the live site.
 
+## Overleaf sync
+
+`resume.tex` can be round-tripped with an Overleaf project over git. Overleaf's
+git remote is a *separate* repo whose root holds `resume.tex`, so it's kept as
+its own clone outside this site repo (default `~/Projects/overleaf-resume`);
+the Makefile just copies `resume.tex` between the two.
+
+```sh
+# one-time: create a Git auth token in Overleaf (Account Settings -> Git
+# Integration), grab the project URL from Menu -> Sync -> Git, then:
+make overleaf-init OVERLEAF_URL=https://git.overleaf.com/<project-id>
+
+make push     # local resume.tex -> Overleaf (commit + push)
+make pull     # Overleaf -> local resume.tex
+```
+
+Requires an Overleaf plan with git access. Only `resume.tex` is synced — if you
+add figures or a custom `.cls`, extend the `cp` lines in the Makefile.
+
 ## Requirements
 
 MacTeX / TeX Live with `pdflatex` and `latexmk` (already installed). The
