@@ -55,6 +55,7 @@
 /* Margin note styling - grey text on RHS, outside content boundaries */
 .blog-post {
   overflow: visible; /* Allow margin notes to extend beyond */
+  counter-reset: sidenote;
 }
 
 .blog-post .margin-note-wrapper {
@@ -62,12 +63,29 @@
   margin: 1.875rem 0; /* Match paragraph spacing */
 }
 
+/* Inline superscript marker (auto-numbered). Increments the shared counter. */
+.blog-post .margin-ref {
+  counter-increment: sidenote;
+}
+.blog-post .margin-ref::before {
+  content: counter(sidenote);
+  vertical-align: super;
+  font-size: 0.7em;
+  color: #888;
+  margin: 0 0.1em;
+}
+
 @media (min-width: 992px) {
   .blog-post .margin-note {
     position: absolute;
     right: -280px; /* Position outside the content area */
     width: 260px;
-    font-size: 0.85em;
+    /* rem (not em) so size is constant regardless of parent — e.g., next to an h2 */
+    font-size: 0.85rem;
+    /* Pin weight and family so margin notes look identical regardless of
+       whether the parent is a paragraph (Lora) or a heading (Open Sans, bold). */
+    font-weight: normal;
+    font-family: 'Lora', 'Times New Roman', serif;
     color: #888;
     line-height: 1.5;
     font-style: italic;
@@ -76,7 +94,19 @@
     /* Align with baseline of surrounding text */
     top: 0.2em;
   }
-  
+
+  /* Prefix the margin note with the same number as the inline marker,
+     styled to match the superscript in the body text. */
+  .blog-post .margin-note::before {
+    content: counter(sidenote);
+    vertical-align: super;
+    font-size: 0.7em;
+    font-weight: normal;
+    font-style: normal;
+    color: #888;
+    margin-right: 0.25em;
+  }
+
   /* Ensure parent containers allow overflow */
   .blog-post,
   .col-xl-8,
